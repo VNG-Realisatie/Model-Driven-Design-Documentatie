@@ -1,5 +1,7 @@
 Deze Wiki is een inventarisatie van informatie over de Model Driven Design aanpak van VNG Realisatie.  
 
+## [0 Inleiding](./Inleiding.md)
+
 ## [1 Installatie](./Installatie.md)
 
 Toelichting op het installeren en configureren van Enterprise Architect zoals het inlezen van profielen en beschikbaarstellen van scripts.
