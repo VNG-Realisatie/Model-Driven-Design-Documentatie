@@ -8,7 +8,7 @@ M.b.v. tagged values (TV's) kan aan constructies in UML extra semantiek meegegev
 
 De tabellen in de volgende secties bevatten de tagged values voor de SIM, UGM en BSM modellen die voor Imvertor en de genereer-code (XML/SOAP en JSON / JSON Linked Data) nodig zijn om op juiste wijze te kunnen werken. Deze tabellen zijn gegenereerd op basis van de Imvertor configuratiebestanden. Aanpassingen van deze tabellen moeten dan ook niet op deze plaats plaatsvinden maar in de configuratiebestanden waarna deze tabellen weer gegenereerd moeten worden.
 
-h2. Tagged values voor de MIG gebaseerde SIM (Semantische Informatie Modellen)
+## Tagged values voor de MIG gebaseerde SIM (Semantische Informatie Modellen)
 
 | Tagged value naam| Waar | Verplicht (in) | Beschrijving | Mogelijke waarden _(in vet de defaultwaarde)_ | Afleiding mogelijk |
 | -----------------| --- | --- | --- | --- | --- |
@@ -105,7 +105,6 @@ h2. Tagged values voor de MIG gebaseerde SIM (Semantische Informatie Modellen)
 | 'Supplier-release' | Basismodel Basismodel, Toepassing | Toepassing | Dit bevat de releasedatum in het format yyyymmdd van het suppliermodel waarvan een model hergebruik maakt. Er zijn meerdere waardes mogelijk, gescheiden door een ; (puntkomma) . Volgorde moet corresponderen met die in supplier-name en supplier-project. Alleen opnemen wanneer van afleiding sprake is. | Bijv. '20170901;20170801' | Nee |
 | 'Versie ID' | Basismodel Basismodel, Toepassing, Domein, Extern, View | Nee | De identificatie van de versie/revisie van dit model of model-element in het gehanteerde versiebeheersysteem. | | Nee |
 | 'Web locatie' | Basismodel Basismodel, Toepassing, Extern, View, Domein | Nee | *Wie kan hier een definitie van geven ?* | | Ja |
-}}
 
 ## Tagged values voor de UGM (UitwisselingsGegevensModel)
 
@@ -153,7 +152,6 @@ h2. Tagged values voor de MIG gebaseerde SIM (Semantische Informatie Modellen)
 | 'Verkorte alias' | Toepassing, Basismodel | Toepassing, | Verkorte alias is een korte naam, die uiteindelijk gekoppeld is aan een namespace in XML schema. In feite is het dus een technisch configuratie-element. Heeft alleen een toepassing binnen StUF schema's. | | Nee |
 | 'Versie ID' | Basismodel, Toepassing, Domein, Extern, View | Nee | De identificatie van de versie/revisie van dit model of model-element in het gehanteerde versiebeheersysteem. | | Nee |
 | 'Web locatie' | Basismodel, Toepassing, Extern, View, Domein | Nee | *Wie kan hier een definitie van geven ?* | | Ja |
-}}
 
 ## Tagged values voor de BSM (Bericht Structuur Modellen)
 
