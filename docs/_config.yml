@@ -32,7 +32,7 @@ plugins:
   
 remote_theme: VNG-Realisatie/jekyll-theme-imvertor
 
-github: melsk-r/Imvertor-Documentatie
+github: VNG-Realisatie/Imvertor-Documentatie
 theme: jekyll-theme-time-machine
 
 project_name: /Imvertor-Documentatie
