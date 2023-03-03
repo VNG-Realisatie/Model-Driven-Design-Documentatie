@@ -1,4 +1,4 @@
-baseurl: "/Imvertor-Documentatie"
+baseurl: "/Model-Driven-Design-Documentatie"
 url: "http://localhost:4000"
 # nav is t.b.v. generatie side-navigation menu.
 # Een 'title' zonder path of url genereert slechts een kopje.
@@ -32,7 +32,7 @@ plugins:
   
 remote_theme: VNG-Realisatie/jekyll-theme-imvertor
 
-github: VNG-Realisatie/Imvertor-Documentatie
+github: VNG-Realisatie/Model-Driven-Design-Documentatie
 theme: jekyll-theme-time-machine
 
-project_name: /Imvertor-Documentatie
+project_name: /Model-Driven-Design-Documentatie
