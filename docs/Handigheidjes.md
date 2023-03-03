@@ -1,3 +1,7 @@
+---
+layout: page-with-side-nav
+title: Technieken en handigheidjes
+---
 # 5.2 Technieken en handigheidjes
 
 ## Attributen specifieke class verbergen

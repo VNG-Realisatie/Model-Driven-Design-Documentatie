@@ -1,3 +1,7 @@
+---
+layout: page-with-side-nav
+title: Het gebruik van SVN
+---
 # 4.1 Het gebruik van SVN
 
 In dit hoofdstuk beschrijven we hoe we binnen VNG-realisatie i.h.k.v. de Nieuwe Aanpak omgaan met het beheer van onze modellen. Het aantal modellen dat we in beheer hebben neemt vlug toe en aangezien de relaties tussen deze modellen een spaghetti aan afhankelijkheden oplevert is het van groot belang dat de procedure voor het gezamenlijk werken aan deze modellen voor iedereen duidelijk is en ook toegepast wordt.
@@ -38,7 +42,7 @@ Het ophalen van een model wordt gedaan door een Get package uit te voeren:
 
 Het model wordt nu binnengehaald  en onder de package gezet die  je in de eerste stap hebt geselecteerd.
 
-*Let op*: Het binnenhalen van een stelsel aan packages dient in de juiste volgorde te gebeuren. Dus eerst de SIM packages waar andere SIM packages van afhankelijk zijn, daarna die andere SIM packages en daarna hetzelfde voor de UGM packages en tenslotte het BSM package. Voor het bepalen van de juiste volgorde verwijs ik naar "[het Supplieroverzicht](https://vvng.sharepoint.com/sites/UnitArchitectuurenStandaarden/Gedeelde%20documenten/General/De%20nieuwe%20aanpak/Supplieroverzicht.html)". De in dit overzicht op het laagste niveau voorkomende modellen (de modellen die het verste inspringen) moeten als eerste binnengehaald worden.
+*Let op*: Het binnenhalen van een stelsel aan packages dient in de juiste volgorde te gebeuren. Dus eerst de SIM packages waar andere SIM packages van afhankelijk zijn, daarna die andere SIM packages en daarna hetzelfde voor de UGM packages en tenslotte het BSM package. Voor het bepalen van de juiste volgorde verwijs ik naar [het Supplieroverzicht](./Supplieroverzicht.html). De in dit overzicht op het laagste niveau voorkomende modellen (de modellen die het verste inspringen) moeten als eerste binnengehaald worden.
 
 ### Bewerken van een model
 
@@ -89,7 +93,7 @@ Zie ook het bijgaande [Presentatie Procedure modellenbeheer](./bestanden/Subvers
 
 ### Opbouwen EA modellen structuur
 
-Het is bij het laden van de benodigde modellen van groot belang dat je de modellen in de juiste volgorde in EA ophaalt. Om die reden dien je voordat je gaat ophalen een goed beeld te hebben van de benodigde modellen en van de volgorde van ophalen. Hiervoor is de tabel 'Tags model-supplier overzicht' die je "hier":https://vvng.sharepoint.com/sites/UnitArchitectuurenStandaarden/Gedeelde%20documenten/General/De%20nieuwe%20aanpak/Supplieroverzicht.html vindt onontbeerlijk. Deze tabel wordt regelmatig ververst dus het is verstandig dit bestand steeds weer opnieuw te downloaden. Welke modellen je nodig hebt is o.a. afhankelijk van de rol waarin je een model gebruikt.
+Het is bij het laden van de benodigde modellen van groot belang dat je de modellen in de juiste volgorde in EA ophaalt. Om die reden dien je voordat je gaat ophalen een goed beeld te hebben van de benodigde modellen en van de volgorde van ophalen. Hiervoor is [het Supplieroverzicht](./Supplieroverzicht.html) onontbeerlijk. Deze tabel wordt regelmatig ververst dus het is verstandig dit bestand steeds weer opnieuw te downloaden. Welke modellen je nodig hebt is o.a. afhankelijk van de rol waarin je een model gebruikt.
 
 Indien je als beheerder een bestaand model gaat bewerken dan moet je dat model zoeken in de 'trunk' of in de 'branches' folder van de repository. Wil je van scratch af aan een nieuw model gaan opbouwen dan haal je geen model op uit de trunk' of 'branches' folder maar dan ga je juist een nieuw model in de trunk plaatsen.
 Over het algemeen zul je echter de meeste modellen alleen als gebruiker op willen halen. Dit zijn de modellen waar jij zelf niet verantwoordelijk voor bent en in dat geval zoek je in de 'tags' folder en daarvoor is de eerder genoemde tabel handig. Je mag er trouwens vanuit gaan dat de modellen die in de tags folder staan ook aanwezig zijn op de Imvertor server. De eigenaar van een model heeft immers de verantwoording om dat model op de Imvertor server te processen voordat hij/zij een verzoek tot het aanmaken van een tag plaatst.

@@ -1,4 +1,8 @@
-## 2 Begrippen
+---
+layout: page-with-side-nav
+title: Begrippen
+---
+# 2 Begrippen
 
 | Begrip | Toelichting |                                                     
 | ------ | ------------------------------------------------------------ |
@@ -18,8 +22,7 @@
 |Objecttype|.....|
 |Proxy|View op een objecttype of attribuut dat in een ander SIM gedefinieerd wordt.|
 |SIM|Semantisch informatie model.|
-|Stereotype| Een mechanisme in UML om een component in een model te typeren waarmee semantiek wordt toegekend aan dat component en aan zijn relatie met andere componenten.
-Om die reden is het component eenvoudiger voor gebruikers beter te interpreteren en geautomatiseerd te verwerken. |
+|Stereotype| Een mechanisme in UML om een component in een model te typeren waarmee semantiek wordt toegekend aan dat component en aan zijn relatie met andere componenten.<br/>Om die reden is het component eenvoudiger voor gebruikers beter te interpreteren en geautomatiseerd te verwerken. |
 |Tracing|Leggen van een harde link tussen componenten in een UGM of koppelvlak naar gerelateerde componenten in UGM of SIM. Daarrmee worden toegekende eigenschappen en definities van de betreffende componenten die gebruikt worden in een UGM of koppelvlak overgenomen uit een (ander) UGM en/of SIM.|
 |UGM|Uitwisselings gegevens model - Gegevensmodel waarin de opbouw van de gegevens in uitwisseling centraal staat.|
 |UML|Unified Modeling Language. Visuele modelleertaal waarin we informatiemodellen en koppelvlakken definiëren. We gebruiken alleen klasse diagrammen.|

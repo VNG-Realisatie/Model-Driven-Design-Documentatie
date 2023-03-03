@@ -1,3 +1,7 @@
+---
+layout: page-with-side-nav
+title: Installatie
+---
 # 1. Installatie
 
 ## 1.1 Enterprise Architect configureren.
@@ -18,7 +22,7 @@ De nieuwste versie van dit script kan kostenloos worden opgehaald op de [website
 
 ### 1.1.3 Imvertor Addin installeren
 
-De imvertor Addin is noodzakelijk om UML-modellen vanuit EA te kunnen aanbieden aan de Armatiek-SAAS omgeving waar Imvertor draait. De nieuwste versie van deze Addin kan kostenloos worden opgehaald van het [Imvertor Dashboard](:https://imvertor.armatiek.nl/imvertor-executor/dashboard/wiki?key=info-EAADDIN). De documentatie over deze Addin en het gebruik vind je [hier](https://imvertor.armatiek.nl/imvertor-executor/dashboard/wiki?key=infoDOCIMVTOPEA).
+De imvertor Addin is noodzakelijk om UML-modellen vanuit EA te kunnen aanbieden aan de Armatiek-SAAS omgeving waar Imvertor draait. De nieuwste versie van deze Addin kan kostenloos worden opgehaald van het [Imvertor Dashboard](https://imvertor.armatiek.nl/imvertor-executor/dashboard/wiki?key=info-EAADDIN). De documentatie over deze Addin en het gebruik vind je [hier](https://imvertor.armatiek.nl/imvertor-executor/dashboard/wiki?key=info-IMVERTORHTSWWI).
 
 
 ### 1.1.4 Profielen/Metamodellen MIG en MUG importeren
@@ -30,7 +34,7 @@ De volgende metamodellen zijn beschikbaar (zie gelinkte bestanden):
 
 Welke je moet installeren is afhankelijk van je werkzaamheden. Ben je alleen verantwoordelijk voor het produceren van SIM's of CIM's dan installeer je alleen de eerste. Indien je ook of juist verantwoordelijk bent voor het vervaardigen van UGM's dan installeer je de eerste en de tweede en als je BSM's moet kunnen maken dan dien je ze alledrie te installeren.
 
-In Enterprise Architect kan je via *Specialize | Technologies | Publish-Tech | Import MDG Technology* de profielen met de metamodellen voor de diverse model-varianten importeren.
+In Enterprise Architect kan je via *Specialize / Technologies / Publish-Tech / Import MDG Technology* de profielen met de metamodellen voor de diverse model-varianten importeren.
 
 ![MDG-Technology](./images/MDG-Technology1.jpg)
 
@@ -116,7 +120,7 @@ De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde 
 
 ### 1.1.8 Tagged value SourceAttribute navigeerbaar (klikbaar) maken
 
-- Ga naar _Configure | Reference Data | UML Types_, voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:
+- Ga naar _Configure / Reference Data / UML Types_, voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:
 
 ![sourceAttribute](./images/sourceattribute-instellingen-ea.JPG)
 
@@ -127,7 +131,7 @@ De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde 
 
 Installeer de laatste versie van het script die onderaan deze pagina is toegevoegd (Set Traceability Scripts with and without transformation 2021-11-29.xml ).
 
-Het set traceability script wordt geimporteerd via "Configure | Model | Transfer | Import Reference Data | Shared File"
+Het set traceability script wordt geimporteerd via "Configure / Model / Transfer / Import Reference Data / Shared File"
 
 *Let op*: Een herstart van EA of zelfs van je systeem kan nodig zijn om de optie 'Scripts' in je context menu bij het rechtsklikken op een package te laten verschijnen.
 
@@ -142,4 +146,4 @@ Als je dat gedaan hebt zal je zien dat er nu in je context menu bij het rechtskl
 
 ## Aan het werk
 
-Je bent nu klaar om aan het werk te gaan. Het is echter handig om eerst de hoofdstukken [2 Begrippen](./Begrippen.md) en [3 Het drie-lagen model](./Drielagen-model.md) door te lezen. Daarna kun je m.b.v. hoofdstuk [4 De nieuwe werkwijze](./De-nieuwe-werkwijze.md)  daadwerkelijk aan de slag.
+Je bent nu klaar om aan het werk te gaan. Het is echter handig om eerst de hoofdstukken [2 Begrippen](./Begrippen) en [3 Het drie-lagen model](./Drielagen-model) door te lezen. Daarna kun je m.b.v. hoofdstuk [4 Model Driven Design](./ModelDrivenDesign)  daadwerkelijk aan de slag.

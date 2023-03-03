@@ -1,3 +1,7 @@
+---
+layout: page-with-side-nav
+title: Werkinstructies
+---
 # 5.1 Werkinstructies
 
 ## Werkinstructie SIM omzetten naar UGM

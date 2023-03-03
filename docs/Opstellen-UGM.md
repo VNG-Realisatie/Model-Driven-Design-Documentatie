@@ -1,4 +1,8 @@
-# 4.2 Het opstellen van een horizontaal GegevensUitwisselingsModel
+---
+layout: page-with-side-nav
+title: Het opstellen van een horizontaal GegevensUitwisselingsModel
+---
+# 4.3 Het opstellen van een horizontaal GegevensUitwisselingsModel
 
 In een horizontaal GegevensUitwisselingsmodel worden die gegevens op UGM niveau
 uitgewerkt die een meervoudige toepassing kennen. Als in een verticaal GegevensUitwisselingsModel
@@ -15,7 +19,7 @@ Zo krijgt een class met het stereotype 'Objecttype' het stereotype 'Entiteittype
 
 **Vraag Robert:** Wat moet er gebeuren met een evt. met het SIM mee gekopieerd intern package 'Generieke Datatypen'?
 
-Het UGM is daarmee bijna klaar om verder verwerkt te worden tot een volwaardig UGM. Dat wil zeggen dat voor SIM logische structuren omgezet worden naar structuren die technisch beter verwerkt kunnen worden. Dat gebeurd op basis van een aantal [4.2.1 Technische en implementatie-overwegingen](./Technische-en-implementatie-overwegingen.md). Eerst moeten er echter een aantal handelingen uitgevoerd worden die onafhankelijk zijn van de gewenste uitvoer (yaml of StUF) en een aantal handelingen die specifiek zijn voor de gewenste uitvoer.
+Het UGM is daarmee bijna klaar om verder verwerkt te worden tot een volwaardig UGM. Dat wil zeggen dat voor SIM logische structuren omgezet worden naar structuren die technisch beter verwerkt kunnen worden. Dat gebeurd op basis van een aantal [4.3.1 Technische en implementatie-overwegingen](./Technische-en-implementatie-overwegingen.md). Eerst moeten er echter een aantal handelingen uitgevoerd worden die onafhankelijk zijn van de gewenste uitvoer (yaml of StUF) en een aantal handelingen die specifiek zijn voor de gewenste uitvoer.
 
 ## Generieke handelingen
 

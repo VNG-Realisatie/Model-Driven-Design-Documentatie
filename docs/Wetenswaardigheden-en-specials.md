@@ -1,3 +1,7 @@
+---
+layout: page-with-side-nav
+title: Wetenswaardigheden en specials
+---
 # 6 Wetenswaardigheden en specials
 
 ## Algemeen
