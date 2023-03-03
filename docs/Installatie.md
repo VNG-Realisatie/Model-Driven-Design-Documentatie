@@ -18,7 +18,7 @@ Wij werken met versie 15.2. Als je deze al geïnstalleerd hebt hoef je EA natuur
 
 Alhoewel deze toolpack niet meer noodzakelijk is voor het gebruik van imvertor biedt deze wel enkel handige tools zoals de Navigator en de Message Composer.
 
-De nieuwste versie van dit script kan kostenloos worden opgehaald op de [website van Geert Bellekens](https://bellekens.com/product/bellekens-enterprise-architect-toolpack/) . Voeg EA Toolpack toe aan de winkelwagen. De website gebruikt een webshop om downloads aan te bieden. Het is niet verplicht een account aan te maken maar even naam en organisatie invullen moet wel. Na "afrekenen" kun je het bestand downloaden.
+De nieuwste versie van dit script kan kostenloos worden opgehaald op de [website van Geert Bellekens](https://bellekens.com/product/bellekens-enterprise-architect-toolpack/) . Voeg EA Toolpack toe aan de winkelwagen. De website gebruikt een webshop om downloads aan te bieden. Het is niet verplicht een account aan te maken maar even naam en organisatie invullen moet wel. Na "afrekenen" (het bestand is gratis te verkrijgen) kun je het bestand downloaden.
 
 ### 1.1.3 Imvertor Addin installeren
 
