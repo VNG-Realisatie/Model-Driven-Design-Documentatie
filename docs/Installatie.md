@@ -67,13 +67,12 @@ Tevens moet in en overbodige profielen uitgezet worden. De profielen die minimaa
 ### 1.1.6  Aanpassen metamodellen
 
 Zo nu en dan moeten de metamodellen worden aangepast. Bijv. omdat er nieuwe stereotypes geconfigureerd moeten worden.
-Het toevoegen van nieuwe stereotypes kan pas gebeuren nadat dit goed is afgestemd met elkaar aangezien nieuwe stereotypes kunnen conflicteren met het MIG.
+Het toevoegen van nieuwe stereotypes kan pas gebeuren nadat dit goed is afgestemd met elkaar aangezien nieuwe stereotypes kunnen conflicteren met het vigerende metamodel (MIM, MUG of MBG).
 
-De metamodellen maar ook het EA project van waaruit de metamodellen aangepast worden zijn opgeslagen in de [SVN repository]( https://kinggemeenten.plan.io/svn/stuf-schemagenerator/KING%20Metamodel%20en%20profielen). Daar vindt je ook een handleiding hoe je vanuit het EA project de MDG profielen genereert.
-
+Het aanpassen vande metamodellen gebeurd door de Imvertor configuratiebestanden aan te passen en vervolgens een met dat metamodel gerelateerd informatiemodel, Uitwisselingsgegevensmodel of Bericht Structuur model te processen met Imvertor.
+Na processen vind je in de folder 'ea' van de zipfile het nieuwe in Enterprise Architect te importeren model. Zie paragraaf '1.1.4 Profielen/Metamodellen MIG en MUG importeren' voor het importeren van het model.
 
 ### 1.1.7 SVN configureren voor EA
-
 
 Hieronder worden de stappen beschreven die je moet doorlopen om Enterprise Architect geschikt te maken voor het werken met Subversion.
 
