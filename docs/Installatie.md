@@ -34,7 +34,7 @@ De volgende metamodellen zijn beschikbaar (zie gelinkte bestanden):
 
 Welke je moet installeren is afhankelijk van je werkzaamheden. Ben je alleen verantwoordelijk voor het produceren van SIM's of CIM's dan installeer je alleen de eerste. Indien je ook of juist verantwoordelijk bent voor het vervaardigen van UGM's dan installeer je de eerste en de tweede en als je BSM's moet kunnen maken dan dien je ze alledrie te installeren.
 
-In Enterprise Architect kan je via *Specialize / Technologies / Publish-Tech / Import MDG Technology* de profielen met de metamodellen voor de diverse model-varianten importeren.
+In Enterprise Architect kan je via **Specialize / Technologies / Publish-Tech / Import MDG Technology** de profielen met de metamodellen voor de diverse model-varianten importeren.
 
 ![MDG-Technology](./images/MDG-Technology1.jpg)
 
@@ -76,7 +76,7 @@ Na processen vind je in de folder 'ea' van de zipfile het nieuwe in Enterprise A
 
 Hieronder worden de stappen beschreven die je moet doorlopen om Enterprise Architect geschikt te maken voor het werken met Subversion.
 
-- Enterprise Architect werkt direct op subversion en niet met Tortoise. Je moet er dus voor zorgen dat je over de SVN executable ‘svn.exe’ beschikt. Dit kan door Tortoise te installeren. Heb je Tortoise al geïnstalleerd dan is de kans groot dat je de svn command line client niet hebt geïnstalleerd.  Installeer daarom Tortoise opnieuw of download de laatste versie van Tortoise en installeer deze. Selecteer daarbij in het Tortoise setup menu de optie ‘Will be installed on local hard drive’ bij ‘command line client tools’ en start daarna opnieuw op:
+- Enterprise Architect werkt direct op subversion en niet met Tortoise. Je moet er dus voor zorgen dat je over de SVN executable ‘svn.exe’ beschikt. Dit kan door Tortoise te installeren. Heb je Tortoise al geïnstalleerd dan is de kans groot dat je de svn command line client niet hebt geïnstalleerd.  Installeer dan Tortoise opnieuw of download de laatste versie van Tortoise en installeer deze. Selecteer daarbij in het Tortoise setup menu de optie ‘Will be installed on local hard drive’ bij ‘command line client tools’ en start daarna opnieuw op:
 
 
  ![Tortoise-setup](./images/Tortoise%20Custom%20Setup.jpg)
@@ -96,7 +96,7 @@ Hieronder worden de stappen beschreven die je moet doorlopen om Enterprise Archi
 - Open daarvoor in Enterprise Architect het lege template EA bestand dat je onderaan deze pagina in de bestandslijst kunt vinden. Hier gaan we niets mee doen maar:
   - een geopend EA bestand is een voorwaarde om SVN in Enterprise Architect te configureren;
   - het voorziet je al van de genoemde SVN configuraties die je dan alleen nog maar hoeft te vullen.
-- Ga binnen Enterprise Architect naar **‘Configure / Version Control / Project-VC’**.
+- Ga binnen Enterprise Architect naar **Configure / Version Control / Project-VC**.
 Je krijgt nu het volgende menu:
 ![Settings](./images/EA%20Version%20Control%20Settings.jpg)
 
@@ -114,12 +114,12 @@ Waarbij je bij de 'Defined Configurations' dus al de negen genoemde configuratie
 De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde waarin deze verschijnen in het pull-down menu voor het ophalen van de packages. Indien je het meest modellen uit de tags ophaalt dan is het wellicht handiger om de configuraties 'Imvertor-tags-SIM', 'Imvertor-tags-UGM' en 'Imvertor-tags-BSM' als eerste op te voeren. In dat geval zul je de oude configuraties toch moeten verwijderen en de configuraties helemaal zelf op moeten voeren.
 
 - Als je alle 9 configuraties hebt vervaardigd dan kan je het menu sluiten.
- ![Settings](./images/Version%20Control%20Settings%20Configured.png)
+![Settings](./images/Version%20Control%20Settings%20Configured.png)
 
 
 ### 1.1.8 Tagged value SourceAttribute navigeerbaar (klikbaar) maken
 
-- Ga naar _Configure / Reference Data / UML Types_, voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:
+- Ga naar **Configure / Reference Data / UML Types**, voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:
 
 ![sourceAttribute](./images/sourceattribute-instellingen-ea.JPG)
 
@@ -130,9 +130,9 @@ De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde 
 
 Installeer de laatste versie van het script die onderaan deze pagina is toegevoegd (Set Traceability Scripts with and without transformation 2021-11-29.xml ).
 
-Het set traceability script wordt geimporteerd via "Configure / Model / Transfer / Import Reference Data / Shared File"
+Het set traceability script wordt geimporteerd via **Configure / Model / Transfer / Import Reference Data / Shared File**
 
-*Let op*: Een herstart van EA of zelfs van je systeem kan nodig zijn om de optie 'Scripts' in je context menu bij het rechtsklikken op een package te laten verschijnen.
+**Let op**: Een herstart van EA of zelfs van je systeem kan nodig zijn om de optie 'Scripts' in je context menu bij het rechtsklikken op een package te laten verschijnen.
 
 Als je dat gedaan hebt zal je zien dat er nu in je context menu bij het rechtsklikken op een package een optie is bijgekomen:
 'Scripts' met de subopties 'Set Traceability with Transformation' en 'Set Traceability without Transformation'. Indien deze niet in de projectbrowser te zien is moeten de volgende stappen uitgevoerd worden
