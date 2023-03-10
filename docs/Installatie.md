@@ -139,7 +139,7 @@ Als je dat gedaan hebt zal je zien dat er nu in je 'Specialize' context menu bij
 
 1. Het script is te vinden onder het topmenu **Specialize / Scripting**.<br/>
 2. Maak in het opkomende menu een map "Package Group" aan als "New Project Browser Group" (als die nog niet bestaat).
-3. Sleep het SetTraceabilityMain script uit de "VNG Realisatie scripts" map naar de "Package Group" map.
+3. Sleep het 'SetTraceabilityMain' script uit de "VNG Realisatie scripts" map naar de "Package Group" map.
 
 Nu zou het script wel beschikbaar moeten zijn onder de rechtermuisknop op de Package in de project Browser (keuze scripting). Ook nu geldt dat een herstart van EA gewenst kan zijn.
 
