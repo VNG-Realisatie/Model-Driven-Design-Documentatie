@@ -10,7 +10,7 @@ title: Begrippen
 | EA     | Enterprise Architect. Tool waarmee UML (klasse)diagrammen worden getekend. |
 | EAP    | Xml bestand dat als tussenbestand wordt gegenereerd uit wat is geconfigureerd in het Enterprise Architect. Bevat alle informatie die nodig is om schema's, documentatie en testberichten te genereren. |
 | Extern model | .... |
-| Entiteittype |Een zodanige vertaling van een Objecttype dat een in een technische omgeving bruikbaar concept ontstaat. Het kan daarbij gaan om een in een gegevensbank of een in berichtenverkeer te gebruiken concept.|
+| Entiteittype |Een zodanige vertaling van een Objecttype dat een in een technische omgeving bruikbaar concept ontstaat incl. de daarvoor benodigde al dan niet afgeleid van de in het Objecttype aanwezige attributen. Het kan daarbij gaan om een in een gegevensbank of een in berichtenverkeer te gebruiken concept.|
 |Gegevensmodel|In gegevensmodellen worden structuren beschreven waarmee in informatiemodellen beschreven objecten uitgewisseld worden tussen informatiesystemen. Het gaat daarbij dus NIET om complete berichtstructuren maar alleen om de content van die berichtstructuren.|
 |Imvertor|Software waarmee de UML klassediagrammen verwerkt kunnen worden naar voor het betreffende type informatiemodel gewenste overzichten en/of bestanden. Zo kan een BSM voor een koppelvlak vertaald worden naar berichtschema's.|
 |Informatiemodel|Een informatiemodel beschrijft de structuur, semantiek en eigenschappen van dingen in de werkelijkheid binnen een gegeven domein ongeacht hoe de gegevens ingewonnen, opgeslagen, beheerd en uitgewisseld worden. Het doet dat in termen van objecten, gegevens (attributen) daarvan en relaties daartussen.|
