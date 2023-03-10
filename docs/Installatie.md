@@ -128,7 +128,7 @@ De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde 
 
 ### 1.1.9 Traceability script beschikbaar maken in project browser.
 
-Installeer de laatste versie van het [set traceability script](./bestanden/Set Traceability Scripts with and without transformation 2021-11-29.xml).
+Installeer de laatste versie van het [set traceability script](./bestanden/Set%20Traceability%20Scripts%20with%20and%20without%20transformation%202021-11-29.xml).
 
 Het set traceability script wordt geimporteerd via **Configure / Model / Transfer / Import Reference Data / Shared File**
 
