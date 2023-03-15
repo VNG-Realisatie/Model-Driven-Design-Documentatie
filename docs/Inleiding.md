@@ -30,7 +30,8 @@ Doel van dit UGM is om, in geval dat er meerdere API's worden ontworpen in een d
 
 De derde stap is het definieren van de berichtmodellen (BerichtStructuurModellen) waarmee de gewenste endpoints, de te gebruiken parameters en de inhoud van het request en/of de response per te ontsluiten resource worden gedefinieerd. Op basis van dit BSM kunnen dan de API-specificaties worden gegenereerd.
 
-![drielagenmodel](./images/drielagenmodel.JPG)
+<!--![drielagenmodel](./images/drielagenmodel.JPG)-->
+<img src="./images/drielagenmodel.JPG" alt="Drielagenmodel" width="1000"/>
 
 De voordelen die het toepassen van Model driven design met zich meebrengt zijn oa:
 - Genereren van documentatie van Informatiemodellen.
