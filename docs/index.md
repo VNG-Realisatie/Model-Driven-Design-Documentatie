@@ -4,6 +4,7 @@ title: Inhoudsopgave
 ---
 Deze Wiki is een inventarisatie van informatie over de Model Driven Design aanpak van VNG Realisatie.  
 
+
 ## [1 Installatie](Installatie)
 
 Toelichting op het installeren en configureren van Enterprise Architect zoals het inlezen van profielen en beschikbaarstellen van scripts.
