@@ -10,6 +10,8 @@ nav:
     subnav:
       - title: Inhoudsopgave
         path: /
+      - title: Inleiding
+        path: /Inleiding
       - title: Installatie
         path: /Installatie
       - title: Begrippen
