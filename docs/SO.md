@@ -3,11 +3,11 @@ layout: page-with-side-nav
 title: Supplier overzicht
 ---
 
-<div xmlns:UML="omg.org/UML1.3" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:myf="www.myfunctions" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<!DOCTYPE HTML><html xmlns:UML="omg.org/UML1.3" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:myf="www.myfunctions" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title></title>
-      <style>
+      <!--style>
 				.model {
 					font-family: "Arial", sans-serif;
 					font-size: 12px;
@@ -70,7 +70,7 @@ title: Supplier overzicht
 				  transition: max-height 0.2s ease-out;
 				  background-color: #f1f1f1;
 				}
-				</style>
+				</style-->
    </head>
    <body>
       <h1 style="font-family: 'Arial', sans-serif;">Tags model-supplier overzicht</h1><button class="collapsible" style="background-color: lightblue;font-size: 16px;font-weight: bold;">SIM</button><div class="content"><button class="collapsible" style="background-color: lightblue;">
@@ -1133,4 +1133,4 @@ title: Supplier overzicht
 				  });
 				}
 				</script></body>
-</div>
+</html>
