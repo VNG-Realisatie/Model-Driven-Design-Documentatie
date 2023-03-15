@@ -7,7 +7,7 @@ title: Supplier overzicht
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title></title>
-      <!--style>
+      <style>
 				.model {
 					font-family: "Arial", sans-serif;
 					font-size: 12px;
@@ -70,7 +70,7 @@ title: Supplier overzicht
 				  transition: max-height 0.2s ease-out;
 				  background-color: #f1f1f1;
 				}
-				</style-->
+				</style>
    </head>
    <body>
       <h1 style="font-family: 'Arial', sans-serif;">Tags model-supplier overzicht</h1><button class="collapsible" style="background-color: lightblue;font-size: 16px;font-weight: bold;">SIM</button><div class="content"><button class="collapsible" style="background-color: lightblue;">
