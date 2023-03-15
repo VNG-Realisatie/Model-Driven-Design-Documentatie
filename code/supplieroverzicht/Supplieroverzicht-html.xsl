@@ -467,12 +467,22 @@
 			<xsl:copy-of select="$tagscollection"/>
 		</test>-->
 		<!--<xsl:copy-of select="$collection"/>-->
-		<html>
+<xsl:text>---
+layout: page-with-side-nav
+title: Supplier overzicht
+---
+
+</xsl:text>
+		<div>
 			<head>
 				<title></title>
 				<style>
+				* {
+				    font-family: 'Montserrat', sans-serif;
+				    color: #424242;
+				    line-height: 1rem;
+				}
 				.model {
-					font-family: "Arial", sans-serif;
 					font-size: 12px;
 					font-weight: normal;
 				}
@@ -482,12 +492,10 @@
 					margin-top: 10px;
 				}
 				.modeltitleError {
-					font-family: "Arial", sans-serif;
 					font-size: 12px;
 					color: red;
 				}
 				.modeltitleWarning {
-					font-family: "Arial", sans-serif;
 					font-size: 12px;
 					color: green;
 				}
@@ -536,7 +544,7 @@
 				</style>
 			</head>
 			<body>
-				<h1 style="font-family: 'Arial', sans-serif;">Tags model-supplier overzicht</h1>
+				<h1>Tags model-supplier overzicht</h1>
 					<xsl:apply-templates select="$collection/modelsupplieroverzicht"/>
 				<script>
 				var coll = document.getElementsByClassName("collapsible");
@@ -555,7 +563,7 @@
 				}
 				</script>
 			</body>
-		</html>
+		</div>
 	</xsl:template>
 	
 	<xsl:template match="modelsupplieroverzicht">
