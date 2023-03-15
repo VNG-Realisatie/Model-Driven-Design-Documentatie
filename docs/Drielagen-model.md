@@ -1,3 +1,7 @@
+---
+layout: page-with-side-nav
+title: Het drie-lagen model
+---
 # 3 Het drie-lagen model
 
 De werkwijze die binnen KING ontwikkeld is om van een Semantisch Informatiemodel (SIM) te komen tot gedocumenteerde koppelvlakken en  berichtschema's is gebaseerd op een drie-lagen-model. Alle drie de lagen zijn opgesteld in UML en worden vastgelegd m.b.v. Enterprise Architect.

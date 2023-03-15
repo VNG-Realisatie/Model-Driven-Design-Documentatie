@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tas:tagsandstereos type="config" xmlns:tas="http://www.vng.nl/tagsandsetereos" xmlns:xi="http://www.w3.org/2001/XInclude" static-base-uri="C:/Data/KING/Kern-taken/Imvertor">
+    <xi:include href="/Imvertor-Maven/src/main/resources/input/KING/cfg/metamodels/KINGBSM.xml"/>
+    <xi:include href="/Imvertor-Maven/src/main/resources/input/KING/cfg/tvsets/KINGBSM.xml"/>
+</tas:tagsandstereos>

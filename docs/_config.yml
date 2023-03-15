@@ -1,0 +1,38 @@
+baseurl: "/Model-Driven-Design-Documentatie"
+url: "http://localhost:4000"
+# nav is t.b.v. generatie side-navigation menu.
+# Een 'title' zonder path of url genereert slechts een kopje.
+# 'path' vormt tezamen met de baseurl de url waarmee de 'href' wordt gevuld.
+# Indien een 'url' voorradig dan wordt daarmee de 'href' gevuld en dient het path slechts om te bepalen welke link active is.
+# 'target: blank' zorgt er voor dat de link in een nieuw tabblad wordt geöpend.
+nav:
+  - title: Model Driven Design documentatie
+    subnav:
+      - title: Inhoudsopgave
+        path: /
+      - title: Installatie
+        path: /Installatie
+      - title: Begrippen
+        path: /Begrippen
+      - title: Het drie-lagen model
+        path: /Drielagen-model
+      - title: Model Driven Design
+        path: /ModelDrivenDesign
+      - title: Handreikingen
+        path: /Handreikingen
+      - title: Wetenswaardigheden en specials
+        path: /Wetenswaardigheden-en-specials
+      - title: Tagged Values
+        path: /Tagged-values
+      - title: Veel voorkomende foutens
+        path: /Veelvoorkomende-fouten
+plugins:
+  - jekyll-redirect-from
+  - jekyll-remote-theme
+  
+remote_theme: VNG-Realisatie/jekyll-theme-imvertor
+
+github: VNG-Realisatie/Model-Driven-Design-Documentatie
+theme: jekyll-theme-time-machine
+
+project_name: /Model-Driven-Design-Documentatie

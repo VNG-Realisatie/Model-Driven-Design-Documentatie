@@ -1,4 +1,8 @@
-# 4.3 Het opstellen van een koppelvlak
+---
+layout: page-with-side-nav
+title: Het opstellen van een koppelvlak
+---
+# 4.4 Het opstellen van een koppelvlak
 
 In dit hoofdstuk beschrijven we hoe je tot de technische specificaties van een koppelvlak kunt komen. Althans wat betreft de StUF XML-Schema's en OAS3 specificatie. Een koppelvlakspecificatie bestaat immers uit meer dan alleen een van deze componenten. Denk onder andere aan de functionele documentatie maar ook aan een 'Getting started'.
 
