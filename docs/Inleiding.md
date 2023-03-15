@@ -1,3 +1,8 @@
+---
+layout: page-with-side-nav
+title: Inleiding
+---
+
 # Inleiding
 
 ## Historie
