@@ -15,7 +15,7 @@ Let wel, het eindproduct van dit traject is een API-specificatie en geen werkend
 
 ## Wat is Model Driven Design in de context van VNGR
 
-De Model Driven Design aanpak die door VNG Realisatie is ontwikkeld is gebaseerd op de visie dat het definiëren van uitwisselingsstandaarden begint bij het vastleggen van de semantiek en samenhang van de gegevens in een informatiemodel. Dit informatiemodel dien opgesteld te worden conform het [MetaModel Informatiemodellen](https://docs.geostandaarden.nl/mim/mim/).
+De Model Driven Design aanpak die door VNG Realisatie is ontwikkeld is gebaseerd op de visie dat het definiëren van uitwisselingsstandaarden begint bij het vastleggen van de semantiek en samenhang van de gegevens in een informatiemodel. Dit informatiemodel dient opgesteld te worden conform het [MetaModel Informatiemodellen](https://docs.geostandaarden.nl/mim/mim/).
 
 Op basis van het informatiemodel van het domein waarbinnen de gegevensuitwisseling plaats gaat vinden wordt er vervolgens een technisch model opgesteld (UitwisselingsGegevensModel). In de technische ontwerp-stap om tot dit model te komen worden keuzes gemaakt die in feite leiden tot de definitie van resources (entiteittypen) en hun onderlinge relaties. Denk daarbij onder andere aan de volgende mogelijke situaties:
 
