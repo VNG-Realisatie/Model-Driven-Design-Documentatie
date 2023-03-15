@@ -3,13 +3,17 @@ layout: page-with-side-nav
 title: Supplier overzicht
 ---
 
-<!DOCTYPE HTML><html xmlns:UML="omg.org/UML1.3" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:myf="www.myfunctions" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+div xmlns:UML="omg.org/UML1.3" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:myf="www.myfunctions" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title></title>
       <style>
+				* {
+				    font-family: 'Montserrat', sans-serif;
+				    color: #424242;
+				    line-height: 1rem;
+				}
 				.model {
-					font-family: "Arial", sans-serif;
 					font-size: 12px;
 					font-weight: normal;
 				}
@@ -19,12 +23,10 @@ title: Supplier overzicht
 					margin-top: 10px;
 				}
 				.modeltitleError {
-					font-family: "Arial", sans-serif;
 					font-size: 12px;
 					color: red;
 				}
 				.modeltitleWarning {
-					font-family: "Arial", sans-serif;
 					font-size: 12px;
 					color: green;
 				}
@@ -73,7 +75,7 @@ title: Supplier overzicht
 				</style>
    </head>
    <body>
-      <h1 style="font-family: 'Arial', sans-serif;">Tags model-supplier overzicht</h1><button class="collapsible" style="background-color: lightblue;font-size: 16px;font-weight: bold;">SIM</button><div class="content"><button class="collapsible" style="background-color: lightblue;">
+      <h1>Tags model-supplier overzicht</h1><button class="collapsible" style="background-color: lightblue;font-size: 16px;font-weight: bold;">SIM</button><div class="content"><button class="collapsible" style="background-color: lightblue;">
             <div class="modeltitle">CIM Klantinteracties</div>
             <div><b>Bestandsnaam</b>: SIM Klantinteracties 00_01_00 in ontwikkeling R20191108.xml</div><b>Release</b>: 20191108, <b>Versie</b>: , <b>Status</b>: In ontwikkeling</button><div class="content">
             <div><b>Suppliermodel(len):</b></div>
@@ -1133,4 +1135,4 @@ title: Supplier overzicht
 				  });
 				}
 				</script></body>
-</html>
+</div>
