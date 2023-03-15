@@ -1,3 +1,8 @@
+---
+layout: page-with-side-nav
+title: Supplier overzicht
+---
+
 <div xmlns:UML="omg.org/UML1.3" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:myf="www.myfunctions" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
