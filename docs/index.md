@@ -2,8 +2,8 @@
 layout: page-with-side-nav
 title: Inhoudsopgave
 ---
-Deze Wiki is een inventarisatie van informatie over de Model Driven Design aanpak van VNG Realisatie.  
 
+Deze Wiki is een inventarisatie van informatie over de Model Driven Design aanpak van VNG Realisatie.  
 
 ## [1 Inleiding](Inleiding)
 
