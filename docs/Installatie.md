@@ -81,8 +81,8 @@ Hieronder worden de stappen beschreven die je moet doorlopen om Enterprise Archi
 
  ![Tortoise-setup](./images/Tortoise%20Custom%20Setup.jpg)
 
-- Hierna dien je een working copy aan te maken in je filesysteem van de inmiddels vervaardigde EAP repository. Kies daarvoor eerst de gewenste locatie en creëer zo nodig een folder;
-- Binnen de zojuist gekozen of vervaardigde folder check je vervolgens de repository met de EAP bestanden uit (op dit moment kun je deze [hier](https://vngrealisatie.plan.io/svn/modellen-repository.modellen-repository) vinden, Kies daarbij een naam voor de folder waarin deze moet worden uitgepakt (bijv. ‘EAP-bronnen’). Er worden nu lokaal een aantal folders en bestanden geplaatst;
+- Hierna dien je een working copy aan te maken in je filesysteem van de modellen repository. Kies daarvoor eerst de gewenste locatie in je filesysteem en creëer indien gewenst nog een folder;
+- Binnen de zojuist gekozen of vervaardigde folder check je vervolgens de modellen repository uit (op dit moment kun je deze [hier](https://vngrealisatie.plan.io/svn/modellen-repository.modellen-repository) vinden, Kies daarbij een naam voor de folder waarin deze moet worden uitgepakt (bijv. ‘EAP-bronnen’). Er worden nu lokaal een aantal folders en bestanden geplaatst. Om deze repository te kunnen gebruiken moet je inloggen. Vraag authorisatie aan bij Robert Melskens of Michiel Verhoef indien je die nog niet hebt;
 - We gaan nu in EA een aantal versioncontrol configuraties aanmaken die je in de gelegenheid stellen eenvoudig naar de subversion folders te navigeren. Afhankelijk van welke modellen je denkt te gaan produceren moet je enkele of alle volgende configuraties aanmaken voor de volgende folders:
   - trunk/SIM;
   - trunk/UGM;
