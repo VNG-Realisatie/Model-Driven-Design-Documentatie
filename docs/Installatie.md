@@ -88,7 +88,7 @@ Hieronder worden de stappen beschreven die je moet doorlopen om Enterprise Archi
   - tags/UGM;
   - tags/BSM.
 - Open daarvoor in Enterprise Architect het lege template EA bestand dat je [hier](./bestanden/Standaard-basis.EAP) kunt vinden. Hier gaan we niets mee doen maar een geopend EA bestand is een voorwaarde om SVN in Enterprise Architect te configureren;
-- Het bestand voorziet je ook al van de genoemde SVN configuraties die je dan alleen nog maar hoeft te vullen. Als het goed is krijg je dan ook bij het openen van dat bestand de melding<br/><br/>_One or more Version Control configurations used by this are not fully defined on this machine. Would you like to complete the set up now?_<br/><br/>Aangezien dat de bedoeling is klik je op 'Yes'.<br/><br/>**Let op**: Indien je de genoemde melding niet krijgt dan heb je de configuraties waarschijnlijk toch al ingegeven. In dat geval is het goed om deze even te checken. Ga daarvoor binnen Enterprise Architect naar ***Configure / Version Control / Project-VC***.
+- Het bestand voorziet je ook al van de genoemde SVN configuraties die je dan alleen nog maar hoeft te vullen. Als het goed is krijg je dan ook bij het openen van dat bestand de melding<br/><br/>_One or more Version Control configurations used by this are not fully defined on this machine. Would you like to complete the set up now?_<br/><br/>Aangezien dat de bedoeling is klik je op 'Yes'.<br/><br/>**Let op**: Indien je de genoemde melding niet krijgt dan heb je de configuraties waarschijnlijk toch al ingegeven. In dat geval is het goed om deze even te checken. Ga daarvoor binnen Enterprise Architect naar ***Configure / Version Control / Project-VC***.<br/>
 - Je krijgt nu het volgende menu:<br/>
 ![Settings](./images/EA%20Version%20Control%20Settings.jpg)<br/><br/>Waarbij je bij de 'Defined Configurations' dus al de negen genoemde configuraties ziet staan (in de illustratie hierboven is deze echter leeg).
 - Voor elk van deze negen configuraties doe je nu het volgende:
@@ -96,7 +96,7 @@ Hieronder worden de stappen beschreven die je moet doorlopen om Enterprise Archi
   - Bepaal of de configuratie voor jou van toepassing zal zijn. Als je je nooit bezig houdt met het ontwikkelen van SIM's, heb je de configuratie 'Imvertor-trunk-SIM' niet nodig. Indien dit niet het geval is verwijder hem dan.
   - Indien de configuratie wel van toepassing is geef dan aan dat het version control van het type ‘Subversion’ is;
   - Kies het path naar de gerelateerde SVN folder. Helaas kan je daarbij geen copy and paste van een voorgaand path toepassen;
-  - Geef aan waar de ‘svn.exe’ nu staat (dit hoef je waarschijnlijk alleen bij de eerste configuratie te doen)<br/><br/>![Settings](./images/Version%20Control%20Settings.png)
+  - Geef aan waar de ‘svn.exe’ nu staat (dit hoef je waarschijnlijk alleen bij de eerste configuratie te doen)<br/><br/>![Settings](./images/Version%20Control%20Settings.png)<br/><br/>
 - Bewaar de configuratie.
 
 De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde waarin deze verschijnen in het pull-down menu voor het ophalen van de packages. Indien je het meest modellen uit de tags ophaalt dan is het wellicht handiger om de configuraties 'Imvertor-tags-SIM', 'Imvertor-tags-UGM' en 'Imvertor-tags-BSM' als eerste op te voeren. In dat geval zul je de oude configuraties toch moeten verwijderen en de configuraties helemaal zelf op moeten voeren.
