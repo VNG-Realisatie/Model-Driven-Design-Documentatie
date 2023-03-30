@@ -106,7 +106,7 @@ De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde 
 
 ### 1.1.8 Tagged value SourceAttribute navigeerbaar (klikbaar) maken
 
-- Ga naar **Configure / Reference Data / UML Types**, voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:<br/><br/>![sourceAttribute](./images/sourceattribute-instellingen-ea.JPG)
+- Ga naar **Configure / Reference Data / UML Types**, voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:<br/><br/><img src="./images/sourceattribute-instellingen-ea.JPG" alt="sourceAttribute" width="1000"/>
 
 - Klik op _Save_.
 
