@@ -53,7 +53,8 @@ Verwijder vervolgens het betreffende MDG.bestand.
 
 Na het laden van de MIG, MUG en MBG profielen (zie boven) moeten deze geactiveerd worden in de configuratie van de Schema Composer.  Deze is te bereiken via **Specialize / Technologies / Manage-Tech**.
 
-![MDG-technologies](./images/MDG_technologies.png)
+<img src="./images/MDG_technologies.png" alt="MDG-technologies" width="1000"/>
+
 
 In geval er meerdere MUG-profielen zichtbaar zijn in het configuratiescherm moeten deze alle aangevinkt worden wegens een onbekende bug in EA.
 
