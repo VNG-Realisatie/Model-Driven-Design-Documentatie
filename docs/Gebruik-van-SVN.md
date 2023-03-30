@@ -12,7 +12,7 @@ Randvoorwaarde om SVN binnen Enterpise Architect te kunnen gebruiken is dat Tort
 ### Het vastleggen van een nieuw model (package) in de repository
 
 Als er een nieuw model wordt gemaakt in Enterprise Architect, om het even of dat nu een SIM, UGM of BSM is, en dat model moet opgenomen worden in de SVN-repository, dan moet op het niveau van de model-package aangegeven worden dat deze package opgenomen moet worden in de repository.
-* Selecteer de betreffende package en kies via de linkermuis-knop de keuze 'Package Control' en in het Sub-menu de keuze 'Configure'.
+* Selecteer de betreffende package en kies via de rechtermuisknop de keuze 'Package Control' en in het Sub-menu de keuze 'Configure'.
 * Kies in het pop-up menu de keuze 'Configure'.
 * Klik het vinkje bij 'Control Package' aan.
 * Selecteer bij  Version Control de repository die bij het installeren van SVN is geconfigureerd. (Met het pijltje aan de rechterkant van de het invoerveld.  
@@ -36,7 +36,7 @@ Randvoorwaarde voor het ophalen van een model uit de repository in Enterprise Ar
 Het ophalen van een model wordt gedaan door een Get package uit te voeren:
 
 * Selecteer de project-package waaronder het model moet worden opgenomen.
-* Ga via de linkermuisknop naar de menukeuze "Package Control" en selecteer in het sub-menu "Get Package...".
+* Ga via de rechtermuisknop naar de menukeuze "Package Control" en selecteer in het sub-menu "Get Package...".
 * Selecteer de locatie waar het gewenste model is opgeslagen. De locaties die hier beschikbaar zijn zijn bij het configureren van Version Control in EA aangebracht (zie hoofdstuk 1: [SVN configureren voor EA](./Installatie#1.1.7%20SVN%20configureren%20voor%20EA).
 * Selecteer het model dat je vanuit de repository in Enterprise Architect beschikbaar wilt hebben en klik op "OK".
 
@@ -48,20 +48,20 @@ Het model wordt nu binnengehaald  en onder de package gezet die  je in de eerste
 
 Een model dat is opgehaald is altijd ingechecked. Als je een model wilt bewerken moet je het uitchecken. Dat doe je als volgt:
 * Selecteer het model-package dat je wilt wijzigen.
-* Ga via de linkermuisknop naar de menukeuze "Package Control" en selecteer in het sub-menu "Check Out...".
+* Ga via de rechtermuisknop naar de menukeuze "Package Control" en selecteer in het sub-menu "Check Out...".
 De meest recente versie van het model wordt nu binnengehaald  (dat is dus eigenlijk meteen een "Get Latest") en opengezet voor het aanbrengen van wijzigingen.
 Ook wordt het model gelocked voor wijzigingen door anderen. Het is dus raadzaam om modellen niet onnodig uitgechecked te laten staan. Tevens voorkomt dat problemen als je het package ook in een ander EA bestand gebruikt en het zonder daar erg in te hebben ook daar zou uitchecken.
 
 Na het aanbrengen van de wijzigingen kan je het model weer inchecken en dat doe je als volgt :
 * Selecteer het model-package dat je wilt inchecken.
-* Ga via de linkermuisknop naar de menukeuze "Package Control" en selecteer in het sub-menu "Check In...".
+* Ga via de rechtermuisknop naar de menukeuze "Package Control" en selecteer in het sub-menu "Check In...".
 
 ### Raadplegen van een model.
 
 Modellen die je opgenomen hebt in je EA-bestand worden niet automatisch bijgewerkt. Op het moment dat iemand anders in een model een wijziging heeft aangebracht moet die wijziging pro-actief opgehaald worden.
 Dat kan op 2 manieren. Je kunt de laatste versie van een specifiek model ophalen door het volgende te doen.
 * Selecteer het model-package dat je wilt updaten.
-* Ga via de linkermuisknop naar de menukeuze "Package Control" en selecteer in het sub-menu "Get Latest...".
+* Ga via de rechtermuisknop naar de menukeuze "Package Control" en selecteer in het sub-menu "Get Latest...".
 
 Als je alle modellen die in jouw EA-betand zitten wilt updaten (aanrader) dan kies je in de bovenstaande situatie voor de keuze "Get All Latest".
 
@@ -69,7 +69,7 @@ Als je alle modellen die in jouw EA-betand zitten wilt updaten (aanrader) dan ki
 
 Indien je een model uit je EA-bestand wilt verwijderen kan dat door de package te verwijderen.
 * Selecteer het model-package dat je wilt verwijderen.
-* Ga via de linkermuisknop naar de menukeuze "Delete (Packagenaam)".
+* Ga via de rechtermuisknop naar de menukeuze "Delete (Packagenaam)".
 
 *Let op*: een model dat in  Version Control is opgenomen kan later weer opgehaald worden (zie boven). Echter een model of package dat niet in Version Control is opgenomen wordt hiermee definitief verwijderd en is niet meer terug te halen.
 
