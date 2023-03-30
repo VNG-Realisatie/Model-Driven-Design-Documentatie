@@ -34,9 +34,7 @@ De volgende metamodellen zijn beschikbaar (zie gelinkte bestanden):
 
 Welke je moet installeren is afhankelijk van je werkzaamheden. Ben je alleen verantwoordelijk voor het produceren van SIM's of CIM's dan installeer je alleen de eerste. Indien je ook of juist verantwoordelijk bent voor het vervaardigen van UGM's dan installeer je de eerste en de tweede en als je BSM's moet kunnen maken dan dien je ze alledrie te installeren.
 
-In Enterprise Architect kan je via **Specialize / Technologies / Publish-Tech / Import MDG Technology** de profielen met de metamodellen voor de diverse model-varianten importeren.
-
-![MDG-Technology](./images/MDG-Technology1.jpg)
+In Enterprise Architect kan je via **Specialize / Technologies / Publish-Tech / Import MDG Technology** de profielen met de metamodellen voor de diverse model-varianten importeren.<br/><br/>![MDG-Technology](./images/MDG-Technology1.jpg)
 
 Let er wel op dat je de **"Import to User"** gebruikt, dan heb je immers in ieder project dat je opent of nieuw maakt de beschikking over deze profielen.
 
@@ -51,9 +49,7 @@ Verwijder vervolgens het betreffende MDG.bestand.
 
 ### 1.1.5 Activeren metamodellen
 
-Na het laden van de MIG, MUG en MBG profielen (zie boven) moeten deze geactiveerd worden in de configuratie van de Schema Composer.  Deze is te bereiken via **Specialize / Technologies / Manage-Tech**.
-
-<img src="./images/MDG_technologies.png" alt="MDG-technologies" width="1000"/>
+Na het laden van de MIG, MUG en MBG profielen (zie boven) moeten deze geactiveerd worden in de configuratie van de Schema Composer.  Deze is te bereiken via **Specialize / Technologies / Manage-Tech**.<br/><br/><img src="./images/MDG_technologies.png" alt="MDG-technologies" width="1000"/>
 
 
 In geval er meerdere MUG-profielen zichtbaar zijn in het configuratiescherm moeten deze alle aangevinkt worden wegens een onbekende bug in EA.
@@ -77,10 +73,7 @@ Na processen vind je in de folder 'ea' van de zipfile het nieuwe in Enterprise A
 
 Hieronder worden de stappen beschreven die je moet doorlopen om Enterprise Architect geschikt te maken voor het werken met Subversion.
 
-- Enterprise Architect werkt direct op subversion en niet met Tortoise. Je moet er dus voor zorgen dat je over de SVN executable ‘svn.exe’ beschikt. Dit kan door Tortoise te installeren. Heb je Tortoise al geïnstalleerd dan is de kans groot dat je de svn command line client niet hebt geïnstalleerd.  Installeer dan Tortoise opnieuw of download de laatste versie van Tortoise en installeer deze. Selecteer daarbij in het Tortoise setup menu de optie ‘Will be installed on local hard drive’ bij ‘command line client tools’ en start daarna opnieuw op:
-
-
- ![Tortoise-setup](./images/Tortoise%20Custom%20Setup.jpg)
+- Enterprise Architect werkt direct op subversion en niet met Tortoise. Je moet er dus voor zorgen dat je over de SVN executable ‘svn.exe’ beschikt. Dit kan door Tortoise te installeren. Heb je Tortoise al geïnstalleerd dan is de kans groot dat je de svn command line client niet hebt geïnstalleerd.  Installeer dan Tortoise opnieuw of download de laatste versie van Tortoise en installeer deze. Selecteer daarbij in het Tortoise setup menu de optie ‘Will be installed on local hard drive’ bij ‘command line client tools’ en start daarna opnieuw op:<br/><br/>![Tortoise-setup](./images/Tortoise%20Custom%20Setup.jpg)
 
 - Hierna dien je een working copy aan te maken in je filesysteem van de modellen repository. Kies daarvoor eerst de gewenste locatie in je filesysteem en creëer indien gewenst nog een folder;
 - Binnen de zojuist gekozen of vervaardigde folder check je vervolgens de modellen repository uit (op dit moment kun je deze [hier](https://vngrealisatie.plan.io/svn/modellen-repository.modellen-repository) vinden, Kies daarbij een naam voor de folder waarin deze moet worden uitgepakt (bijv. ‘EAP-bronnen’). Er worden nu lokaal een aantal folders en bestanden geplaatst. Om deze repository te kunnen gebruiken moet je inloggen. Vraag authorisatie aan bij Robert Melskens of Michiel Verhoef indien je die nog niet hebt;
@@ -108,18 +101,14 @@ Hieronder worden de stappen beschreven die je moet doorlopen om Enterprise Archi
 
 De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde waarin deze verschijnen in het pull-down menu voor het ophalen van de packages. Indien je het meest modellen uit de tags ophaalt dan is het wellicht handiger om de configuraties 'Imvertor-tags-SIM', 'Imvertor-tags-UGM' en 'Imvertor-tags-BSM' als eerste op te voeren. In dat geval zul je de oude configuraties toch moeten verwijderen en de configuraties helemaal zelf op moeten voeren.
 
-- Als je alle 9 configuraties hebt vervaardigd dan kan je het menu sluiten.
-![Settings](./images/Version%20Control%20Settings%20Configured.png)
+- Als je alle 9 configuraties hebt vervaardigd dan kan je het menu sluiten.<br/><br/>![Settings](./images/Version%20Control%20Settings%20Configured.png)
 
 
 ### 1.1.8 Tagged value SourceAttribute navigeerbaar (klikbaar) maken
 
-- Ga naar **Configure / Reference Data / UML Types**, voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:
-
-![sourceAttribute](./images/sourceattribute-instellingen-ea.JPG)
+- Ga naar **Configure / Reference Data / UML Types**, voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:<br/><br/>![sourceAttribute](./images/sourceattribute-instellingen-ea.JPG)
 
 - Klik op _Save_.
-
 
 ### 1.1.9 Traceability script beschikbaar maken in project browser.
 
