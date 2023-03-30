@@ -95,8 +95,7 @@ Hieronder worden de stappen beschreven die je moet doorlopen om Enterprise Archi
   - tags/UGM;
   - tags/BSM.
 - Open daarvoor in Enterprise Architect het lege template EA bestand dat je [hier](./bestanden/Standaard-basis.EAP) kunt vinden. Hier gaan we niets mee doen maar een geopend EA bestand is een voorwaarde om SVN in Enterprise Architect te configureren;
-- Het bestand voorziet je ook al van de genoemde SVN configuraties die je dan alleen nog maar hoeft te vullen. Als het goed is krijg je dan ook bij het openen van dat bestand de melding 'One or more Version Control configurations used by this are not fully defined on this machine. Would you like to complete the set up now?'.
-  Aangezien dat de bedoeling is klik je op 'Yes'.<br/><br/>_Indien je de genoemde melding niet krijgt dan heb je de configuraties waarschijnlijk toch al ingegeven. In dat geval is het goed om deze even te checken. Ga daarvoor binnen Enterprise Architect naar **Configure / Version Control / Project-VC**._
+- Het bestand voorziet je ook al van de genoemde SVN configuraties die je dan alleen nog maar hoeft te vullen. Als het goed is krijg je dan ook bij het openen van dat bestand de melding<br/><br/>_One or more Version Control configurations used by this are not fully defined on this machine. Would you like to complete the set up now?_<br/><br/>Aangezien dat de bedoeling is klik je op 'Yes'.<br/><br/>**Let op**: Indien je de genoemde melding niet krijgt dan heb je de configuraties waarschijnlijk toch al ingegeven. In dat geval is het goed om deze even te checken. Ga daarvoor binnen Enterprise Architect naar ***Configure / Version Control / Project-VC***.
 - Je krijgt nu het volgende menu:<br/>
 ![Settings](./images/EA%20Version%20Control%20Settings.jpg)<br/><br/>Waarbij je bij de 'Defined Configurations' dus al de negen genoemde configuraties ziet staan (in de illustratie hierboven is deze echter leeg).
 - Voor elk van deze negen configuraties doe je nu het volgende:
