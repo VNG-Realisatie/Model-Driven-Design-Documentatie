@@ -26,7 +26,7 @@ nav:
         path: /Wetenswaardigheden-en-specials
       - title: Tagged Values
         path: /Tagged-values
-      - title: Veel voorkomende foutens
+      - title: Veel voorkomende fouten
         path: /Veelvoorkomende-fouten
 plugins:
   - jekyll-redirect-from
