@@ -45,7 +45,7 @@ We kiezen er op dit moment voor om de Relaties die lopen tussen een Groep en een
 
 Bij alle Objecttypen (ongeacht of het nu de fundamentele of een gerelateerde is) die nog niet beschikken over een uniek identificerend attribuut wordt in het UGM een technisch uniek identificerend attribuut aangemaakt.
 
-![Relaties - UGM step 3](./images/Relaties - UGM-step3.jpg)  
+<img src="./images/Relaties - UGM-step3.jpg" alt="Relaties - UGM step 3" width="1000"/>
 
 In het Entiteittype dat onderwerp is of gaat worden van een bericht (hier de Entiteittype ‘fundamenteel’ en in de OAS specificatie de resource van een bericht), het ‘fundamenteel’ Entiteittype dus, wordt voor alle Relaties die vandaaruit naar een (gerelateerd) Entiteittype lopen een verwijzend attribuut opgenomen. Attributen dus die de gerelateerde Entiteittypes identificeren. Deze hebben dus dezelfde kenmerken als het identificerende attribuut van dat gerelateerde Entiteittype. Zie in het volgende diagram het attribuut ‘gerelateerdeId’ in het Entiteittype ‘fundamenteel’.
 De tagged value ‘Is afgeleid’ krijgt bij de beide ‘gerelateerdeId’ attributen de waarde ‘Nee’ en er wordt daar ook geen tagged value ‘SourceAttribute’ opgenomen. 
@@ -53,7 +53,7 @@ Let op! De kardinaliteit van dit attribuut moet gelijk zijn aan de kardinaliteit
 
 Voor Relaties die oorspronkelijk in het SIM vanuit een Gegevensgroeptype naar een Objecttype liepen maar waarvoor nu de source verlegd is naar het ‘fundamenteel’ Entiteittype wordt een verwijzend attribuut opgenomen in de Groep. Ook deze hebben weer dezelfde kenmerken als het identificerende attribuut van dat ‘gerelateerde’ Entiteittype en ook hier geldt dezelfde opmerking m.b.t. diens kardinaliteit. Zie in het volgende diagram het attribuut ‘gerelateerdeId’ in de Groep ‘gegevensgroep’.
 
-![Relaties - UGM step 4](./images/Relaties - UGM-step4.jpg)  
+<img src="./images/Relaties - UGM-step4.jpg" alt="Relaties - UGM step 4" width="1000"/>
 
 Als naam voor de properties die verwijzen naar het identificerende property van een gerelateerd Entiteittype gebruiken we ‘Id’ voorafgegaan door de naam van de entiteit waarnaar verwezen wordt (dus bijv. ‘persoonId’). Als er meerdere Relaties naar dezelfde entiteit zijn dan nemen we in de naam de naam van de Relatie op. I.p.v. de naam van het Entiteittype komt dan de naam van de Relatie (dus bijv. ‘ouderVanId’ en ‘kindVanId’).
 
