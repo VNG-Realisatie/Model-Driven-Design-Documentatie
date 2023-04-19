@@ -25,7 +25,235 @@ Binnen UGM zal je deze 'isEen' relaties waarschijnlijk willen oplossen. Dat kun 
 Bij het vervaardigen van een informatiemodel baseren we ons op de realiteit. Sterker nog, een informatiemodel is niet anders dan een model van de realiteit. De realiteit is echter complex en bij het modelleren simplificeer je de realiteit vooral kijkend naar wat je nodig hebt om de userstories in te kunnen vullen. Af en toe zal je daarbij een voorschot nemen op mogelijk in de toekomst in te vullen userstories met als gevolg dat er objectclasses in het informatiemodel worden opgenomen die je (nog) niet nodig hebt.
 In het UGM, waarin we alleen dat modelleren wat we voor de userstories technisch nodig hebben worden de entiteiten die relateren aan deze objectclasses dan ook verwijderd.
 
-h2. Yaml specifieke methodes
+### Van Model naar OAS specificatie: Relaties
+In de UGM en BSM modellen komen met regelmaat relaties tussen Entiteittypen en andere Entiteittypen maar ook tussen Groepen en Entiteittypen voor. De wijze van modelleren heeft invloed op de manier waarop deze naar OAS (json danwel hal+json) worden vertaald. Er zijn een aantal regels die gehanteerd moeten worden bij het modelleren in UGM en BSM en een aantal regels die toegepast moeten worden door de stylesheets die op basis van de modellen de specificaties genereren. Idealiter zijn de regels die we hanteren bij het modelleren voor een OAS specificatie in json formaat gelijk aan de regels die we hanteren bij het modelleren van een OAS specificatie in hal+json formaat. Daardoor worden de modellen onafhankelijk van het te genereren OAS formaat.
+
+#### Modelleren
+In een SIM modelleren we relaties door een associatie aan te brengen tussen twee Objecttypen of tussen een Gegevensgroeptype en een Objecttype. Deze krijgt vervolgens het stereotype ‘Relatiesoort’. Zie het volgende voorbeeld:
+
+![Relaties - Informatiemodel](./images/Relaties - Informatiemodel.jpg)
+
+Bij de omzetting naar UGM worden de Objecttypen omgezet naar Entiteittypen, de Gegevensgroeptypen naar Groepen en het stereotype ‘Relatiesoort’ van de associatie naar ‘Relatie’. Als volgt dus: 
+
+![Relaties - UGM step 1](./images/Relaties - UGM-step1.jpg) 
+
+Daarna moet aan de tagged value ‘Target role in meervoud’ van de Relaties een naam wordt toegekend die het meervoud is van de naam van het Entiteittype waarnaar de Relatie loopt. Ook de kardinaliteit van zo’n Relatie wordt aan beide zijden van de Relatie gespecificeerd.
+
+We kiezen er op dit moment voor om de Relaties die lopen tussen een Groep en een Entiteittype in het UGM aan te passen. De source kant van de relatie wordt verlegd naar het fundamentele Entiteittype.  We maken deze keuze zodat we in de Imvertor code geen logica hoeven op te nemen die deze aanpassing automatisch in het geval van hal+json doorvoert. Als we op een later moment besluiten die aanpassing alsnog in de code door te voeren dan zullen dit soort aanpassingen op de UGM modellen niet meer hoeven te worden aangebracht.
+
+![Relaties - UGM step 2](./images/Relaties - UGM-step2.jpg)  
+
+Bij alle Objecttypen (ongeacht of het nu de fundamentele of een gerelateerde is) die nog niet beschikken over een uniek identificerend attribuut wordt in het UGM een technisch uniek identificerend attribuut aangemaakt.
+
+![Relaties - UGM step 3](./images/Relaties - UGM-step3.jpg)  
+
+In het Entiteittype dat onderwerp is of gaat worden van een bericht (hier de Entiteittype ‘fundamenteel’ en in de OAS specificatie de resource van een bericht), het ‘fundamenteel’ Entiteittype dus, wordt voor alle Relaties die vandaaruit naar een (gerelateerd) Entiteittype lopen een verwijzend attribuut opgenomen. Attributen dus die de gerelateerde Entiteittypes identificeren. Deze hebben dus dezelfde kenmerken als het identificerende attribuut van dat gerelateerde Entiteittype. Zie in het volgende diagram het attribuut ‘gerelateerdeId’ in het Entiteittype ‘fundamenteel’.
+De tagged value ‘Is afgeleid’ krijgt bij de beide ‘gerelateerdeId’ attributen de waarde ‘Nee’ en er wordt daar ook geen tagged value ‘SourceAttribute’ opgenomen. 
+Let op! De kardinaliteit van dit attribuut moet gelijk zijn aan de kardinaliteit van de target zijde van de relatie waaraan deze gerelateerd is.
+
+Voor Relaties die oorspronkelijk in het SIM vanuit een Gegevensgroeptype naar een Objecttype liepen maar waarvoor nu de source verlegd is naar het ‘fundamenteel’ Entiteittype wordt een verwijzend attribuut opgenomen in de Groep. Ook deze hebben weer dezelfde kenmerken als het identificerende attribuut van dat ‘gerelateerde’ Entiteittype en ook hier geldt dezelfde opmerking m.b.t. diens kardinaliteit. Zie in het volgende diagram het attribuut ‘gerelateerdeId’ in de Groep ‘gegevensgroep’.
+
+![Relaties - UGM step 4](./images/Relaties - UGM-step4.jpg)  
+
+Als naam voor de properties die verwijzen naar het identificerende property van een gerelateerd Entiteittype gebruiken we ‘Id’ voorafgegaan door de naam van de entiteit waarnaar verwezen wordt (dus bijv. ‘persoonId’). Als er meerdere Relaties naar dezelfde entiteit zijn dan nemen we in de naam de naam van de Relatie op. I.p.v. de naam van het Entiteittype komt dan de naam van de Relatie (dus bijv. ‘ouderVanId’ en ‘kindVanId’).
+
+Bij het genereren van json kiezen we er voorlopig voor geen gerelateerde Entiteittypes embedded op te nemen. Deze keuze is echter nog onderwerp van discussie. Wel kunnen er tijdens het modelleren natuurlijk attributen van een ander Entiteittype platgeslagen worden in een ander Entiteittype. 
+
+Bij hal+json kunnen Entiteittypes wel embedded opgenomen worden. Indien we een OAS specificatie in het hal+json formaat willen genereren en daarbij een gerelateerde Entiteittype embedded op willen nemen moet het Entiteittype daarvan in het UGM en BSM minimaal het identificerende attribuut en een niet identificerend attribuut bevatten. In alle andere gevallen mag het Entiteittype leeg blijven. In dat geval zal er in de OAS specificatie alleen een link worden opgenomen in de ‘_links’ property. 
+De afspraak binnen VNG-R is dat we in hal+json relaties nooit dieper dan 1 niveau embedded modeleren. Indien dieper gemodelleerd wordt dan wordt dit echter wel zonder problemen gegenereerd. In principe zit hier geen beperking op.
+ 
+#### JSON Genereren
+In deze en de volgende paragraaf ga ik er vanuit dat het fundamentele Entiteittype de naam ‘fundamenteel’ heeft, het gerelateerde Entiteittype de naam ‘gerelateerd’ en de gegevensgroep de naam ‘gegevensgroep’. Op het Entiteittype ‘gerelateerd’ zijn 2 attributen gedefinieerd waarvan er één identificerend is. 
+
+De Groep ‘gegevensgroep’ is alleen van toepassing voor de paragrafen ‘Relatie tussen Groep en Entiteittype’.
+
+##### Relatie tussen 2 Entiteittypen
+
+![Relaties - UGM situatie 1](./images/Relaties - UGM-situatie1.jpg) 
+
+In de specificatie van het bericht zal een verwijzing worden opgenomen naar de ‘fundamenteel’ Entiteittype. Dat bevat naast het eigen identificerende property het identificerende property van de ‘gerelateerde’ Entiteittype. Er wordt geen property opgenomen met daarin de uri naar dat ‘gerelateerde’ Entiteittype.
+
+```
+Fundamenteel:
+  type: "object"
+  required:
+  - "id"
+  - "gerelateerdeId"
+  properties:
+    id:
+      type: "integer"
+    gerelateerdeId:
+      type: "integer"
+Gerelateerde:
+  type: "object"
+  required:
+  - "id"
+  properties:
+    id:
+      type: "integer"
+    attribuut:
+      type: "string"
+```
+
+##### Relatie tussen Groep en Entiteittype
+
+![Relaties - UGM situatie 2](./images/Relaties - UGM-situatie2.jpg) 
+
+Bij een Relatie tussen een in het ‘fundamenteel’ Entiteittype aanwezige Gegevensgroep en een Entiteittype bevat het ‘fundamenteel’ Entiteittype een property met een link naar de Groep. In die Groep is nu de property met de identificatie van het gerelateerde Entiteittype te vinden. Ook nu is er nergens een property opgenomen met daarin de uri naar dat gerelateerde Entiteittype.
+
+```
+Fundamenteel:
+  type: "object"
+  required:
+  - "id"
+  properties:
+    id:
+      type: "integer"
+    gegevensgroep:
+      $ref: "#/components/schemas/Gegevensgroep"
+Gegevensgroep:
+  type: "object"
+  properties:
+    gerelateerdeId:
+      type: "integer"
+    attribuut:
+      type: "string"
+Gerelateerde:
+  type: "object"
+  required:
+  - "id"
+  properties:
+    id:
+      type: "integer"
+    attribuut:
+      type: "string"
+```
+
+#### HAL+JSON Genereren
+
+##### Relatie tussen 2 Entiteittypen
+
+![Relaties - UGM situatie 1](./images/Relaties - UGM-situatie1.jpg) 
+
+
+In de specificatie van het bericht zal een verwijzing worden opgenomen naar ‘FundamenteelHalCollectie’ of ‘FundamenteelHal’. In het geval van de eerste dan wordt daarbinnen verwezen naar de tweede.
+De inhoud van ‘FundamenteelHal’ is vervolgens afhankelijk van de keuze die bij het modelleren is gemaakt. Naast een referentie naar het schema-component dat de inhoud van het ‘fundamenteel’ Entiteittype bevat (‘Fundamenteel’) incl. de identificerende property van het ‘gerelateerde’ Entiteittype, bevat het ook een link naar het schema-component ‘Fundamenteel_links’ en kan het ook een link naar het schema-component ‘Fundamenteel_embedded’ bevatten.
+
+‘Fundamenteel_links’ wordt dus altijd gegenereerd en wel binnen de property ‘_links’. Het schema-component ‘Fundamenteel_links’ bevat naast de property ‘self’, voor alle in het UGM en BSM met het ‘fundamenteel’ Entiteittype gerelateerde Entiteittypen een property met als naam de in de tagged value ‘Target role in meervoud’ gespecificeerde waarde. Die properties refereren allen naar ‘…./common.yaml#/components/schemas/HalLink’.
+
+De tweede (‘Fundamenteel_embedded’) wordt alleen gegenereerd als minimaal een van de met het ‘fundamenteel’ Entitetitype gerelateerde Entiteittypes in het UGM en BSM een niet identificerend attribuut bevat. In dat geval wordt deze in de property ‘_embedded’ geplaatst die een referentie heeft naar het Hal component van het ‘gerelateerde’Entiteittype. In dit voorbeeld leidt de link naar ‘GerelateerdeHal’. Dat schema-component bevat vervolgens een referentie naar het schema-component ‘Gerelateerde’, waarin de properties van dat schema-component en de property ‘_links’ met een referentie naar ‘Gerelateerde_links’ staan.
+
+Het uiteindelijke schema resultaat is dus als volgt:
+
+```
+FundamenteelHalCollectie:
+  type: "object"
+  properties:
+	_links:
+	  ...
+	_embedded:
+	  type: "object"
+	  properties:
+		fundamentelen:
+		  type: "array"
+		  items:
+			$ref: "#/components/schemas/FundamenteelHal"
+FundamenteelHal:
+  allOf:
+  - $ref: "#/components/schemas/Fundamenteel"
+  - type: "object"
+	properties:
+	  _links:
+		$ref: "#/components/schemas/Fundamenteel_links"
+	  _embedded:
+		$ref: "#/components/schemas/Fundamenteel_embedded"
+Fundamenteel_links:
+  type: "object"
+  properties:
+	self:
+	  $ref: ".../common.yaml#/components/schemas/HalLink"
+	gerelateerden:
+	  $ref: ".../common.yaml#/components/schemas/HalLink"
+Fundamenteel_embedded:
+  type: "object"
+  properties:
+	gerelateerden:
+	  $ref: "#/components/schemas/GerelateerdeHal"
+GerelateerdeHal:
+  allOf:
+  - $ref: "#/components/schemas/Gerelateerde"
+  - type: "object"
+	properties:
+	  _links:
+		$ref: "#/components/schemas/Gerelateerde_links"
+Gerelateerde_links:
+  type: "object"
+  properties:
+    self:
+      $ref: ".../common.yaml#/components/schemas/HalLink"
+Fundamenteel:
+  type: "object"
+  required:
+  - "id"
+  - "gerelateerdeId"
+  properties:
+    id:
+      type: "integer"
+    gerelateerdeId:
+      type: "integer"
+Gerelateerde:
+  type: "object"
+  required:
+  - "id"
+  properties:
+    id:
+      type: "integer"
+    attribuut:
+      type: "string"
+```
+
+De schema-componenten 
+* 'FundamenteelHalCollectie';
+* 'Fundamenteel_embedded';
+* 'GerelateerdeHal';
+* 'Gerelateerde_links';
+* en 'Gerelateerde'.
+
+komen afhankelijk van de modellering wel of niet voor.
+
+##### Relatie tussen Groep en Entiteittype
+
+![Relaties - UGM situatie 2](./images/Relaties - UGM-situatie2.jpg) 
+
+In dit geval zal het schema-component ‘Fundamenteel’ een property ‘gegevensgroepen’ kennen i.p.v. het attribuut ‘gerelateerdeId’. Dat attribuut zal zijn opgenomen in het schema-component ‘Gegevensgroep’. Natuurlijk is ook het schema-component ‘Fundamenteel_embedded’ gewijzigd aangezien de Relatie met het Entiteittype ‘gerelateerde’ hier meerdere keren voor kan komen. Hieronder zie je alleen die drie schema-componenten:
+
+```
+Fundamenteel:
+  type: "object"
+  required:
+  - "id"
+  properties:
+    id:
+      type: "integer"
+    gegevensgroep:
+	$ref: "#/components/schemas/Gegevensgroep"
+Gegevensgroep:
+  type: "object"
+  properties:
+    gerelateerdeId:
+	type: "integer"
+    attribuut:
+	type: "string"
+Fundamenteel_embedded:
+  type: "object"
+  properties:
+	gerelateerden:
+	  type: "array"
+	  items:
+		$ref: "#/components/schemas/GerelateerdeHal"
+```
+
+<!--h2. Yaml specifieke methodes
 
 ### uuid en url attributen
 
@@ -61,4 +289,4 @@ Vervolgens wordt dit gekopieerde entiteittype op maat gemaakt voor het domeinspe
 
  ![domeinspecugm](./images/Dom-spec%20UMG.JPG)
 
-p{color:red}. *Noot Robert:* Op de nieuwe entiteittypen die naar aanleiding van nieuw in het domeinspecifieke informatiemodel gedefinieerde objecttypen in het domeinspecifieke UGM worden geïntroduceerd kan net zoals de entiteittypen in de "generieke" UGM's natuurlijk ook een verStUFfingsslag van toepassing zijn. Daarvoor gelden dezelfde technieken als voor het verStUFfen van entiteittypen in de "generieke" UGM's (zie de voorgaande paragraaf).
+p{color:red}. *Noot Robert:* Op de nieuwe entiteittypen die naar aanleiding van nieuw in het domeinspecifieke informatiemodel gedefinieerde objecttypen in het domeinspecifieke UGM worden geïntroduceerd kan net zoals de entiteittypen in de "generieke" UGM's natuurlijk ook een verStUFfingsslag van toepassing zijn. Daarvoor gelden dezelfde technieken als voor het verStUFfen van entiteittypen in de "generieke" UGM's (zie de voorgaande paragraaf). -->
