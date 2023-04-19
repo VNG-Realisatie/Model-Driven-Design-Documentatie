@@ -6,11 +6,11 @@ title: Technische en implementatie-overwegingen
 
 Hier kunnen we documenteren welke overwegingen er zijn toegepast bij het opstellen van het UGM. Daarbij kan gebruik gemaakt worden van voorbeelden.
 
-In mijn beleving wordt dit hoofdstuk wat vroeger het "verStUFfingsdocument"  was.
+<!--In mijn beleving wordt dit hoofdstuk wat vroeger het "verStUFfingsdocument"  was.
 
 **Noot Robert:** Nee, dat klopt niet. Hier wordt uitgelegd wat de gedachte achter de creatie van een UGM is (in feite ook de gedachte achter het verStUFfingsdocument). In de volgende paragrafen moet dan uitgelegd worden welke methodes er bij het creëren van een UGM kunnen worden gehanteerd. Het zou kunnen dat deze pagina voor het yaml deel uiteindelijk vervangen wordt door de API Best Practices. Op zijn minst voor de principes, wellicht dat hier dan alleen nog wat handreikingen worden gedaan m.b.t. de wijze waarop in de praktijk met de API Best Practices in de UGM's moet worden omgegaan.
 
-Een voorzet voor de API Best Practices wordt "hier":https://github.com/VNG-Realisatie/API-Kennisbank/blob/master/Analyse%20API%20Design/Analyse%20API%20Design.md gedaan.
+Een voorzet voor de API Best Practices vind je "[hier](https://github.com/VNG-Realisatie/API-Kennisbank/blob/master/Analyse%20API%20Design/Analyse%20API%20Design.md gedaan)". -->
 
 ## Generieke methodes
 
