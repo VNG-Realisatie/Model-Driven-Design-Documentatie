@@ -51,7 +51,7 @@ Generated: 2023-03-01
 | 'Interne release' | Intern | Ja | **Wie kan hier een definitie van geven ?** | | Nee |
 | 'Is afgeleid' | Project, Basismodel, Toepassing, Domein, Extern, Intern, Objecttype, Relatiesoort, Relatierol, Data element, Attribuutsoort, Gegevensgroep, Referentielijst, Referentie element, Keuze, Enumeratie, Enumeratiewaarde, Codelijst, Gegevensgroeptype, Relatieklasse, Gestructureerd datatype, Primitief datatype, Interface | Nee | Deze constructie is al dan niet afgeleid van een "supplier model". Wanneer je niks opgeeft wordt afleiding vastgesteld op basis van het package waarin het voorkomt. | 'Nee', 'Ja', *'Zie package'* | Nee |
 | 'Is includeerbaar' | Product | Nee | Deze constructie kan via xi:include worden geincludeerd in het document. De equivalente constructie in het XML schema, of constructies daarbinnen, krijgt hierdoor dan een optioneel attribuut xml:base bijgevoegd. | 'Ja', *'Nee'* | JaJa |
-| 'Maximumwaarde' | Attribuutsoort, Data element, Primitief datatype, Gestructureerd datatype | Nee | De boven (inclusief) voor de waarde. | | Ja |
+| 'Maximumwaarde' | Attribuutsoort, Data element, Primitief datatype, Gestructureerd datatype | Nee | De bovengrens (inclusief) voor de waarde. | | Ja |
 | 'MIM extensie' | Informatiemodel | Nee | MIM 1.1: De aanduiding van een extensie op MIM. | | Ja |
 | 'MIM extensie versie' | Informatiemodel | Nee | De versie van de extensie op MIM. | | Ja |
 | 'MIM taal' | Informatiemodel | Nee | De aanduiding van de taal die gebruikt is voor de modelelementen. | MIM 1.1: De aanduiding van de taal die gebruikt is voor de modelelementen. | *'NL'*, 'EN' | Ja |
