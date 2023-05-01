@@ -97,7 +97,7 @@ Generated: 2023-03-01
 | 'Interne release' | Intern | Ja | **Wie kan hier een definitie van geven ?** | | Nee |
 | 'Is includeerbaar' | Product | Nee | Deze constructie kan via xi:include worden geincludeerd in het document. De equivalente constructie in het XML schema, of constructies daarbinnen, krijgt hierdoor dan een optioneel attribuut xml:base bijgevoegd. | 'Ja', *'Nee'* | JaJa |
 | 'Lengte' | Element, Data element, Datatype Primitief datatype, Tabel Element | Nee | De maximale lengte die een attribuut kan hebben. | | Nee |
-| 'Maximum waarde (inclusief)' | Element, Data element, Datatype Primitief datatype | Nee | DDe maximale waarde (inclusief) dat een attribuut mag hebben. | | Nee |
+| 'Maximum waarde (inclusief)' | Element, Data element, Datatype Primitief datatype | Nee | De maximale waarde (inclusief) dat een attribuut mag hebben. | | Nee |
 | 'Minimum lengte' | Element, Data element, Datatype Primitief datatype, Tabel Element | Nee | De minimale lengte die een attribuut moet hebben. | | Nee |
 | 'Minimum waarde (inclusief)' | Element, Data element, Datatype Primitief datatype | Nee | De minimale waarde (inclusief) dat een attribuut moet hebben | | Nee |
 | 'Mogelijk geen waarde' | Element, Groep, Relatie, Gegevensgroep | Nee | Indicatie waarmee wordt aangegeven dat het gegeven ook geen waarde kan hebben. | 'Ja', *'Nee'* | Ja |
