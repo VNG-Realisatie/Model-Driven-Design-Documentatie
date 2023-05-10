@@ -58,7 +58,7 @@ Als je handmatig objecten hebt gekopieerd of aangemaakt die gebaseerd zijn op ob
 
 Het toevoegen van relatieklassen kan op 2 manieren. Hieronder worden beide wijzen beschreven echter alleen de tweede wijze is correct omdat dat de enige wijze is waarop het juiste MIM stereotype (Relatieklasse) aan de relatieklasse gekoppeld kan worden.
 
-### Foutief:
+### <span style="color:red">Foutief</span>:
 
 *Door het koppelen van een class aan een association*
 In dit geval bestaan de association en de class al en wordt de class op de volgende wijze aan de association gekoppeld:
@@ -66,7 +66,7 @@ In dit geval bestaan de association en de class al en wordt de class op de volge
 - Klik met de rechter muistoets op de class en selecteer 'Advanced - Association Class ...';
 - Kies de gewenste association.
 
-### Correct:
+### <span style="color:green">Correct</span>:
 
 *Door het direct aanmaken van een association class*
 In dit geval worden zowel de association als de class op het moment van aanmaken van de association class gecreëerd.
