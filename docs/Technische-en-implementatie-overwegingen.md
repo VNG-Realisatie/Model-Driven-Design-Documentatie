@@ -64,7 +64,7 @@ De afspraak binnen VNG-R is dat we in hal+json relaties nooit dieper dan 1 nivea
  
 #### JSON Genereren
 
-<span style="color:red">Deze paragraaf is nog in discussie.</span>
+<span style="color:red"><b>Deze paragraaf is nog in discussie.</b></span>
 
 In deze en de volgende paragraaf ga ik er vanuit dat het fundamentele Entiteittype de naam ‘fundamenteel’ heeft, het gerelateerde Entiteittype de naam ‘gerelateerd’ en de gegevensgroep de naam ‘gegevensgroep’. Op het Entiteittype ‘gerelateerd’ zijn 2 attributen gedefinieerd waarvan er één identificerend is. 
 
