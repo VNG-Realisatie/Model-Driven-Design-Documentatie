@@ -63,6 +63,9 @@ Bij hal+json kunnen Entiteittypes wel embedded opgenomen worden. Indien we een O
 De afspraak binnen VNG-R is dat we in hal+json relaties nooit dieper dan 1 niveau embedded modeleren. Indien dieper gemodelleerd wordt dan wordt dit echter wel zonder problemen gegenereerd. In principe zit hier geen beperking op.
  
 #### JSON Genereren
+
+<span style="color:red">Deze paragraaf is nog in discussie.</span>
+
 In deze en de volgende paragraaf ga ik er vanuit dat het fundamentele Entiteittype de naam ‘fundamenteel’ heeft, het gerelateerde Entiteittype de naam ‘gerelateerd’ en de gegevensgroep de naam ‘gegevensgroep’. Op het Entiteittype ‘gerelateerd’ zijn 2 attributen gedefinieerd waarvan er één identificerend is. 
 
 De Groep ‘gegevensgroep’ is alleen van toepassing voor de paragrafen ‘Relatie tussen Groep en Entiteittype’.
