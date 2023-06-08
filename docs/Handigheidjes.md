@@ -120,3 +120,16 @@ Af en toe is het nodig om versie controle van een package te verwijderen. Dit ga
 !https://kinggemeenten.plan.io/attachments/download/161704!
 
 In Enterprise Architect 15.1 kan dit menu gevonden worden via het menu *Publish > Model Exhange > Package Control > Configure > Package Control...*.
+
+## Enumeratie classes in SIM corrigeren
+  
+In een SIM heeft een enumeratie het UML-Type 'Enumeration' en het MIM stereotype 'Enumeratie', de enumeratiewaardes daarbinnen krijgen als MIM stereotpe 'Enumeratiewaarde'.
+Een enumeratie kan op verschillende manieren worden vervaardigd maar al die manieren kennen zo hun handvatten. Om die reden komt het nu vaak voor dat een enumeratie class wel het correcte UML-Type en MIM stereotype heeft maar de enumeratiewaarde niet het juiste UML-Type en stereotype.
+  
+Het corrigeren van dit soort enumeraties gaat als volgt:
+* Wijzig het UML-Type' van de Enumeratie in 'Class' door het 'Type' property aan te passen. Het MIM stereotype blijft vooralsnog ongewijzigd;
+* Nu zijn de Features van die class van het UML-Type 'Attribute' waardoor je er het MIM stereotype 'Enumeratiewaarde' aan kunt koppelen;
+* Wijzig het UML-Type van de Enumeratie weer terug naar een 'Enumeration';
+* Indien de Enumeratie nog geen MIM stereotype had of een andere MIM stereotype dan 'Enumeratie' ken je er nu het MIM stereotype 'Enumeratie' aan toe.
+
+Is een enumeratie en de daarbij horende enumeratiewaarden m.b.v. de MIM Toolbox aangemaakt dan krijgt de enumeratie class wel het correcte UML-Type en de enumeratiewaardes wel het juiste UML-Type en MIM stereotype. De enumeratie class moet dan alleen nog voorzien worden van het juiste MIM stereotype.
