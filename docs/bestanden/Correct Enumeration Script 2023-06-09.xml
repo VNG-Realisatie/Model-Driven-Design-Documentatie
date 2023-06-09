@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<RefData version="1.0" exporter="EA.25">
+	<DataSet name="Automation Scripts" table="t_script" filter="ScriptName='#ScriptName#' and ScriptCategory='#ScriptCategory#'" stoplist=";ScriptID;">
+		<DataRow>
+			<Column name="ScriptID" value="67"/>
+			<Column name="ScriptCategory" value="3955A83E-9E54-4810-8053-FACC68CD4782"/>
+			<Column name="ScriptName" value="{ACFD1CA9-6270-4242-BC49-B0591D378FD7}"/>
+			<Column name="Notes" value="&lt;Group Type=&quot;PROJBROWSER&quot; Notes=&quot;&quot;/&gt;&#xA;"/>
+			<Column name="Script" value="2 VNG Realisatie Handle Elements"/>
+		</DataRow>
+		<DataRow>
+			<Column name="ScriptID" value="68"/>
+			<Column name="ScriptCategory" value="605A62F7-BCD0-4845-A8D0-7DC45B4D2E3F"/>
+			<Column name="ScriptName" value="{E9D16012-2E35-483b-9544-4DF2FEA5C305}"/>
+			<Column name="ScriptAuthor" value="{ACFD1CA9-6270-4242-BC49-B0591D378FD7}"/>
+			<Column name="Notes" value="&lt;Script Name=&quot;Correct Enumeration&quot; Type=&quot;Internal&quot; Language=&quot;VBScript&quot;/&gt;&#xA;"/>
+			<Column name="Script" value="option explicit&#xA;&#xA;!INC Local Scripts.EAConstants-VBScript&#xA;&#xA;' Script Name: Correct Enumeration Class&#xA;' Author: Robert Melskens&#xA;' Purpose: Enumeration created with the VNGR SIM_Grouping NL Toolbox or by hand within the Browser menu dont apply fuly to MIM. This script corrects that.&#xA;' Date: 9-6-2023&#xA;&#xA;dim outputTabName&#xA;outputTabName = &quot;Correct enumeration&quot;&#xA;const profilename = &quot;VNGR SIM+Grouping NL&quot;&#xA;&#xA;'&#xA;' Project Browser Script main function&#xA;'&#xA;sub OnProjectBrowserScript()&#xA;	&#xA;	Repository.CreateOutputTab outputTabName&#xA;	Repository.ClearOutput outputTabName&#xA;	Repository.EnsureOutputVisible outputTabName&#xA;	' Get the type of element selected in the Project Browser&#xA;	dim treeSelectedType&#xA;	treeSelectedType = Repository.GetTreeSelectedItemType()&#xA;	&#xA;	select case treeSelectedType&#xA;	&#xA;		case otElement&#xA;			' Code for when an element is selected&#xA;			dim theElement as EA.Element&#xA;			dim enumerationValue as EA.Attribute&#xA;			set theElement = Repository.GetTreeSelectedObject()&#xA;			&#xA;			if lcase(theElement.Type) = &quot;enumeration&quot; then&#xA;				Repository.WriteOutput outputTabName, now() &amp; &quot; Starting correcting enumeration!&quot;,0&#xA;				&#xA;				theElement.Type = &quot;Class&quot;&#xA;				theElement.Update()&#xA;				&#xA;				for each enumerationValue in theElement.Attributes&#xA;					Repository.WriteOutput outputTabName, now() &amp; &quot; Starting correcting enumerationvalue!&quot;,0&#xA;					enumerationValue.StereotypeEx = profilename &amp; &quot;::Enumeratiewaarde&quot;&#xA;					enumerationValue.StyleEx = &quot;IsLiteral=0&quot;&#xA;					enumerationValue.Update()&#xA;				next&#xA;				&#xA;				theElement.Type = &quot;Enumeration&quot;&#xA;				theElement.StereotypeEx = profilename &amp; &quot;::Enumeratie&quot;&#xA;&#xA;				Repository.WriteOutput outputTabName, now() &amp; &quot; Ended correcting enumeration!&quot;,0&#xA;			else &#xA;				Repository.WriteOutput outputTabName, now() &amp; &quot; Select an 'Enumeration' element to convert! The selected element is'nt of type 'Enumeration'.&quot;,0&#xA;			end if&#xA;			theElement.Update()&#xA;		case else&#xA;			' Error message&#xA;			Session.Prompt &quot;This script does not support items of this type.&quot;, promptOK&#xA;			&#xA;	end select&#xA;	&#xA;end sub&#xA;&#xA;OnProjectBrowserScript&#xA;"/>
+		</DataRow>
+	</DataSet>
+</RefData>
