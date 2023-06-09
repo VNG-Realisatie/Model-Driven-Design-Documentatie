@@ -123,13 +123,13 @@ In Enterprise Architect 15.1 kan dit menu gevonden worden via het menu *Publish 
 
 ## Enumeratie classes in SIM corrigeren
   
-In een SIM heeft een enumeratie het UML-Type 'Enumeration' en het MIM stereotype 'Enumeratie', de enumeratiewaardes daarbinnen krijgen als MIM stereotpe 'Enumeratiewaarde'.
-Een enumeratie kan op verschillende manieren worden vervaardigd maar al die manieren kennen zo hun handvatten. Om die reden komt het nu vaak voor dat een enumeratie class wel het correcte UML-Type en MIM stereotype heeft maar de enumeratiewaarde niet het juiste UML-Type en stereotype.
+In een op het MIM gebaseerd SIM heeft een enumeratie het UML-Type 'Enumeration' en het MIM stereotype 'Enumeratie', de enumeratiewaardes daarbinnen krijgen als MIM stereotpe 'Enumeratiewaarde'.
+Een enumeratie kan op verschillende manieren worden vervaardigd, handmatig in de browser, via de MIM Toolbox of d.m.v. een mengvorm van beide, maar al die manieren kennen zo hun tekortkomingen en genereren een enumeratie die (net) niet voldoet aan het MIM. Om die reden komt het nu vaak voor dat een enumeratie class wel het correcte UML-Type en MIM stereotype heeft maar de enumeratiewaarde niet het juiste UML-Type en stereotype.
   
-Het corrigeren van dit soort enumeraties gaat als volgt:
-* Wijzig het UML-Type' van de Enumeratie in 'Class' door het 'Type' property aan te passen. Het MIM stereotype blijft vooralsnog ongewijzigd;
-* Nu zijn de Features van die class van het UML-Type 'Attribute' waardoor je er het MIM stereotype 'Enumeratiewaarde' aan kunt koppelen;
-* Wijzig het UML-Type van de Enumeratie weer terug naar een 'Enumeration';
-* Indien de Enumeratie nog geen MIM stereotype had of een andere MIM stereotype dan 'Enumeratie' ken je er nu het MIM stereotype 'Enumeratie' aan toe.
+Teneinde de enumeraties eenvoudig en snel aan het MIM te laten voldoen is een script vervaardigd waarmee een enumeratie eenvoudig geconverteerd zodat het wel voldoet aan het MIM formaat.
 
-Is een enumeratie en de daarbij horende enumeratiewaarden m.b.v. de MIM Toolbox aangemaakt dan krijgt de enumeratie class wel het correcte UML-Type en de enumeratiewaardes wel het juiste UML-Type en MIM stereotype. De enumeratie class moet dan alleen nog voorzien worden van het juiste MIM stereotype.
+Installeer de laatste versie van het [Correct Enumeration Script](./bestanden/Correct%20Enumeration%20Script%202023-06-09.xml).
+
+Dat kan door het script te importeren via **Configure / Model / Transfer / Import Reference Data / Import File**
+
+Als je dat gedaan hebt zal je zien dat er nu in je 'Specialize' context menu bij het rechtsklikken op een enumeration class de optie 'Scripts / Correct Enumeration' is bijgekomen. De enige voorwaarde voor dit script is dat het Element waarop je dit script toepast van het UML-Type 'Enumeration' is.
