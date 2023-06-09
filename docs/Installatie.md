@@ -116,18 +116,10 @@ De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde 
 
 Installeer de laatste versie van het [set traceability script](./bestanden/Set%20Traceability%20Scripts%20with%20and%20without%20transformation%202021-06-08.xml).
 
-Het set traceability script wordt geimporteerd via **Configure / Model / Transfer / Import Reference Data / Shared File**
-
-**Let op**: Een herstart van EA of zelfs van je systeem kan nodig zijn om de optie 'Scripts' in je 'Specialize' context menu bij het rechtsklikken op een package te laten verschijnen.
+Het set traceability script wordt geimporteerd via **Configure / Model / Transfer / Import Reference Data / Import File**
 
 Als je dat gedaan hebt zal je zien dat er nu in je 'Specialize' context menu bij het rechtsklikken op een package een optie is bijgekomen:
-'Scripts' met de subopties 'Set Traceability with Transformation' en 'Set Traceability without Transformation'. Indien deze niet in de projectbrowser te zien is moeten de volgende stappen uitgevoerd worden
-
-1. Het script is te vinden onder het topmenu **Specialize / Scripting**.<br/>
-2. Maak in het opkomende menu een map "Package Group" aan als "New Project Browser Group" (als die nog niet bestaat).
-3. Sleep het "SetTraceabilityMain" script uit de "VNG Realisatie scripts" map naar de "Package Group" map.
-
-Nu zou het script wel beschikbaar moeten zijn onder de rechtermuisknop op de Package in de project Browser (keuze scripting). Ook nu geldt dat een herstart van EA gewenst kan zijn.
+'Scripts' met de subopties 'Set Traceability with Transformation' en 'Set Traceability without Transformation'. 
 
 ## Aan het werk
 
