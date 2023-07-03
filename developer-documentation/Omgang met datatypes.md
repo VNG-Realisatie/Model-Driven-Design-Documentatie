@@ -11,13 +11,24 @@ Dit soort datatypes wordt als bekend verondersteld. Ze worden nl. niet binnen de
 
 Onze modellen kennen deze datatypes eigenlijk niet aangezien ze worden gedefinieerd buiten het zicht van die modellen. Ook op de Imvertor server zijn deze datatypes niet in het een of ander model aanwezig. Berichtontwerpers worden verondersteld te weten wat er mee bedoelt wordt en wanneer en waar ze gebruikt kunnen worden. De stylesheets zijn ingericht op het verwerken van deze types naar de schemataal waarvoor het stylesheet is opgezet. Het MIM 1.1 Primitieve datatype wordt bijvoorbeeld door een stylesheet dat XML-Schema genereert vertaalt naar 'xs:string' en door een stylesheet dat JSON genereert naar 'string'.
 
-Om dit te kunnen doen worden de karakteristieken van elk Primitief datatype binnen Imvertor gedeclareerd in een van de zogenaamde conceptual-schema's. De werking van conceptual schema's is in de laatste paragraaf beschreven beschreven. 
+Om dit te kunnen doen worden deze datatypes binnen Imvertor gedeclareerd in een van de zogenaamde conceptual-schema's. De werking van conceptual schema's is in de laatste paragraaf beschreven beschreven. 
 
 ## Generieke datatypes
-xxx
+Bij Generieke datatypes gaat het om datatypes die een voor een organisatie vaste vorm vertegenwoordigen. Een goed voorbeeld is het datatype 'DatumOnvolledig' dat binnen VNG-Realisatie wordt gebruikt. Het bestaat uit de elementen:
+* 'dag';
+* 'maand';
+* 'jaar';
+* en 'datum'.
+
+Ook hier geldt:
+* dat onze modellen deze datatypes eigenlijk niet kennen en dat ze worden gedefinieerd buiten het zicht van die modellen;
+* dat berichtontwerpers worden verondersteld te weten wat er mee bedoelt wordt en wanneer en waar ze gebruikt kunnen worden;
+* dat de stylesheets die deze datatype gebruiken zijn ingericht op het verwerken van deze types naar de schemataal waarvoor het stylesheet is opgezet;
+* en dat deze gedeclareerd wordenin een van de zogenaamde conceptual-schema's. 
 
 ## Lokale datatypes
-xxx
+Lokale datatypes zijn datatypes die specifiek binnen een model een toepassing vinden, bijvoorbeeld omdat dat binnen een model veel wordt gebruikt. Het gaat hier om datatypes die ook binnen zo'n model worden gedefiniëerd en die over het algemeen een aanscherping zijn van de primitieve datatypes. Bijv. een datatype dat is gebaseerd op een integer maar waarvan de minimum waarde 1 en de maximum waarde 100 is.
+Doordat deze datatypes gebaseerd zijn op primitieve datatypes wordt er bij de verwerking door Imvertor gebruik gemaakt van dezelfde mechanismes als bij de Primitieve datatypes.
 
 ## Conceptual schema's
 Conceptual schema's zijn bestanden waarin per datatype en per schemataal een conceptual mapping is gedefinieerd. M.b.v. de conceptual schema's vindt er dus een mapping plaats van het datatype naar een construct in de schemataal. Om het datatype bijvoorbeeld te kunnen verwerken in een XML-Schema moet je dus weten naar welk XML simpleType of complexType het datatype mapt. Om het te verwerken in een OAS3 of RDF schema map je natuurlijk naar geheel andere types.
