@@ -3,4 +3,4 @@ Deze folder bevat technische informatie voor Imvertor developers. Beschrijvingen
 Deze documentatie is dus niet bedoelt voor gebruikers van de iMvertor software.
 
 ## Inhoudsopgave
-### [Omgang met datatypes](./Omgang met datatypes.md)
+### 1. [Omgang met datatypes](https://github.com/VNG-Realisatie/Model-Driven-Design-Documentatie/blob/main/developer-documentation/Omgang%20met%20datatypes.md)
