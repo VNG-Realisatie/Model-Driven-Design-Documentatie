@@ -14,8 +14,10 @@ Onze modellen kennen deze datatypes eigenlijk niet aangezien ze worden gedefinie
 Om dit te kunnen doen worden de karakteristieken van elk Primitief datatype binnen Imvertor gedeclareerd in een van de zogenaamde conceptual-schema's. De werking van conceptual schema's is in de laatste paragraaf beschreven beschreven. 
 
 ## Generieke datatypes
+xxx
 
 ## Lokale datatypes
+xxx
 
 ## Conceptual schema's
 Conceptual schema's zijn bestanden waarin per datatype en per schemataal een conceptual mapping is gedefinieerd. M.b.v. de conceptual schema's vindt er dus een mapping plaats van het datatype naar een construct in de schemataal. Om het datatype bijvoorbeeld te kunnen verwerken in een XML-Schema moet je dus weten naar welk XML simpleType of complexType het datatype mapt. Om het te verwerken in een OAS3 of RDF schema map je natuurlijk naar geheel andere types.
