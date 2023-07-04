@@ -156,8 +156,8 @@ Het element `cs:xsdType` in `cs:xsdTypes` kent de volgende structuur:
 `cs:oasType` en `cs:rdfType` kennen de elementen `cs:asAttributes` en `cs:asAttributeDesignation` niet. OAS bestanden bevatten immers geen attributes zoals die in een XML bestand wel aanwezig kunnen zijn.<br/>
 `rdfType` kent daarnaast ook het element `cs: primitive` niet. 
 
-### Toevoegen nieuw GML datatype
-
 ### Toevoegen nieuw MIM primitief datatype
+
+### Toevoegen nieuw GML datatype
 
 ### Toevoegen Gemeentelijk generiek datatype
