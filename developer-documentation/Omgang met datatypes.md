@@ -110,7 +110,7 @@ Optie 2 werkt echter als volgt er vanuit gaande dat je de mappings voor ‘Chara
 ### Meerdere versies van een mapping
 In het conceptual schema 'conceptual-schemas.xml' (src\main\resources\input\KING\xsd) kunnen meerdere secties voor GML voorkomen. Bijv. een voor GML 3.21 en een voor GML 3.22. Hoe hou je nu uit elkaar welke van de 2 je wil gebruiken?
 
-Bij het verwerken met Imvertor worden de properties gedefinieerd. In die properties wordt een mapping identifier meegegeven, bijv. ‘NEN3610_GML321’. In het conceptual schema wordt ook een mapping configuratie gedeclareerd, dat gaat als volgt:
+Bij het verwerken met Imvertor worden de properties behorende bij de gekozen processing mode uitgelezen. Een van die properties is 'mapping' waaraan een identifier is toegekend, bijv. ‘NEN3610_GML321’. In het conceptual schema is ook een mapping configuratie gedeclareerd met de naam 'NEN3610_GML321':
 
 ```
    <cs:mappings>
@@ -118,10 +118,40 @@ Bij het verwerken met Imvertor worden de properties gedefinieerd. In die propert
          <cs:name>NEN3610_GML321</cs:name>
          <cs:use>
             <cs-ref:MapRef xlink:href="#GML321"/>
-            <cs-ref:MapRef xlink:href="#MIM11"/>
+            <cs-ref:MapRef xlink:href="#MIM111"/>
             <cs-ref:MapRef xlink:href="#VNGR-MAP"/>
          </cs:use>
       </cs:Mapping>
    </cs:mappings>
 ```
-Hieruit kun je opmaken dat deze identifier correspondeert met de mappings voor GML321, MIM11 en VNGR-MAP, mappings die verderop in dat bestand worden gedefinieerd.
+In feite definieert deze mapping dat de conceptual mappings met de mapping referenties 'GML321', 'MIM111' en 'VNGR-MAP', mappings die verderop in het bestand worden geinclude, moeten worden gebruikt. Definieer, als je een andere set conceptual mappings wil gebruiken, een nieuwe mapping configuratie met daarin de gewenste  mapping referenties. Definieer zo nodig ook nieuwe conceptual mapping bestanden.
+
+### Mappings voor andere schematalen
+In de voorgaande paragraaf zagen we al de volgende conceptual mapping:
+```
+        <cs:Construct>
+            <cs:name>CharacterString</cs:name>
+            <cs:sentinel>false</cs:sentinel>
+            <cs:catalogEntries>
+                <cs:CatalogEntry>
+                    <cs:name>#primitive-datatypes</cs:name>
+                </cs:CatalogEntry>
+            </cs:catalogEntries>
+            <cs:xsdTypes>
+                <cs:XsdType>
+        </cs:Construct>
+```
+Zoals je ziet bevat deze conceptual mapping de mapping naar een XSD-type. Naast mappings voor XSD-types kun je ook mappings voor OAS- en RDF-types definiëren in een conceptual mapping. Daarvoor definiëer je op hetzelfde niveau als het element `cs:xsdRtpes` de elementen `cs:oasTypes` resp. `cs:rdfTypes`.
+
+Het element `cs:xsdType` in `cs:xsdTypes` kent de volgende structuur:
+
+```
+        <cs:xsdType>
+           <cs:name>xs:string</cs:name>
+           <cs:asAttribute>xs:string</cs:asAttribute>
+           <cs:asAttributeDesignation>simpletype</cs:asAttributeDesignation>
+           <cs:primitive>true</cs:primitive>
+        </cs:XsdType>
+```
+`cs:oasType` en `cs:rdfType` kennen de elementen `cs:asAttributes` en `cs:asAttributeDesignation` niet. OAS bestanden bevatten immers geen attributes zoals die in een XML bestand wel aanwezig kunnen zijn.<br/>
+`rdfType` kent daarnaast ook het element `cs: primitive` niet. 
