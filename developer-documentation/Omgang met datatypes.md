@@ -54,6 +54,7 @@ Voorbeelden van packages met dit soort datatypes zijn het 'GML3' package en het 
 Hoe deze datatypes in deze packages zijn gedefinieerd (als class, datatype of als interface) is eigenlijk niet van belang. De naam en evt. de identifier zijn van belang niet het stereotype of enig andere karakteristiek.
 Om een van deze datatypes te gebruiken kan je er naar refereren door in het 'type' veld het betreffende datatype hard in te geven. Het heeft echter de voorkeur er naar te refereren door in het 'type' veld een van de types uit de datatype packages te selecteren. Om die laatste methode af te dwingen is het handig de Imvertor parameter 'nativescalars' de waarde 'no' te geven.
 
+### Meerdere voorkomens van hetzelfde datatype.
 Nu kan het gebeuren dat een datatype in meerdere packages voorkomt, bijv. in zowel het 'MIM11 Primitieve datatypes' als in het 'GML3' package, bijv. 'boolean'. Er is dan sprake van ambiguïteit wat leidt tot foutmeldingen. Deze ambiguïteit kan op drie verschillende manieren worden opgelost. 
 1. door een van de twee mappings te laten vervallen (verwijderen uit de mapping in het conceptual schema);
 2. door een van de twee mappings te hernoemen;
@@ -157,6 +158,9 @@ Het element `cs:xsdType` in `cs:xsdTypes` kent de volgende structuur:
 `rdfType` kent daarnaast ook het element `cs: primitive` niet. 
 
 ### Toevoegen nieuw MIM primitief datatype
+Er vanuit gaand dat nog niet alle primitieve datatypen vertegenwoordigd zijn in het package 'MIM11 Primitieve datatypen' wordt hier beschreven hoe deze toe te voegen.
+1. Voeg een nieuw Datatype element toe aan het package met de naam van het nieuwe primitieve datatype en geeft dit als stereotype 'VNG-R SIM+Grouping NL::interface';
+2. Def
 
 ### Toevoegen nieuw GML datatype
 
