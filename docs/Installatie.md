@@ -14,7 +14,7 @@ Ten eerste moet EA geïnstalleerd worden. Daarna moeten er een aantal externe to
 Benader voor het verkrijgen van het installatiescript de daarvoor verantwoordelijke persoon binnen uw organisatie.
 Wij werken met versie 15.2. Als je deze al geïnstalleerd hebt hoef je EA natuurlijk niet opnieuw te installeren.
 
-<span style="color:red">Inmiddels kunnen wij ook gebruik maken van versie 16.1. Er is nog geen ervaring bij VNG-R in de configuratie van die versie dus de in de volgende paragrafen beschreven procedures kunnen afwijken. Een eenmaal in EA 16.1 geöpend en bewaard (wat vaak automatisch gebeurd) EAP bestand kan niet meer in een oudere versie van EA worden geöpend. Dat geldt natuurlijk niet voor de XMI bestanden.<br/>Een [Enterprise Architect viewer](https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition) kan vrij van licentiekosten worden gedownload zodat de Enterprise Architect bestanden ook door anderen bestudeert kunnen worden.</span>
+<span style="color:red">Inmiddels kan ook gebruik maken van versie 16.1. Er is nog geen ervaring bij VNG-R in de configuratie van die versie dus de in de volgende paragrafen beschreven procedures kunnen afwijken. Een eenmaal in EA 16.1 geöpend en bewaard (wat vaak automatisch gebeurd) EAP bestand kan niet meer in een oudere versie van EA worden geöpend. Dat geldt natuurlijk niet voor de XMI bestanden.<br/>Een [Enterprise Architect viewer](https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition) kan vrij van licentiekosten worden gedownload zodat de Enterprise Architect bestanden ook door anderen bestudeert kunnen worden.</span>
 
 ### 1.1.2 EA Toolpack installeren
 
