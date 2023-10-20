@@ -36,7 +36,7 @@ Procesbeschrijving voor het maken van horizontale SIM's en UGM's en de koppelvla
 Handreikingen van diverse pluimage.
 
 **[6.1 Werkinstructies](Werkinstructies)**<br/>
-**[6.2 Technieken en handigheidjes](Technieken-en-handigheidjes)**<br/>
+**[6.2 Technieken en handigheidjes](Handigheidjes)**<br/>
 **[6.3 Naamgevingsconventies](Naamgevingsconventies)**
 
 ## [7 Wetenswaardigheden en specials](Wetenswaardigheden-en-specials)
