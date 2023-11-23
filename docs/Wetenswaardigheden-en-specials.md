@@ -191,3 +191,20 @@ In een BSM verwijzen de relaties ‘scope’ en ‘start’ van een vraagbericht
 Hiermee garanderen we dat de content van de daarvan afgeleide complexTypes gelijk is aan elkaar.
 De relaties ‘gelijk’ , ‘ vanaf’  en ‘ tot en met’ mogen naar een ander gespecialiseerd entiteittype verwijzen.
 In de complexTypes van gelijk, vanaf en tot en met zijn alle velden optioneel.
+
+## Vergelijken van modellen
+
+Het is mogelijk om m.b.v. Imvertor modellen op twee verschillende manieren met elkaar te vergelijken. Je kunt een model vergelijken met een eerdere release van dat model. Bijv. het SIM van het RGBZ met releasedatum 20230113 kan je vergelijken met de versie met releasedatum 20201005. Je kunt een model echter ook vergelijken met zijn supplier. Bijv. het UGM Klantinteracties kun je vergelijken met het SIM Klantinteracties met release 20230912.
+Om te kunnen vergelijken moeten de releases van de modellen waarmee je wil vergelijken natuurlijk wel succesvol verwerkt zijn met Imvertor.
+
+Bij het configureren van de vergelijking zijn een aantal configuratieproperties van belang waarvan je er minimaal één in je lokale properties bestand zal moeten definiëren.
+
+| Configuratieproperty | Mogelijke waarden | Uitleg |
+| --- | --- | -- |
+| compare | supplier, release, none | Hiermee geef je aan welk soort vergelijking je wil uitvoeren. De default is 'none'. Als je wil vergelijken zul je deze property dus zelf moeten definiëren. |
+| comparekey | id, name | Geeft aan op welke wijze de te vergelijken constructs gematched worden. A.d.h.v. de unieke id of a.d.h.v. de naam. De default voor VNG-R is id. |
+| comparemethod | xmldiff, xmlunit, default | De default is 'default'. Werking van de andere waarden is (nog) niet bekend. |
+| comparerules | KINGSIM, KINGUGM, KINGBSM | De naam van het bestand warain de vergelijkingsregels zijn vastgelegd. Voor SIM, UGM en BSM zijn de defaults KINGSIM resp. KINGUGM en KINGBSM. |
+| comparewith | [YYYYMMDD] | Als bij de 'compare' property 'release' is gedefinieerd moet hier een datum in het formaat 'YYYYMMDD' worden verstrekt. Hiermee definiëer je met welke versie van je model je wil vergelijken. Als je met een release wil vergelijken zul je deze property dus zelf moeten definiëren. |
+
+Het resultaat van de vergelijking is een tabel die je in het IMVERTOR Processing report terug kunt vinden onder de naam 'Release comparison'.
