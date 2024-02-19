@@ -32,7 +32,7 @@ De imvertor Addin is noodzakelijk om UML-modellen vanuit EA te kunnen aanbieden 
 De volgende metamodellen zijn beschikbaar (zie gelinkte bestanden):
  - [Metamodel Informatiemodellen Modellering:](./bestanden/VNGR%20SIM+Grouping%20NL-1.1-1.65.2.ea-toolbox.xml) (MIM)
  - [Metamodel UitwisselingsGegevensmodel VNG-R:](./bestanden/VNGR%20MUG+Grouping%20NL-1.0-1.65.2.ea-toolbox.xml) (MUG)
- - [Metamodel BerichtGevensmodel VNG-R:](./bestanden/VNGR%20MBG+Grouping%20NL-1.0-1.65.2.ea-toolbox.xml) (MBG)
+ - [Metamodel BerichtstructuurGegevens VNG-R:](./bestanden/VNGR%20MBG+Grouping%20NL-1.0-1.65.2.ea-toolbox.xml) (MBG)
 
 Welke je moet installeren is afhankelijk van je werkzaamheden. Ben je alleen verantwoordelijk voor het produceren van SIM's of CIM's dan installeer je alleen de eerste. Indien je ook of juist verantwoordelijk bent voor het vervaardigen van UGM's dan installeer je de eerste en de tweede en als je BSM's moet kunnen maken dan dien je ze alledrie te installeren.
 
