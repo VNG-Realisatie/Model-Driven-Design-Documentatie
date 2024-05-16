@@ -3,7 +3,7 @@ layout: page-with-side-nav
 title: Inleiding
 ---
 
-# 1. Inleiding
+# Inleiding
 
 ## Historie
 
