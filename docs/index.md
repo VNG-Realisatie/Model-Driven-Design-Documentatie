@@ -28,7 +28,7 @@ Procesbeschrijving voor het maken van horizontale SIM's en UGM's en de koppelvla
 **[5.1 Het gebruik van SVN](Gebruik-van-SVN)**<br/>
 **[5.2 Het opstellen van een horizontaal Semantisch InformatieModel](Opstellen-SIM)**<br/>
 **[5.3 Het opstellen van een horizontaal GegevensUitwisselingsModel](Opstellen-UGM)**<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**[4.3.1 Technische en implementatie-overwegingen](Technische-en-implementatie-overwegingen)**<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**[5.3.1 Technische en implementatie-overwegingen](Technische-en-implementatie-overwegingen)**<br/>
 **[5.4 Het opstellen van een koppelvlak](Opstellen-BSM)**
 
 ## [6 Handreikingen](./Handreikingen.md)
