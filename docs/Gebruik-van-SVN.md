@@ -25,7 +25,7 @@ In Enterprise Architect 15.1 kan dit menu gevonden worden via het menu *Publish 
 
 De bestandsnaam voldoet daarbij aan de volgende conventie:
 
-> [Modeltype] [Domein (al dan niet als afkorting)].xml
+`[Modeltype] [Domein (al dan niet als afkorting)].xml`
 
 Modeltype is daarbij gelijk aan 'SIM', 'UGM' of 'BSM'. Enkele voorbeelden hiervan zijn 'SIM RSGB.xml' of 'BSM Bevraging Bewoning.xml'.
 
@@ -113,24 +113,24 @@ Hoe ga je te werk.
  - Zorg er voor dat je je model hebt ingecheckt. Het staat dus in de 'trunk' of 'branches' folder;
  - Verwerk het model nog eenmaal met Imvertor. Dit zorgt er voor dat er voor elke tag een overeenkomend model op de Imvertor server is;
  - Stuur een verzoek voor het aanmaken van een tag naar de administrator van de NieuweAanpak (NA) repository en verstrek deze daarbij de volgende informatie:
-  - De bestandsnaam van het te taggen model;
-  - Het versienummer van het te taggen model in het volgende formaat nn_nn_nn;
-  - De releasedatum van het te taggen model (*Let op!* dit is de waarde van de tagged value 'release' die op het package gedefinieerd is);
-  - De status van het te taggen model. We kennen de volgende statussen: (Wellicht nog niet compleet)
-    - In ontwikkeling
-    - In beoordeling
-    - Gereed voor UGM
-      Deze status wordt alleen gebruikt bij een SIM. Hiermee geef je aan dat je nog wel aan het werk bent in de SIM maar dat hij voldoende gereed is om te worden verwerkt tot een SIM. Een SIM hoeft niet verplicht deze stap te doorlopen.
-    - In gebruik
-  - In geval van een geheel nieuw model een lijstje met modellen waar het nieuwe model van afhankelijk is.
-  - Na ontvangst van het verzoek zal de administrator de tag aanmaken. Daarbij hanteert hij als het origineel in de trunk staat de volgende naamgevingsconventie:
-_[bestandsnaam in de trunk minus de extensie] [versienummer] [status] R[releasedatum].xml_
-of als het origineel in de branch staat:
-_[bestandsnaam in de branch minus de datum en extensie] R[releasedatum].xml_;
-  - Nadat de tag is vervaardigd stelt de administrator de opdrachtgever op de hoogte. De opdrachtgever zal vervolgens het origineel van het model (in de 'trunk' of 'branches' folder) openen in EA en de taggedvalue 'releasedatum' een nieuwe waarde geven. Daarmee wordt voorkomen dat het met de zojuist gemaakte tag overeenkomende model op de server overschreven wordt;
-  - De administrator verwerkt de nieuwe tag en ook een evt. nieuw model in de trunk in de eerder genoemde tabel;
-  - Tenslotte informeert de administrator zo nodig alle gebruikers van een voorgaande versie van het model dat er een nieuwe versie voor handen is.
-  - Om de hoeveelheid bestanden in de tags te beperken wordt er naar gestreefd oude tags zo snel mogelijk op te ruimen. Na een periode van uiterlijk 2 maanden wordt een oude tag verwijderd. NB. doordat de oudere tag nog in het versiebeheersysteem op te vragen is gaat er niets verloren. Alleen blijft het aantal versies van tags beperkt tot de actuele versies zodat e.e.a. overzichtelijk blijft.
+   - De bestandsnaam van het te taggen model;
+   - Het versienummer van het te taggen model in het volgende formaat nn_nn_nn;
+   - De releasedatum van het te taggen model (*Let op!* dit is de waarde van de tagged value 'release' die op het package gedefinieerd is);
+   - De status van het te taggen model. We kennen de volgende statussen: (Wellicht nog niet compleet)
+     - In ontwikkeling
+     - In beoordeling
+     - Gereed voor UGM
+       Deze status wordt alleen gebruikt bij een SIM. Hiermee geef je aan dat je nog wel aan het werk bent in de SIM maar dat hij voldoende gereed is om te worden verwerkt tot een SIM. Een SIM hoeft niet verplicht deze stap te doorlopen.
+     - In gebruik
+   - In geval van een geheel nieuw model een lijstje met modellen waar het nieuwe model van afhankelijk is.
+ - Na ontvangst van het verzoek zal de administrator de tag aanmaken. Daarbij hanteert hij als het origineel in de trunk staat de volgende naamgevingsconventie:<br/>
+`[bestandsnaam in de trunk minus de extensie] [versienummer] [status] R[releasedatum].xml`<br/>
+of als het origineel in de branch staat:<br/>
+`[bestandsnaam in de branch minus de datum en extensie] R[releasedatum].xml`;
+ - Nadat de tag is vervaardigd stelt de administrator de opdrachtgever op de hoogte. De opdrachtgever zal vervolgens het origineel van het model (in de 'trunk' of 'branches' folder) openen in EA en de taggedvalue 'releasedatum' een nieuwe waarde geven. Daarmee wordt voorkomen dat het met de zojuist gemaakte tag overeenkomende model op de server overschreven wordt;
+ - De administrator verwerkt de nieuwe tag en ook een evt. nieuw model in de trunk in de eerder genoemde tabel;
+ - Tenslotte informeert de administrator zo nodig alle gebruikers van een voorgaande versie van het model dat er een nieuwe versie voor handen is.
+ - Om de hoeveelheid bestanden in de tags te beperken wordt er naar gestreefd oude tags zo snel mogelijk op te ruimen. Na een periode van uiterlijk 2 maanden wordt een oude tag verwijderd. NB. doordat de oudere tag nog in het versiebeheersysteem op te vragen is gaat er niets verloren. Alleen blijft het aantal versies van tags beperkt tot de actuele versies zodat e.e.a. overzichtelijk blijft.
 
 ### Het aanvragen van een branch
 
@@ -144,9 +144,9 @@ Hoe ga je te werk.
     - Het versienummer van het te branchen model in het volgende formaat nn_nn_nn.
     - De releasedatum van het te branchen model (dit is de waarde van de tagged value 'release' die op het package gedefinieerd is);
   - Na ontvangst van het verzoek zal de administrator de branch aanmaken. Daarbij hanteert hij de volgende naamgevingsconventie:
-_[bestandsnaam in de trunk minus extensie] [versienummer] in gebruik [datum branchcreatie].xml_;
+`[bestandsnaam in de trunk minus extensie] [versienummer] in gebruik [datum branchcreatie].xml`;
   - De administrator zal daarna, als dat niet al eerder is gebeurd, tevens een nieuwe tag aanmaken. Daarbij hanteert hij de volgende naamgevingsconventie:
-_[bestandsnaam in de trunk minus extensie] [versienummer] in gebruik R[releasedatum].xml_;
+`[bestandsnaam in de trunk minus extensie] [versienummer] in gebruik R[releasedatum].xml`;
   - Nadat de branch is vervaardigd stelt de administrator de opdrachtgever op de hoogte. De opdrachtgever zal vervolgens het origineel van het model in de 'trunk' folder openen in EA en de taggedvalue 'releasedatum' een nieuwe waarde geven. Daarmee wordt voorkomen dat de met de zojuist gemaakte branch overeenkomende model op de server overschreven wordt. Tevens zal hij de status van het model weer op 'in ontwikkeling' zetten. Zo mogelijk kent de opdrachtgever ook een nieuwe waarde aan het 'Version' property toe;
   - De opdrachtgever zal vervolgens de zojuist gemaakte branch van het model in de 'branches' folder openen in EA en de taggedvalue 'releasedatum' een nieuwe waarde geven. Daarmee wordt voorkomen dat het met de zojuist gemaakte tag overeenkomende model op de server overschreven wordt zodra men de branch gaat gebruiken om een patch te creëren. Tevens zal hij de status van het model weer op 'in ontwikkeling' zetten;
   - De administrator verwerkt de nieuwe branch en ook de nieuwe tag in de eerder genoemde tabel;
