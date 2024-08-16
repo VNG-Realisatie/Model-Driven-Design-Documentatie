@@ -1,3 +1,7 @@
+---
+layout: page-with-side-nav
+title: Omgang met datatypes
+---
 # Omgang met datatypes
 Binnen Enterprise Architect maken we gebruik van 3 verschillende soorten datatypes:
 1. Primitieve datatypes;

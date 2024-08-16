@@ -1,1 +1,0 @@
-# Calculating path en parameters
