@@ -14,7 +14,7 @@ Binnen Enterprise Architect maken we gebruik van 4 verschillende soorten datatyp
 
 ### Primitieve datatypes
 Dit soort datatypes wordt als bekend verondersteld bij de verwerkende applicatie. Ze worden nl. niet binnen de modellen in Enterprise Architect gedefinieerd. 
-We noemen ze Primitieve datatypes alhoewel het niet persé hoeft te gaan om rudimentaire primitieve datatypes. De term ‘primitieve datatypes’ wordt eigenlijk .................................
+We noemen ze Primitieve datatypes alhoewel het niet persé hoeft te gaan om rudimentaire primitieve datatypes. De term ‘primitieve datatypes’ wordt eigenlijk
 niet zuiver gehanteerd in de MIM 1.1 standaard. Het MIM Primitieve datatype URI kan bijvoorbeeld afgeleid zijn van CharacterString. Een betere naam zou dan ook 
 zijn ‘Built-in datatypes’. Datatypes dus die binnen een schemataal specificatie zijn gedefinieerd. Voorbeelden hiervan vind je in het 'MIM11 Primitieve datatypen' 
 model. Gemene deler bij dit soort datatypes is dat ze als stereotype 'Interface' hebben.
@@ -32,7 +32,7 @@ Om dit te kunnen doen worden deze datatypes binnen Imvertor gedeclareerd in een 
 voor de beschrijving van de verwerking. 
 
 **Vraag**: Waarom heeft het 'MIM11 Primitieve datatypen' model geen stereotype en het 'GML' model wel?  
-**Antwoord**: Het stereotype doet er niet zoveel toe. De eerste zouden we ook een stereotype kunnen geven.
+**Antwoord**: Het stereotype doet er niet zoveel toe. De eerste zouden we ook een stereotype kunnen geven of hem bij de tweede zelfs weg kunnen laten.
 
 Zie ook het [Toevoegen nieuw MIM primitief datatype](#toevoegen-nieuw-mim-primitief-datatype) en het [Toevoegen nieuw GML datatype](#toevoegen-nieuw-gml-datatype).
 
