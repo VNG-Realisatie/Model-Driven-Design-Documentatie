@@ -250,14 +250,16 @@ XML bestand wel aanwezig kunnen zijn.<br/>
 Er vanuit gaand dat nog niet alle primitieve datatypen vertegenwoordigd zijn in het package 'MIM11 Primitieve datatypen' wordt hier beschreven hoe deze toe te voegen.
 1. Voeg een nieuw Datatype element toe aan het package 'MIM11 Primitieve datatypen' met de naam van het nieuwe primitieve datatype en geeft dit als stereotype 
 'VNG-R SIM+Grouping NL::interface';
-2. Definieer in het conceptual schema bestand 'cm-MIM111.xml' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste mappings definieert.
+2. Definieer in het conceptual schema bestand 'cm-MIM111.xml' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste mappings (XSD en/of OAS) 
+definieert.
 3. Zodra de wijziging is aangebracht in de Develop branch van de 'Imvertor-Maven' GitHub repository is het bruikbaar in de 'nightly build' van Imvertor. Zodra het is 
 uitgerold naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
 
 ### Toevoegen nieuw GML datatype
 1. Voeg een nieuw Datatype element toe aan het package 'MIM Primitieve datatypen' met de naam van het nieuwe primitieve datatype en geeft dit als stereotype 
 'VNG-R SIM+Grouping NL::interface';
-2. Definieer in het conceptual schema bestand 'cm-GML322.xml' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste mappings definieert.
+2. Definieer in het conceptual schema bestand 'cm-GML322.xml' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste mappings (XSD en/of OAS) 
+definieert.
 3. Zodra de wijziging is aangebracht in de Develop branch van de 'Imvertor-Maven' GitHub repository is het bruikbaar in de 'nightly build' van Imvertor. Zodra het is 
 uitgerold naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
 
@@ -266,7 +268,7 @@ uitgerold naar de master is het bruikbaar in de laatste release van Imvertor. Va
 Generalisatie associatie vanuit het nieuwe datatype naar een van de datatypes in een ander package en scherp het vervolgens aan;
 2. Definieer in het 'Intern' stereotyped package met de naam 'Generieke Datatypen Gemeenten' een nieuw 'Datatype' component met het stereotype 'Interface';
 3. Definieer in het gerelateerde conceptual schema bestand dat start met 'cm-' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste 
-mappings definieert.
+mappings (XSD en/of OAS) definieert.
 4. Zodra de wijziging is aangebracht in de Develop branch van de 'Imvertor-Maven' GitHub repository is het bruikbaar in de 'nightly build' van Imvertor. Zodra het is 
 uitgerold naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
 
