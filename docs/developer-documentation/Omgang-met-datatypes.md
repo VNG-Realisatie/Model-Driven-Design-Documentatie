@@ -34,6 +34,8 @@ voor de beschrijving van de verwerking.
 **Vraag**: Waarom heeft het 'MIM11 Primitieve datatypen' model geen stereotype en het 'GML' model wel?  
 **Antwoord**: Het stereotype doet er niet zoveel toe. De eerste zouden we ook een stereotype kunnen geven.
 
+Zie ook het [Toevoegen nieuw MIM primitief datatype](#toevoegen-nieuw-mim-primitief-datatype) en het [Toevoegen nieuw GML datatype](#toevoegen-nieuw-gml-datatype).
+
 ### Generieke datatypes
 Bij Generieke datatypes gaat het om datatypes die een voor een organisatie vaste vorm vertegenwoordigen. Een goed voorbeeld is het datatype 'DatumOnvolledig' dat 
 binnen VNG-Realisatie wordt gebruikt en daar in het model 'Generieke Datatypen Gemeenten' is gedefinieerd. Het bestaat uit de elementen:
@@ -70,6 +72,8 @@ mij echter wel gelijk.
 redenen aan te wijzen dat we dit toch doen? In weerwil van de bovenstaande vraag zou je ook kunnen besluiten dit soort datatypes hetzelfde te behandelen als de 
 Primitieve datatypes, toch?
 
+Zie ook het [Toevoegen Gemeentelijk generiek datatype](#toevoegen-gemeentelijk-generiek-datatype).
+
 ### Lokale datatypes
 Lokale datatypes zijn datatypes die specifiek binnen een specifiek model een toepassing vinden, bijvoorbeeld omdat dat binnen dat model en alleen dat model veel wordt 
 gebruikt. Het gaat hier om datatypes die ook binnen zo'n model worden gedefiniëerd en die over het algemeen een aanscherping zijn van de primitieve datatypes. Bijv. 
@@ -83,6 +87,8 @@ Vervolgens kan overal waar het als lokaal datatype wordt gebruikt het type worde
 datatype verwijderd worden.
 
 **Vraag**: Is dit voldoende of vereist dit ook nog een aanpassing van de stylesheets?
+
+Zie ook het [Toevoegen Lokaal datatype](#toevoegen-lokaal-datatype).
 
 ## Conceptual schema's
 Voor het verwerken van datatypes van het stereotype 'Interface' zijn Conceptual schema's gecreëerd. Dit zijn bestanden waarin per datatype en per schemataal een conceptual 
@@ -155,8 +161,8 @@ Optie 2 werkt echter als volgt er vanuit gaande dat je de mappings voor ‘Chara
             </cs:xsdTypes>
         </cs:Construct>
 ```
-* Voeg daar dan het element ‘cs:managedID’ aan toe dat de waarde krijgt van de GUID van het datatype in het package in Enterprise Architect dat wordt gebruikt. Je krijgt 
-dus iets als het volgende:
+* Voeg daar dan het element ‘cs:managedID’ aan toe dat de waarde krijgt van de GUID van het datatype in het package in Enterprise Architect dat wordt gebruikt. Je 
+krijgt dus iets als het volgende:
 
 ```
         <cs:Construct>
@@ -180,16 +186,17 @@ dus iets als het volgende:
 ```
 * Doe hetzelfde voor alle andere voorkomens van het construct met de naam ‘CharacterString’.
 
-Het is overigens ook mogelijke het element ‘cs:managedID’ meerdere keren toe te voegen aan één en dezelfde 'cs:Construct'. Die hebben dan wel steeds een andere waarde.
+Het is overigens ook mogelijke het element ‘cs:managedID’ meerdere keren toe te voegen aan één en dezelfde 'cs:Construct'. Die hebben dan wel steeds een andere 
+waarde.
 
 **Vraag**: Moeten we het gebruik van optie 2 en 3 niet actief tegengaan en er voor zorgen dat we situaties waarin dat gebeurd wegnemen?
 
 ### Meerdere versies van een mapping
-In het conceptual schema 'conceptual-schemas.xml' (src\main\resources\input\KING\xsd) kunnen meerdere secties voor GML voorkomen. Bijv. een voor GML 3.21 en een voor GML 
-3.22. Hoe hou je nu uit elkaar welke van de 2 je wil gebruiken?
+In het conceptual schema 'conceptual-schemas.xml' (src\main\resources\input\KING\xsd) kunnen meerdere secties voor GML voorkomen. Bijv. een voor GML 3.21 en een 
+voor GML 3.22. Hoe hou je nu uit elkaar welke van de 2 je wil gebruiken?
 
-Bij het verwerken met Imvertor worden de properties behorende bij de gekozen processing mode uitgelezen. Een van die properties is 'mapping' waaraan een identifier is 
-toegekend, bijv. ‘NEN3610_GML321’. In het conceptual schema is ook een mapping configuratie gedeclareerd met de naam 'NEN3610_GML321':
+Bij het verwerken met Imvertor worden de properties behorende bij de gekozen processing mode uitgelezen. Een van die properties is 'mapping' waaraan een identifier 
+is toegekend, bijv. ‘NEN3610_GML321’. In het conceptual schema is ook een mapping configuratie gedeclareerd met de naam 'NEN3610_GML321':
 
 ```
    <cs:mappings>
@@ -203,9 +210,9 @@ toegekend, bijv. ‘NEN3610_GML321’. In het conceptual schema is ook een mappi
       </cs:Mapping>
    </cs:mappings>
 ```
-In feite definieert deze mapping dat de conceptual mappings met de mapping referenties 'GML321', 'MIM111' en 'VNGR-MAP', mappings die verderop in het bestand worden geinclude, 
-moeten worden gebruikt. Definieer, als je een andere set conceptual mappings wil gebruiken, een nieuwe mapping configuratie met daarin de gewenste  mapping referenties. 
-Definieer zo nodig ook nieuwe conceptual mapping bestanden.
+In feite definieert deze mapping dat de conceptual mappings met de mapping referenties 'GML321', 'MIM111' en 'VNGR-MAP', mappings die verderop in het bestand worden 
+geinclude, moeten worden gebruikt. Definieer, als je een andere set conceptual mappings wil gebruiken, een nieuwe mapping configuratie met daarin de gewenste  mapping 
+referenties. Definieer zo nodig ook nieuwe conceptual mapping bestanden.
 
 ### Mappings voor andere schematalen
 In de voorgaande paragraaf zagen we al de volgende conceptual mapping:
@@ -222,8 +229,8 @@ In de voorgaande paragraaf zagen we al de volgende conceptual mapping:
                 <cs:XsdType>
         </cs:Construct>
 ```
-Zoals je ziet bevat deze conceptual mapping de mapping naar een XSD-type. Naast mappings voor XSD-types kun je ook mappings voor OAS- en RDF-types definiëren in een conceptual 
-mapping. Daarvoor definiëer je op hetzelfde niveau als het element `cs:xsdRtpes` de elementen `cs:oasTypes` resp. `cs:rdfTypes`.
+Zoals je ziet bevat deze conceptual mapping de mapping naar een XSD-type. Naast mappings voor XSD-types kun je ook mappings voor OAS- en RDF-types definiëren in een 
+conceptual mapping. Daarvoor definiëer je op hetzelfde niveau als het element `cs:xsdRtpes` de elementen `cs:oasTypes` resp. `cs:rdfTypes`.
 
 Het element `cs:xsdType` in `cs:xsdTypes` kent de volgende structuur:
 
@@ -235,8 +242,8 @@ Het element `cs:xsdType` in `cs:xsdTypes` kent de volgende structuur:
            <cs:primitive>true</cs:primitive>
         </cs:XsdType>
 ```
-`cs:oasType` en `cs:rdfType` kennen de elementen `cs:asAttributes` en `cs:asAttributeDesignation` niet. OAS bestanden bevatten immers geen attributes zoals die in een XML 
-bestand wel aanwezig kunnen zijn.<br/>
+`cs:oasType` en `cs:rdfType` kennen de elementen `cs:asAttributes` en `cs:asAttributeDesignation` niet. OAS bestanden bevatten immers geen attributes zoals die in een 
+XML bestand wel aanwezig kunnen zijn.<br/>
 `rdfType` kent daarnaast ook het element `cs: primitive` niet. 
 
 ### Toevoegen nieuw MIM primitief datatype
@@ -244,20 +251,26 @@ Er vanuit gaand dat nog niet alle primitieve datatypen vertegenwoordigd zijn in 
 1. Voeg een nieuw Datatype element toe aan het package 'MIM11 Primitieve datatypen' met de naam van het nieuwe primitieve datatype en geeft dit als stereotype 
 'VNG-R SIM+Grouping NL::interface';
 2. Definieer in het conceptual schema bestand 'cm-MIM111.xml' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste mappings definieert.
-3. Zodra de wijziging is aangebracht in de Develop branch van de 'Imvertor-Maven' GitHub repository is het bruikbaar in de 'nightly build' van Imvertor. Zodra het is uitgerold 
-naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
+3. Zodra de wijziging is aangebracht in de Develop branch van de 'Imvertor-Maven' GitHub repository is het bruikbaar in de 'nightly build' van Imvertor. Zodra het is 
+uitgerold naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
 
 ### Toevoegen nieuw GML datatype
 1. Voeg een nieuw Datatype element toe aan het package 'MIM Primitieve datatypen' met de naam van het nieuwe primitieve datatype en geeft dit als stereotype 
 'VNG-R SIM+Grouping NL::interface';
 2. Definieer in het conceptual schema bestand 'cm-GML322.xml' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste mappings definieert.
-3. Zodra de wijziging is aangebracht in de Develop branch van de 'Imvertor-Maven' GitHub repository is het bruikbaar in de 'nightly build' van Imvertor. Zodra het is uitgerold 
-naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
+3. Zodra de wijziging is aangebracht in de Develop branch van de 'Imvertor-Maven' GitHub repository is het bruikbaar in de 'nightly build' van Imvertor. Zodra het is 
+uitgerold naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
 
 ### Toevoegen Gemeentelijk generiek datatype
-1. Definieer in het package 'Generieke Datatypen Gemeenten' een nieuw datatype, geef dat het gewenste datatype stereotype, trek een Generalisatie associatie vanuit het nieuwe 
-datatype naar een van de datatypes in een ander package en scherp het vervolgens aan;
+1. Definieer in het package 'Generieke Datatypen Gemeenten' een nieuw datatype, geef dat het gewenste datatype stereotype, maak een diagram en trek daarin een 
+Generalisatie associatie vanuit het nieuwe datatype naar een van de datatypes in een ander package en scherp het vervolgens aan;
 2. Definieer in het 'Intern' stereotyped package met de naam 'Generieke Datatypen Gemeenten' een nieuw 'Datatype' component met het stereotype 'Interface';
-3. Definieer in het gerelateerde conceptual schema bestand dat start met 'cm-' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste mappings definieert.
-4. Zodra de wijziging is aangebracht in de Develop branch van de 'Imvertor-Maven' GitHub repository is het bruikbaar in de 'nightly build' van Imvertor. Zodra het is uitgerold 
-naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
+3. Definieer in het gerelateerde conceptual schema bestand dat start met 'cm-' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste 
+mappings definieert.
+4. Zodra de wijziging is aangebracht in de Develop branch van de 'Imvertor-Maven' GitHub repository is het bruikbaar in de 'nightly build' van Imvertor. Zodra het is 
+uitgerold naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
+
+### Toevoegen Lokaal datatype
+1. Definieer in het model waarin je dat nodig hebt het nieuwe datatype, geef dat het gewenste datatype stereotype, maak een diagram en trek daarin een Generalisatie 
+associatie vanuit het nieuwe datatype naar een van de datatypes in een ander package en scherp het vervolgens aan;
+2. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
