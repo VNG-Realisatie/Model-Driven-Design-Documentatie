@@ -189,7 +189,7 @@ krijgt dus iets als het volgende:
 Het is overigens ook mogelijke het element ‘cs:managedID’ meerdere keren toe te voegen aan één en dezelfde 'cs:Construct'. Die hebben dan wel steeds een andere 
 waarde.
 
-**Vraag**: Moeten we het gebruik van optie 2 en 3 niet actief tegengaan en er voor zorgen dat we situaties waarin dat gebeurd wegnemen?
+**Vraag**: Moeten we het gebruik van optie 2 en 3 niet actief ontmoedigen en er voor zorgen dat we situaties waarin dat gebeurd wegnemen?
 
 ### Meerdere versies van een mapping
 In het conceptual schema 'conceptual-schemas.xml' (src\main\resources\input\KING\xsd) kunnen meerdere secties voor GML voorkomen. Bijv. een voor GML 3.21 en een 
