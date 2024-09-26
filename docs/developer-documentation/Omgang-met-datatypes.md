@@ -68,23 +68,23 @@ verwijzen naar built in datatypes. Waarom is er echter in het geval van 'GML' vo
 'GML' heeft als stereotype 'Extern' terwijl 'Generieke Datatypen Gemeenten' juist het stereotype 'basismodel' heeft. De constructie is in het conceptual schema volgens 
 mij echter wel gelijk.  
 
-**Vraag**: Het lijkt een beetje onzinnig dat je dit soort datatypes wel met Imvertor moet verwerken terwijl je ze ook in een conceptual schema declareert. Zijn er 
+**Vraag**: Het lijkt een beetje onzinnig dat je dit soort datatypes wel met Imvertor moet verwerken terwijl je ze ook in een Conceptual schema declareert. Zijn er 
 redenen aan te wijzen dat we dit toch doen? In weerwil van de bovenstaande vraag zou je ook kunnen besluiten dit soort datatypes hetzelfde te behandelen als de 
 Primitieve datatypes, toch?
 
 Zie ook het [Toevoegen Gemeentelijk generiek datatype](#toevoegen-gemeentelijk-generiek-datatype).
 
 ### Lokale datatypes
-Lokale datatypes zijn datatypes die specifiek binnen een specifiek model een toepassing vinden, bijvoorbeeld omdat dat binnen dat model en alleen dat model veel wordt 
+Lokale datatypes zijn datatypes die specifiek binnen een specifiek model een toepassing vinden, bijvoorbeeld omdat die binnen dat model en alleen dat model veel worden 
 gebruikt. Het gaat hier om datatypes die ook binnen zo'n model worden gedefiniëerd en die over het algemeen een aanscherping zijn van de primitieve datatypes. Bijv. 
 een datatype dat is gebaseerd op een integer maar waarvan de minimum waarde 1 en de maximum waarde 100 is.
 Doordat deze datatypes gebaseerd zijn op primitieve datatypes wordt er bij de verwerking door Imvertor gebruik gemaakt van die primitieve datatypes maar worden ze op
-basis van hun lokale definitie verder aangescherpt. Deze datatypes hoeven dan ook niet in een conceptual schema gedeclareerd te worden.
+basis van hun lokale definitie verder aangescherpt. Deze datatypes hoeven dan ook niet in een Conceptual schema gedeclareerd te worden.
 
-Er kan een moment komen dat we een lokaal datatype willen promoveren tot een generiek datatype. Als eerste stap dient dat datatype dan in een van de conceptuele schema's 
+Er kan een moment komen dat we een lokaal datatype willen promoveren tot een generiek datatype. Als eerste stap dient dat datatype dan in een van de Conceptual schema's 
 te worden gedefinieerd. Daarna kan het als een object met het stereotype 'Interface' worden toegevoegd aan een bestaand of nieuw package met generieke datatypes.
 Vervolgens kan overal waar het als lokaal datatype wordt gebruikt het type worden gewijzigd in een referentie naar een generiek datatype en tenslotte kan het lokale
-datatype verwijderd worden.
+datatype worden verwijderd.
 
 **Vraag**: Is dit voldoende of vereist dit ook nog een aanpassing van de stylesheets?
 
@@ -97,16 +97,16 @@ kunnen verwerken in een XML-Schema moet je dus weten naar welk XML simpleType of
 natuurlijk naar geheel andere types.
 
 De conceptual schema's zijn georganiseerd over meerdere bestanden. Zo hebben we conceptual schema's voor de MIM 1.1 Primitieve datatypes maar ook voor GML3 en VNG-R 
-datatypes. Het conceptual schema 'conceptual-schemas.xml' (src\main\resources\input\KING\xsd) fungeert als catalog waardoor de andere conceptual schema's kunnen worden 
-gevonden.
+datatypes. Het conceptual schema 'conceptual-schemas.xml' (voor VNG Realisatie te vinden in 'src\main\resources\input\KING\xsd') fungeert als catalog waardoor de andere 
+conceptual schema's kunnen worden gevonden.
 
 **Vraag**: Wat is de functie van de conceptual schema bestanden met de prefix 'cs-'?.
 
 **Vraag**: Wat is de functie van de verschillende elementen in de conceptual schema bestanden (zowel die met de prefix 'cs-' als die met de prefix 'cm-')?.
 
 ### Werking
-Op het moment dat bij het processen van een model een referentie naar een datatype wordt gevonden treedt het conceptual schema mechanisme in werking. Alle conceptual 
-schema's worden afgezocht naar een mapping waarvan de naam overeenkomt met dat van het datatype. 
+Op het moment dat bij het processen van een model een referentie naar een datatype wordt gevonden dat niet in een gerelateerd model wordt aangetroffen treedt het conceptual 
+schema mechanisme in werking. Alle conceptual schema's worden afgezocht naar een mapping waarvan de naam overeenkomt met dat van het datatype. 
 
 Voorbeelden van packages met dit soort datatypes zijn het 'GML3' package en het package 'MIM11 Primitieve datatypen'. In de eerste staan GML datatypes waar wij gebruik 
 van willen maken (bijv. 'GM_Point'). De tweede bevat MIM 1.1 primitieve datatypes zoals:
@@ -137,9 +137,9 @@ dan sprake van ambiguïteit wat leidt tot foutmeldingen. Deze ambiguïteit kan o
 
 De 2e optie heft weliswaar de ambiguïteit op maar er bestaan nog steeds 2 dezelfde datatypes in 2 verschillende packages. Dat heeft natuurlijk geen toegevoegde waarde. 
 Bij de laatste optie ben je gedwongen in alle modellen dezelfde versie van het MIM / GML package op te nemen omdat je anders andere GUID's krijgt. Onder normale 
-omstandigheden heeft optie 1 de voorkeur.
+omstandigheden heeft optie 1 daarom de voorkeur.
 
-Optie 2 werkt echter als volgt er vanuit gaande dat je de mappings voor ‘CharacterString’ wil aanpassen:
+Er vanuit gaande dat je de mappings voor ‘CharacterString’ wil aanpassen werkt optie 2 echter als volgt :
 * Je vindt in het conceptual schema een gelijksoortige code als:
 
 ```
@@ -184,7 +184,7 @@ krijgt dus iets als het volgende:
             </cs:xsdTypes>
         </cs:Construct>
 ```
-* Doe hetzelfde voor alle andere voorkomens van het construct met de naam ‘CharacterString’.
+* Doe hetzelfde voor alle andere voorkomens van het construct met de naam ‘CharacterString’ (al krijgen die natuurlijk wel een andere GUID waarde).
 
 Het is overigens ook mogelijke het element ‘cs:managedID’ meerdere keren toe te voegen aan één en dezelfde 'cs:Construct'. Die hebben dan wel steeds een andere 
 waarde.
@@ -192,7 +192,7 @@ waarde.
 **Vraag**: Moeten we het gebruik van optie 2 en 3 niet actief ontmoedigen en er voor zorgen dat we situaties waarin dat gebeurd wegnemen?
 
 ### Meerdere versies van een mapping
-In het conceptual schema 'conceptual-schemas.xml' (src\main\resources\input\KING\xsd) kunnen meerdere secties voor GML voorkomen. Bijv. een voor GML 3.21 en een 
+In het conceptual schema 'conceptual-schemas.xml' (voor VNG Realisatie te vinden in 'src\main\resources\input\KING\xsd') kunnen meerdere secties voor GML voorkomen. Bijv. een voor GML 3.21 en een 
 voor GML 3.22. Hoe hou je nu uit elkaar welke van de 2 je wil gebruiken?
 
 Bij het verwerken met Imvertor worden de properties behorende bij de gekozen processing mode uitgelezen. Een van die properties is 'mapping' waaraan een identifier 
@@ -244,7 +244,9 @@ Het element `cs:xsdType` in `cs:xsdTypes` kent de volgende structuur:
 ```
 `cs:oasType` en `cs:rdfType` kennen de elementen `cs:asAttributes` en `cs:asAttributeDesignation` niet. OAS bestanden bevatten immers geen attributes zoals die in een 
 XML bestand wel aanwezig kunnen zijn.<br/>
-`rdfType` kent daarnaast ook het element `cs: primitive` niet. 
+`rdfType` kent daarnaast ook het element `cs: primitive` niet.
+
+In de toekomst zouden er indien gewenst ook mappings voor andere schematalen kunnen worden toegevoegd.
 
 ### Toevoegen nieuw MIM primitief datatype
 Er vanuit gaand dat nog niet alle primitieve datatypen vertegenwoordigd zijn in het package 'MIM11 Primitieve datatypen' wordt hier beschreven hoe deze toe te voegen.
@@ -264,12 +266,13 @@ definieert.
 uitgerold naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
 
 ### Toevoegen Gemeentelijk generiek datatype
-1. Definieer in het package 'Generieke Datatypen Gemeenten' een nieuw datatype, geef dat het gewenste datatype stereotype, maak een diagram en trek daarin een 
-Generalisatie associatie vanuit het nieuwe datatype naar een van de datatypes in een ander package en scherp het vervolgens aan;
-2. Definieer in het 'Intern' stereotyped package met de naam 'Generieke Datatypen Gemeenten' een nieuw 'Datatype' component met het stereotype 'Interface';
-3. Definieer in het gerelateerde conceptual schema bestand dat start met 'cm-' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste 
-mappings (XSD en/of OAS) definieert.
-4. Zodra de wijziging is aangebracht in de Develop branch van de 'Imvertor-Maven' GitHub repository is het bruikbaar in de 'nightly build' van Imvertor. Zodra het is 
+1. Definieer in het package 'Generieke Datatypen Gemeenten' een nieuw datatype, geef dat het gewenste datatype stereotype ('Primitief datatype' of 'Gestructureerd datatype');
+2. Maak, indien het een 'Primitief datatype betreft', een diagram en trek daarin een Generalisatie associatie vanuit het nieuwe datatype naar een van de datatypes in een
+ander package en scherp het vervolgens aan;
+4. Definieer in het 'Intern' stereotyped package met de naam 'Generieke Datatypen Gemeenten' een nieuw 'Datatype' component met het stereotype 'Interface';
+5. Definieer in het gerelateerde Conceptual schema bestand dat start met 'cm-' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste 
+mappings (XSD, RDF en/of OAS) definieert.
+6. Zodra de wijziging is aangebracht in de Develop branch van de 'Imvertor-Maven' GitHub repository is het bruikbaar in de 'nightly build' van Imvertor. Zodra het is 
 uitgerold naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
 
 ### Toevoegen Lokaal datatype
