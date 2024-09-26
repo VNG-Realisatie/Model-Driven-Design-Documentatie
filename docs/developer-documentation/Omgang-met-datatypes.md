@@ -21,7 +21,7 @@ model. Gemene deler bij dit soort datatypes is dat ze als stereotype 'Interface'
 
 Zoals gesteld kennen de modellen deze datatypes eigenlijk niet aangezien ze worden gedefinieerd buiten het zicht van de modellen. De packages die deze datatypes 
 bevatten bestaan dus alleen om er voor te zorgen dat de Interface componenten daarin in Enterprise Architect door een ander model gebruikt kunnen worden. Deze 
-modellen worden dus ook nooit door Imvertor verwerkt. Dus ook op de Imvertor server zijn deze datatypes niet aanwezig. 
+modellen hoeven dus ook nooit met Imvertor verwerkt te worden. Daarmee zijn deze datatypes dus ook niet op de Imvertor server aanwezig. 
 
 Informatiemodelleurs en berichtontwerpers worden verondersteld te weten wat er met de datatypes bedoelt wordt en wanneer en waar ze gebruikt kunnen worden. De 
 stylesheets zijn ingericht op het verwerken van deze types al dan niet naar een schemataal waarvoor het stylesheet is opgezet. 
@@ -50,15 +50,15 @@ Ook hier geldt:
 * dat de stylesheets die deze datatypes gebruiken zijn ingericht op het verwerken van deze types al dan niet naar een schemataal waarvoor het stylesheet is opgezet;
 * en dat deze gedeclareerd worden in een van de zogenaamde conceptual-schema's.
 
-Generieke datatypes worden in een package van het stereotype 'Basismodel' gemodelleerd en in tegenstelling tot 'Primitieve datatypes' packages wel met Imvertor verwerkt.
-Deze datatypes kunnen van het stereotype 'Primitief datatype' of 'Gestructureerd datatype' zijn. Bij datatypes van het stereotype 'Primitief datatype' kan de 
-generalization relatie met een van de MIM 1.1 Primitive datatype gelegd worden. Voor de verwerking met Imvertor is dit niet noodzakelijk maar toch is dat aan te 
-bevelen aangezien op die wijze formeel wordt vastgelegd waar de eigen primitieve datatypes op gebaseerd zijn.
+Generieke datatypes worden in een package van het stereotype 'Basismodel' gemodelleerd en in tegenstelling tot 'Primitieve datatypes' packages moeten deze wel met 
+Imvertor verwerkt worden. Deze datatypes kunnen van het stereotype 'Primitief datatype' of 'Gestructureerd datatype' zijn. Bij datatypes van het stereotype 'Primitief 
+datatype' kan de generalization relatie met een van de MIM 1.1 Primitive datatype gelegd worden. Voor de verwerking met Imvertor is dit niet noodzakelijk maar toch 
+is dat aan te bevelen aangezien op die wijze formeel wordt vastgelegd waar de eigen primitieve datatypes op gebaseerd zijn.
 
 Wil je de in deze paragraaf beschreven soort datatypes in een ander model kunnen gebruiken dan moet er in dat andere model een package geplaatst worden met het
-stereotype 'Intern' dat dezelfde naam en release heeft als het gerelateerde basismodel. In dat package moeten dan objecten met het stereotype 'Interface' worden 
-geplaatst met dezelfde naam als in het gerelateerde generieke datatype model welke dan door de attributen van de objecttypes, entiteittypes, groepen, etc... als type 
-gebruikt kunnen worden.
+stereotype 'Intern' dat dezelfde naam en dezelfde waarde voor de tagged value 'release' heeft als het gerelateerde basismodel. In dat package moeten dan objecten met 
+het stereotype 'Interface' worden geplaatst met wederom dezelfde naam als de in het gerelateerde generieke datatype model voorkomende datatypes. Deze 'Interface'
+componenten kunnen vervolgens door de attributen van de objecttypes, entiteittypes, groepen, etc... als type worden gebruikt.
 
 Voor de verwerking met Imvertor van dit soort datatypes wordt ook gebruik gemaakt van conceptual-schema's. Zie [Conceptual schema's](#conceptual-schemas) voor 
 de beschrijving van de verwerking. 
