@@ -161,7 +161,7 @@ Er vanuit gaande dat je de mappings voor ‘CharacterString’ wil aanpassen wer
             </cs:xsdTypes>
         </cs:Construct>
 ```
-* Voeg daar dan het element ‘cs:managedID’ aan toe dat de waarde krijgt van de GUID van het datatype in het package in Enterprise Architect dat wordt gebruikt. Je 
+* Voeg daar dan het element `<cs:managedID>` aan toe dat de waarde krijgt van de GUID van het datatype in het package in Enterprise Architect dat wordt gebruikt. Je 
 krijgt dus iets als het volgende:
 
 ```xml
@@ -186,7 +186,7 @@ krijgt dus iets als het volgende:
 ```
 * Doe hetzelfde voor alle andere voorkomens van het construct met de naam ‘CharacterString’ (al krijgen die natuurlijk wel een andere GUID waarde).
 
-Het is overigens ook mogelijke het element ‘cs:managedID’ meerdere keren toe te voegen aan één en dezelfde 'cs:Construct'. Die hebben dan wel steeds een andere 
+Het is overigens ook mogelijke het element `<cs:managedID>` meerdere keren toe te voegen aan één en dezelfde `<cs:Construct>`. Die hebben dan wel steeds een andere 
 waarde.
 
 **Vraag**: Moeten we het gebruik van optie 2 en 3 niet actief ontmoedigen en er voor zorgen dat we situaties waarin dat gebeurd wegnemen?
@@ -230,9 +230,9 @@ In de voorgaande paragraaf zagen we al de volgende conceptual mapping:
         </cs:Construct>
 ```
 Zoals je ziet bevat deze conceptual mapping de mapping naar een XSD-type. Naast mappings voor XSD-types kun je ook mappings voor OAS- en RDF-types definiëren in een 
-conceptual mapping. Daarvoor definiëer je op hetzelfde niveau als het element `cs:xsdRtpes` de elementen `cs:oasTypes` resp. `cs:rdfTypes`.
+conceptual mapping. Daarvoor definiëer je op hetzelfde niveau als het element `<cs:xsdRtpes` de elementen `<cs:oasTypes` resp. `<cs:rdfTypes`.
 
-Het element `cs:xsdType` in `cs:xsdTypes` kent de volgende structuur:
+Het element `<cs:xsdType>` in `<cs:xsdTypes>` kent de volgende structuur:
 
 ```xml
         <cs:xsdType>
@@ -242,9 +242,9 @@ Het element `cs:xsdType` in `cs:xsdTypes` kent de volgende structuur:
            <cs:primitive>true</cs:primitive>
         </cs:XsdType>
 ```
-`cs:oasType` en `cs:rdfType` kennen de elementen `cs:asAttributes` en `cs:asAttributeDesignation` niet. OAS bestanden bevatten immers geen attributes zoals die in een 
+`<cs:oasType>` en `<cs:rdfType>` kennen de elementen `<cs:asAttributes>` en `<cs:asAttributeDesignation>` niet. OAS bestanden bevatten immers geen attributes zoals die in een 
 XML bestand wel aanwezig kunnen zijn.<br/>
-`rdfType` kent daarnaast ook het element `cs: primitive` niet.
+`<rdfType>` kent daarnaast ook het element `<cs: primitive>` niet.
 
 In de toekomst zouden er indien gewenst ook mappings voor andere schematalen kunnen worden toegevoegd.
 
