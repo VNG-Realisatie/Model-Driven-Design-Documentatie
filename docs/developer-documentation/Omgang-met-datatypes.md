@@ -142,7 +142,7 @@ omstandigheden heeft optie 1 daarom de voorkeur.
 Er vanuit gaande dat je de mappings voor ‘CharacterString’ wil aanpassen werkt optie 2 echter als volgt :
 * Je vindt in het conceptual schema een gelijksoortige code als:
 
-```
+```xml
         <cs:Construct>
             <cs:name>CharacterString</cs:name>
             <cs:sentinel>false</cs:sentinel>
@@ -164,7 +164,7 @@ Er vanuit gaande dat je de mappings voor ‘CharacterString’ wil aanpassen wer
 * Voeg daar dan het element ‘cs:managedID’ aan toe dat de waarde krijgt van de GUID van het datatype in het package in Enterprise Architect dat wordt gebruikt. Je 
 krijgt dus iets als het volgende:
 
-```
+```xml
         <cs:Construct>
             <cs:name>CharacterString</cs:name>
             <cs:sentinel>false</cs:sentinel>
@@ -198,7 +198,7 @@ voor GML 3.22. Hoe hou je nu uit elkaar welke van de 2 je wil gebruiken?
 Bij het verwerken met Imvertor worden de properties behorende bij de gekozen processing mode uitgelezen. Een van die properties is 'mapping' waaraan een identifier 
 is toegekend, bijv. ‘NEN3610_GML321’. In het conceptual schema is ook een mapping configuratie gedeclareerd met de naam 'NEN3610_GML321':
 
-```
+```xml
    <cs:mappings>
       <cs:Mapping>
          <cs:name>NEN3610_GML321</cs:name>
@@ -216,7 +216,7 @@ referenties. Definieer zo nodig ook nieuwe conceptual mapping bestanden.
 
 ### Mappings voor andere schematalen
 In de voorgaande paragraaf zagen we al de volgende conceptual mapping:
-```
+```xml
         <cs:Construct>
             <cs:name>CharacterString</cs:name>
             <cs:sentinel>false</cs:sentinel>
@@ -234,7 +234,7 @@ conceptual mapping. Daarvoor definiëer je op hetzelfde niveau als het element `
 
 Het element `cs:xsdType` in `cs:xsdTypes` kent de volgende structuur:
 
-```
+```xml
         <cs:xsdType>
            <cs:name>xs:string</cs:name>
            <cs:asAttribute>xs:string</cs:asAttribute>
