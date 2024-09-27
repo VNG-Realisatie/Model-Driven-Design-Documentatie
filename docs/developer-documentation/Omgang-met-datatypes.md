@@ -199,16 +199,16 @@ Bij het verwerken met Imvertor worden de properties behorende bij de gekozen pro
 is toegekend, bijv. ‘NEN3610_GML321’. In het conceptual schema is ook een mapping configuratie gedeclareerd met de naam 'NEN3610_GML321':
 
 ```xml
-   <cs:mappings>
-      <cs:Mapping>
-         <cs:name>NEN3610_GML321</cs:name>
-         <cs:use>
-            <cs-ref:MapRef xlink:href="#GML321"/>
-            <cs-ref:MapRef xlink:href="#MIM111"/>
-            <cs-ref:MapRef xlink:href="#VNGR-MAP"/>
-         </cs:use>
-      </cs:Mapping>
-   </cs:mappings>
+        <cs:mappings>
+           <cs:Mapping>
+              <cs:name>NEN3610_GML321</cs:name>
+              <cs:use>
+                 <cs-ref:MapRef xlink:href="#GML321"/>
+                 <cs-ref:MapRef xlink:href="#MIM111"/>
+                 <cs-ref:MapRef xlink:href="#VNGR-MAP"/>
+              </cs:use>
+           </cs:Mapping>
+        </cs:mappings>
 ```
 In feite definieert deze mapping dat de conceptual mappings met de mapping referenties 'GML321', 'MIM111' en 'VNGR-MAP', mappings die verderop in het bestand worden 
 geinclude, moeten worden gebruikt. Definieer, als je een andere set conceptual mappings wil gebruiken, een nieuwe mapping configuratie met daarin de gewenste  mapping 
