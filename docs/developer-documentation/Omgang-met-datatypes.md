@@ -230,7 +230,7 @@ In de voorgaande paragraaf zagen we al de volgende conceptual mapping:
         </cs:Construct>
 ```
 Zoals je ziet bevat deze conceptual mapping de mapping naar een XSD-type. Naast mappings voor XSD-types kun je ook mappings voor OAS- en RDF-types definiëren in een 
-conceptual mapping. Daarvoor definiëer je op hetzelfde niveau als het element `<cs:xsdRtpes` de elementen `<cs:oasTypes` resp. `<cs:rdfTypes`.
+conceptual mapping. Daarvoor definiëer je op hetzelfde niveau als het element `<cs:xsdRtpes>` de elementen `<cs:oasTypes>` resp. `<cs:rdfTypes>`.
 
 Het element `<cs:xsdType>` in `<cs:xsdTypes>` kent de volgende structuur:
 
