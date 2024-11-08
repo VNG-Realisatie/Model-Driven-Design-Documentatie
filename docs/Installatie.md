@@ -14,7 +14,7 @@ Ten eerste moet EA geïnstalleerd worden. Daarna moeten er een aantal externe to
 Benader voor het verkrijgen van het installatiebestand de daarvoor verantwoordelijke persoon binnen uw organisatie.
 VNG Realisatie werkt nog met versie 15.2, zij installeren dus [die versie](https://kinggemeenten.plan.io/attachments/162460). Als je deze al geïnstalleerd hebt hoef je EA natuurlijk niet opnieuw te installeren.
 
-<span style="color:red">Inmiddels kan ook gebruik maken van versie 16.1. Er is nog geen ervaring bij VNG-R in de configuratie van die versie dus de in de volgende paragrafen beschreven procedures kunnen afwijken. Een eenmaal in EA 16.1 geöpend en bewaard (wat vaak automatisch gebeurd) EAP bestand kan niet meer in een oudere versie van EA worden geöpend. Dat geldt natuurlijk niet voor de XMI bestanden.<br/>Een [Enterprise Architect viewer](https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition) kan vrij van licentiekosten worden gedownload zodat de Enterprise Architect bestanden ook door anderen bestudeert kunnen worden.</span>
+<span style="color:red">Inmiddels kan ook gebruik maken van versie 16.1. Er is nog weinig ervaring bij VNG-R in de configuratie van die versie dus de in de volgende paragrafen beschreven procedures kunnen afwijken. Bij het openen van een oude EA versie bestand in EA 16.1 zal gevraagd worden deze te migreren naar een ander bestandsformaat. Het oude bestand blijft overigens wel beschikbaar maar het lijkt verstandiger dat dan niet meer te gebruiken en zelfs te verwijderen. Het nieuwe formaat kan niet in een oudere versie van EA worden geöpend. Dat geldt natuurlijk niet voor de XMI bestanden.<br/><br/>Een [Enterprise Architect viewer](https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition) kan vrij van licentiekosten worden gedownload zodat de Enterprise Architect bestanden ook door anderen bestudeert kunnen worden.</span>
 
 ### 1.1.2 EA Toolpack installeren
 
@@ -37,6 +37,7 @@ De volgende metamodellen zijn beschikbaar (zie gelinkte bestanden):
 Welke je moet installeren is afhankelijk van je werkzaamheden. Ben je alleen verantwoordelijk voor het produceren van SIM's of CIM's dan installeer je alleen de eerste. Indien je ook of juist verantwoordelijk bent voor het vervaardigen van UGM's dan installeer je de eerste en de tweede en als je BSM's moet kunnen maken dan dien je ze alledrie te installeren.
 
 In Enterprise Architect kan je via **Specialize / Technologies / Publish-Tech / Import MDG Technology** de profielen met de metamodellen voor de diverse model-varianten importeren.<br/><br/>![MDG-Technology](./images/MDG-Technology1.jpg)
+<span style="color:red">In Enterprise Architect 16.1 gaat dat via **Specialize / Technologies / Publish Technology / Import MDG Technology**</span>
 
 Let er wel op dat je de **"Import to User"** gebruikt, dan heb je immers in ieder project dat je opent of nieuw maakt de beschikking over deze profielen.
 
