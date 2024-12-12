@@ -31,13 +31,13 @@ Modeltype is daarbij gelijk aan 'SIM', 'UGM' of 'BSM'. Enkele voorbeelden hierva
 
 ### Het ophalen van een bestaand model (package).
 
-Randvoorwaarde voor het ophalen van een model uit de repository in Enterprise Architect is dat er een standaard projecten structuur aanwezig is in het EA-bestand. Om te waarborgen dat dit het geval is dien je bij het aanmaken van een nieuw EA bestand een kopie te maken van het EA Template bestand dat je kunt vinden in de folder die je n.a.v. de tweede bullet van de sectie [SVN configureren voor EA](./Installatie#1.1.7%20SVN%20configureren%20voor%20EA) hebt aangemaakt of gekozen.
+Randvoorwaarde voor het ophalen van een model uit de repository in Enterprise Architect is dat er een standaard projecten structuur aanwezig is in het EA-bestand. Om te waarborgen dat dit het geval is dien je bij het aanmaken van een nieuw EA bestand een kopie te maken van het EA Template bestand dat je kunt vinden in de folder die je n.a.v. de tweede bullet van de sectie [SVN configureren voor EA](./Installatie#117-svn-configureren-voor-ea) hebt aangemaakt of gekozen.
 
 Het ophalen van een model wordt gedaan door een Get package uit te voeren:
 
 * Selecteer de project-package waaronder het model moet worden opgenomen.
 * Ga via de rechtermuisknop naar de menukeuze "Package Control" en selecteer in het sub-menu "Get Package...".
-* Selecteer de locatie waar het gewenste model is opgeslagen. De locaties die hier beschikbaar zijn zijn bij het configureren van Version Control in EA aangebracht (zie hoofdstuk 1: [SVN configureren voor EA](./Installatie#1.1.7%20SVN%20configureren%20voor%20EA).
+* Selecteer de locatie waar het gewenste model is opgeslagen. De locaties die hier beschikbaar zijn zijn bij het configureren van Version Control in EA aangebracht (zie hoofdstuk 1: [SVN configureren voor EA](./Installatie#117-svn-configureren-voor-ea).
 * Selecteer het model dat je vanuit de repository in Enterprise Architect beschikbaar wilt hebben en klik op "OK".
 
 Het model wordt nu binnengehaald  en onder de package gezet die  je in de eerste stap hebt geselecteerd.
