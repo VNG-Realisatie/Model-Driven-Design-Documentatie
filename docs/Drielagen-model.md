@@ -65,7 +65,7 @@ wordt opgeslagen in de jobs. Hoe dat precies in zijn werk gaat is beschreven in 
 
 Het modelleren van een UGM gebeurt op basis van het Metamodel Uitwisselings Gegevensmodellen (UGM). De formele beschrijving daarvan vind je in de paragrafen 6.2 en 6.4 van het 
 [Metamodel BerichtstructuurGegevens (MBG)](https://vng-realisatie.github.io/publicatie/cim/mbg/1.0.0/). Een UGM is gebaseerd op een SIM. Er is een ontwerp-slag gemaakt waarbij 
-[4.2.1 Technische en implementatie-overwegingen](./Technische-en-implementatieoverwegingen.md) een rol spelen. In die ontwerpslag worden gegevensstructuren aangepast om uiteindelijk de toepassing 
+[4.2.1 Technische en implementatie-overwegingen](./Technische-en-implementatie-overwegingen.md) een rol spelen. In die ontwerpslag worden gegevensstructuren aangepast om uiteindelijk de toepassing 
 daarvan te vereenvoudigen. Tevens worden beschrijvingen dermate geformaliseerd dat op basis daarvan code en/of berichtschema's gegenereerd kunnen worden.
 
 Waar bij het SIM de business professionals de primaire doelgroep is vormt bij het UGM de ICT-deskundige, en in het verlengde daarvan computers, de primaire doelgroep. Een UGM is dus geen 
@@ -76,7 +76,7 @@ Net als bij het SIM heb je hier het onderscheid in een generiek UGM en een speci
 Voor een Koppelvlak wordt er op basis van het (domein-) specifieke koppelvlak-informatiemodel een specifiek UGM opgesteld dat daarmee correspondeert. Bij het opstellen van dit UGM worden 
 dezelfde technische- en implementatie-overwegingen gehanteerd als die voor de "standaard" UGM's worden gehanteerd. In de praktijk betekent dit dat voor alle proxies in de informatiemodellen 
 de corresponderende constructies uit het onderliggende UGM worden gekopieerd in het koppelvlak-UGM en dat voor alle toevoegingen aan het koppelvlak specifieke SIM ook toevoegingen worden 
-gedaan aan het koppelvlak specifieke UGM. Bijzonderheden over het [4.3.2 Opstellen van een koppelvlak-UitwisselingsGegevensModel](Opstellen-koppelvlakUGM.md) zijn op een aparte pagina uitgewerkt.
+gedaan aan het koppelvlak specifieke UGM. Bijzonderheden over het opstellen van een koppelvlak-UitwisselingsGegevensModel zullen op een aparte pagina worden uitgewerkt.
 
 Voor UGM modellen zijn proxies niet van toepassing.
 
@@ -92,8 +92,7 @@ geldt dat voor een goede verwerking door Imvertor de eerder genoemde tagged valu
 
 Het modelleren van een BSM gebeurt op basis van het [Metamodel BerichtstructuurGegevens (MBG)](https://vng-realisatie.github.io/publicatie/cim/mbg/1.0.0/).
 
-Het BSM is een berichtmodel van één of meerdere berichtschema. Bij [4.3 Het opstellen van een koppelvlak](./Opstellen-koppelvlak.md) wordt dus één BSM gemaakt. Dit model bestaat uit enerzijds 
-specifieke informatie die nodig is om te bepalen welk type bericht er van toepassing is en welke (bericht-) structuur daarbij hoort en anderzijds de content van het bericht.
+Het BSM is een berichtmodel van één of meerdere berichtschema. Bij [4.4 Het opstellen van een koppelvlak](./Opstellen-BSM.md) wordt dus één BSM gemaakt. Dit model bestaat uit enerzijds specifieke informatie die nodig is om te bepalen welk type bericht er van toepassing is en welke (bericht-) structuur daarbij hoort en anderzijds de content van het bericht.
 
 De specifieke informatie van een berichttype betreft een relatief beperkte set. Afhankelijk van het type koppelvlak zijn er een aantal berichttypen vooraf gedefinieerd die gebruikt kunnen worden. 
 Voor ieder van die berichttypen is bepaald welke informatie onderdeel uit MAG maken en welke informatie onderdeel uit MOET maken van een bericht.
@@ -102,7 +101,7 @@ De content-informatie die in een bericht-schema wordt opgenomen is gebaseerd op 
 Omdat een koppelvlak UGM gebaseerd kan zijn op een horizontaal UGM en dat op haar beurt weer op een ander horizontaal UGM kan een bericht-schema een subset van 1 of meerdere UGM's zijn.
 
 Voor StUF berichtschema's geldt bijvoorbeeld dat de content van berichten samengesteld kan zijn op basis van het UGM-BG. Zaak-berichten zullen over het algemeen weer gebaseerd zijn 
-op zowel het UGM-ZKN als het UGM-BG. Bijzonderheden over het [4.3.3 Opstellen van een koppelvlak-BerichtStructuurModel](./Opstellen-koppelvlakBSM.md) zijn op een aparte pagina uitgewerkt.
+op zowel het UGM-ZKN als het UGM-BG. Bijzonderheden over het [Opstellen van een koppelvlak-BerichtStructuurModel](https://vng-realisatie.github.io/Model-Driven-Design-Documentatie/Opstellen-BSM.html#koppelvlak-berichtstructuurmodel-opstellen) zijn op een aparte pagina uitgewerkt.
 
 Net als bij UGM modellen geldt voor BSM modellen dat proxies niet van toepassing zijn.
 
