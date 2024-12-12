@@ -9,7 +9,7 @@ dan wordt verwezen naar entiteiten en attributen uit een horizontaal GegevensUit
 
 Zoals in hoofdstuk [3 Het drie-lagen model](./Drielagen-model.md) al is uitgelegd zijn SIM's en UGM's sterk met elkaar verweven.
 In het geval van een UGM kan die verwevenheid initieel al voor een groot deel geautomatiseerd worden vastgelegd.
-Voer daarvoor de werkinstructie 'Werkinstructie SIM omzetten naar UGM' zoals beschreven in  [5.1 Werkinstructies#Werkinstructie-SIM-omzetten-naar-UGM](./Werkinstructie-SIM-omzetten-naar-UGM.md) uit.
+Voer daarvoor de werkinstructie 'Werkinstructie SIM omzetten naar UGM' zoals beschreven in  [5.1 Werkinstructies#Werkinstructie-SIM-omzetten-naar-UGM](./Werkinstructies.md#werkinstructie-sim-omzetten-naar-ugm) uit.
 Dit zorgt er voor dat alle stereotypes die in feite nog tot het MIM behoren worden omgezet naar stereotypes die tot het MUG behoren.
 Zo krijgt een class met het stereotype 'Objecttype' het stereotype 'Entiteittype' toegekend en een attribuut met het stereotype 'Attribuutsoort' het stereotype 'Element'. Daarnaast worden er automatisch traces gecreëerd tussen de gerelateerde componenten in het SIM en het UGM.
 
