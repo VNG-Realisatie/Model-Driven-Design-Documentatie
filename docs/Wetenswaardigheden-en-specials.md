@@ -136,7 +136,7 @@ Voor relaties geldt hetzelfde verhaal, de in het voorgaande scenario beschreven 
 Net zoals je op UGM niveau entiteiten kunt aanscherpen kun je dat op BSM niveau ook.
 Verschil is wel dat van de op UGM niveau geschetste scenario's alleen scenario 2 van toepassing kan zijn en dan zelfs alleen nog maar in de restriction variant.
 
-We gaan er vanuit dat een op koppelvlak UGM niveau aangescherpte entiteit altijd 1 op 1 wordt gebruikt in de berichten. Het kan echter voorkomen dat je die entiteit voor een specifiek bericht nog verder wil aanscherpen. In dat geval maak je op BSM niveau weer een kopie van de op UGM niveau reeds aangescherpte entiteit, geeft hem weer een desambiguerende naam en ook een nieuwe waarde voor de 'Restriction identifier'. Verder geldt hier hetzelfde als beschreven in de paragraaf *Aanscherping entiteit zonder rol verandering* van de sectie "Meerdere entiteiten gebaseerd op dezelfde entiteittypen":https://kinggemeenten.plan.io/projects/de-nieuwe-aanpak/wiki/Wetenswaardigheden_en_specials#section-6.
+We gaan er vanuit dat een op koppelvlak UGM niveau aangescherpte entiteit altijd 1 op 1 wordt gebruikt in de berichten. Het kan echter voorkomen dat je die entiteit voor een specifiek bericht nog verder wil aanscherpen. In dat geval maak je op BSM niveau weer een kopie van de op UGM niveau reeds aangescherpte entiteit, geeft hem weer een desambiguerende naam en ook een nieuwe waarde voor de 'Restriction identifier'. Verder geldt hier hetzelfde als beschreven in de paragraaf [Aanscherping entiteit zonder rol verandering](#aanscherping-entiteit-zonder-rol-verandering).
 
 ### Custom parameters of stuurgegevens (XML/SOAP)
 
