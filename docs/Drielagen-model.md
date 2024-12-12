@@ -21,7 +21,7 @@ Realisatie extensie daarop.
 Sommige SIM's zijn generiek van aard andere zijn specifiek voor een domein (Koppelvlak-informatiemodel). De generieke SIM's bevatten objecttypen die in meerdere domeinen een toepassing hebben. 
 De specifieke domein SIM's bevatten objecttypen die alleen van toepassing zijn op een bepaald domein. Tezamen vormen deze SIM's de basis voor het maken van koppelvlakken.  
 
-Bijzonderheden over het [4.3.1 Opstellen van een Koppelvlak-informatiemodel](Opstellen-koppelvlakSIM.md) zijn op een aparte pagina uitgewerkt
+Bijzonderheden over het opstellen van een Koppelvlak-informatiemodel zullen op een aparte pagina worden uitgewerkt.
 
 ### Proxies
 
