@@ -102,7 +102,8 @@ Bij het samenstellen van het contentmodel van een entiteit kunnen zich 3 situati
 
 In zowel scenario 2 als 3 kunnen zich 2 situaties voordoen. Er kan sprake zijn van een restrictie van een basis entiteit en tegelijkertijd of juist in plaats daarvan kan er sprake kan zijn van een extensie van een basis entiteit. In het eerste geval worden er dus attributen en/of relaties verwijderd uit de entiteit of worden een of meerdere attributen van de entiteit van een afwijkend datatype voorzien. In het tweede geval worden er juist attributen toegevoegd aan de entiteit. De hierboven gedefinieerde scenario’s 2 en 3 worden hieronder besproken.
 
-*Aanscherping entiteit zonder rol verandering*
+#### Aanscherping entiteit zonder rol verandering
+
 Afhankelijk van het domein waarin een entiteit moet worden gebruikt kan er behoefte zijn aan het verwijderen danwel toevoegen van attributen. Sommige attributen hebben gewoon geen functie in het domein of er is bij het opstellen van de basis entiteit geen zicht geweest op de informatie behoefte van het adopterende domein.
 
 Dit wordt opgelost door van het entiteittype een kopie op te nemen in het koppelvlak-UGM met een gespecialiseerde naam. Een voorbeeld hiervan is de NATUURLIJK PERSOON die wordt gebruikt in het kader van een vergunningen systeem. Het desambigueren in UML gebeurt op entiteittype-niveau door de betreffende entiteittype een afwijkende naam te geven (in dit geval bijv. "NatuurlijkPersoon_vergunningen" ).
@@ -115,7 +116,8 @@ Andersom is dit overigens niet geldig. Een tagged-value 'Restriction identifier'
 
 In die zin is het wellicht handig om alle entiteiten met dezelfde tagged-value waarde voor 'Restriction identifier' bij elkaar in een package onder te brengen en die package eenzelfde waarde te geven als de 'Restriction identifier'.
 
-*Aanscherping entiteit met rolverandering*
+#### Aanscherping entiteit met rolverandering
+
 In een koppelvlak-UGM (of een afgeleid UGM zoals UGM-ZKN) kan het voorkomen dat een entiteittype in verschillende rollen (relaties) gebruikt wordt. Er kan dan ook per rol een verschil in behoefte zijn v.w.b. de elementen die opgenomen zijn in de entiteit. Eigenlijk is dat niet anders dan het in de voorgaande paragraaf geschetste scenario. De verwerking is dan ook identiek.
 Een voorbeeld van dit scenario is de NATUURLIJK PERSOON als BETROKKENE in het UGM ZKN. Zie ook onderstaand voorbeeld:
 
