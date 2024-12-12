@@ -7,7 +7,7 @@ title: Het gebruik van SVN
 In dit hoofdstuk beschrijven we hoe we binnen VNG-realisatie i.h.k.v. de Nieuwe Aanpak omgaan met het beheer van onze modellen. Het aantal modellen dat we in beheer hebben neemt vlug toe en aangezien de relaties tussen deze modellen een spaghetti aan afhankelijkheden oplevert is het van groot belang dat de procedure voor het gezamenlijk werken aan deze modellen voor iedereen duidelijk is en ook toegepast wordt.
 Omdat bij dat beheer SVN een centraal onderdeel is zijn hieronder de belangrijkste SVN handelingen beschreven. In de paragraaf daaronder beschrijven we de te hanteren procedure waarbij je gebruik maakt van de beschreven SVN handelingen.
 
-Randvoorwaarde om SVN binnen Enterpise Architect te kunnen gebruiken is dat Tortoise SVN geïnstalleerd is en en dat Enterprise Architect is geconfigureerd om de repository met Informatiemodellen, Gegevensmodellen en Berichtmodellen te kunnen gebruiken. Zie onder [1 Installatie](./Installatie.md) de paragraaf  *SVN configureren voor EA*.
+Randvoorwaarde om SVN binnen Enterpise Architect te kunnen gebruiken is dat Tortoise SVN geïnstalleerd is en en dat Enterprise Architect is geconfigureerd om de repository met Informatiemodellen, Gegevensmodellen en Berichtmodellen te kunnen gebruiken. Zie onder [1 Installatie](./Installatie) de paragraaf  *SVN configureren voor EA*.
 
 ### Het vastleggen van een nieuw model (package) in de repository
 
