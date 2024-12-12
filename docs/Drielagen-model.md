@@ -65,7 +65,7 @@ wordt opgeslagen in de jobs. Hoe dat precies in zijn werk gaat is beschreven in 
 
 Het modelleren van een UGM gebeurt op basis van het Metamodel Uitwisselings Gegevensmodellen (UGM). De formele beschrijving daarvan vind je in de paragrafen 6.2 en 6.4 van het 
 [Metamodel BerichtstructuurGegevens (MBG)](https://vng-realisatie.github.io/publicatie/cim/mbg/1.0.0/). Een UGM is gebaseerd op een SIM. Er is een ontwerp-slag gemaakt waarbij 
-[4.2.1 Technische en implementatie-overwegingen](./Technische-en-implementatie-overwegingen.md) een rol spelen. In die ontwerpslag worden gegevensstructuren aangepast om uiteindelijk de toepassing 
+[4.3.1 Technische en implementatie-overwegingen](./Technische-en-implementatie-overwegingen.md) een rol spelen. In die ontwerpslag worden gegevensstructuren aangepast om uiteindelijk de toepassing 
 daarvan te vereenvoudigen. Tevens worden beschrijvingen dermate geformaliseerd dat op basis daarvan code en/of berichtschema's gegenereerd kunnen worden.
 
 Waar bij het SIM de business professionals de primaire doelgroep is vormt bij het UGM de ICT-deskundige, en in het verlengde daarvan computers, de primaire doelgroep. Een UGM is dus geen 
