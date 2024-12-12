@@ -8,7 +8,7 @@ title: Werkinstructies
 
 - Kopieer de SIM-package vanuit het KING:SIM-project naar het KING:UGM-project ('Full structure for duplication');
 - Voer het 'Set traceability' script uit. Ga voor een beschrijving daarvan naar de sectie  'Set traceability script draaien' op deze wiki-pagina en kies voor de variant 'Set traceability with transformation' (het onderliggende metamodel voor SIM moet immers omgezet worden naar een metamodel voor het UGM);
-- Volg vervolgens de beschrijving in [4.2 Het opstellen van een horizontaal GegevensUitwisselingsModel](./OpstellenUGM.md).
+- Volg vervolgens de beschrijving in [4.2 Het opstellen van een horizontaal GegevensUitwisselingsModel](./Opstellen-UGM).
 
 ## Werkinstructie UGM omzetten naar BSM
 
@@ -16,7 +16,7 @@ title: Werkinstructies
 
 - Kopieer het UGM-package vanuit het KING:UGM-project naar het KING:BSM-project ('Full structure for duplication');
 - Voer het 'Set traceability' script uit. Ga voor een beschrijving daarvan naar de sectie  'Set traceability script draaien' op deze wiki-pagina en kies voor de variant 'Set traceability without transformation' (ook in het BSM gebruiken we immers het metamodel voor het UGM);
-- Volg vervolgens de beschrijving in [4.3.3 Opstellen van een koppelvlak-BerichtStructuurModel](./OpstellenBSM.md)
+- Volg vervolgens de beschrijving in [Opstellen van een koppelvlak-BerichtStructuurModel](./Opstellen-BSM#koppelvlak-berichtstructuurmodel-opstellen)
 
 ## Werkinstructie UML-package in subversion zetten
 
