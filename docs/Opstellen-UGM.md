@@ -7,15 +7,15 @@ title: Het opstellen van een horizontaal GegevensUitwisselingsModel
 In een horizontaal GegevensUitwisselingsmodel worden die gegevens op UGM niveau uitgewerkt die een meervoudige toepassing kennen. Als in een verticaal GegevensUitwisselingsModel
 dan wordt verwezen naar entiteiten en attributen uit een horizontaal GegevensUitwisselingsModel zorgt dat er voor dat deze gegevens in alle koppelvlakken (ongeacht de aard van het koppelvlak) op eenzelfde wijze worden gespecificeerd.
 
-Zoals in hoofdstuk [3 Het drie-lagen model](./Drielagen-model.md) al is uitgelegd zijn SIM's en UGM's sterk met elkaar verweven.
+Zoals in hoofdstuk [3 Het drie-lagen model](./Drielagen-model) al is uitgelegd zijn SIM's en UGM's sterk met elkaar verweven.
 In het geval van een UGM kan die verwevenheid initieel al voor een groot deel geautomatiseerd worden vastgelegd.
-Voer daarvoor de werkinstructie 'Werkinstructie SIM omzetten naar UGM' zoals beschreven in  [5.1 Werkinstructie - SIM omzetten naar UGM](https://vng-realisatie.github.io/Model-Driven-Design-Documentatie/Werkinstructies.html#werkinstructie-sim-omzetten-naar-ugm) uit.
+Voer daarvoor de werkinstructie 'Werkinstructie SIM omzetten naar UGM' zoals beschreven in  [5.1 Werkinstructie - SIM omzetten naar UGM](./Werkinstructies#werkinstructie-sim-omzetten-naar-ugm) uit.
 Dit zorgt er voor dat alle stereotypes die in feite nog tot het MIM behoren worden omgezet naar stereotypes die tot het MUG behoren.
 Zo krijgt een class met het stereotype 'Objecttype' het stereotype 'Entiteittype' toegekend en een attribuut met het stereotype 'Attribuutsoort' het stereotype 'Element'. Daarnaast worden er automatisch traces gecreëerd tussen de gerelateerde componenten in het SIM en het UGM.
 
 **Vraag Robert:** Wat moet er gebeuren met een evt. met het SIM mee gekopieerd intern package 'Generieke Datatypen'?
 
-Het UGM is daarmee bijna klaar om verder verwerkt te worden tot een volwaardig UGM. Dat wil zeggen dat voor SIM logische structuren omgezet worden naar structuren die technisch beter verwerkt kunnen worden. Dat gebeurd op basis van een aantal [4.3.1 Technische en implementatie-overwegingen](./Technische-en-implementatie-overwegingen.md). Eerst moeten er echter een aantal handelingen uitgevoerd worden die onafhankelijk zijn van de gewenste uitvoer en een aantal handelingen die specifiek zijn voor de gewenste uitvoer. 
+Het UGM is daarmee bijna klaar om verder verwerkt te worden tot een volwaardig UGM. Dat wil zeggen dat voor SIM logische structuren omgezet worden naar structuren die technisch beter verwerkt kunnen worden. Dat gebeurd op basis van een aantal [4.3.1 Technische en implementatie-overwegingen](./Technische-en-implementatie-overwegingen). Eerst moeten er echter een aantal handelingen uitgevoerd worden die onafhankelijk zijn van de gewenste uitvoer en een aantal handelingen die specifiek zijn voor de gewenste uitvoer. 
 
 ## Generieke handelingen
 
