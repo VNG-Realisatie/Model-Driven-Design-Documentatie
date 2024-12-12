@@ -6,7 +6,7 @@ title: Het opstellen van een koppelvlak
 
 In dit hoofdstuk beschrijven we hoe je tot de technische specificaties van een koppelvlak kunt komen. Althans wat betreft de StUF XML-Schema's en OAS3 specificatie. Een koppelvlakspecificatie bestaat immers uit meer dan alleen een van deze componenten. Denk onder andere aan de functionele documentatie maar ook aan een 'Getting started'.
 
-Voor zowel StUF XML-Schema's als een OAS3 specificatie is het uitgangspunt dat er een valide UGM en dus ook een valide SIM voor het koppelvlak voor handen is. De paragrafen [4.3.1 Opstellen van een Koppelvlak-informatiemodel](./obsolete.md) en [4.3.2 opstellen van een koppelvlak-UitwisselingsGegevensModel](./obsolete.md) gaan daar dieper op in. De details over het modelleren van berichtspecificaties staan beschreven in paragraaf [[433 opstellen van een koppelvlak-BerichtStructuurModel]].
+Voor zowel StUF XML-Schema's als een OAS3 specificatie is het uitgangspunt dat er een valide UGM en dus ook een valide SIM voor het koppelvlak voor handen is. Details over het opstellen van een Koppelvlak-informatiemodel en het opstellen van een koppelvlak-UitwisselingsGegevensModel zullen aparte pagina's worden uitgewerkt. De details over het modelleren van berichtspecificaties staan op deze pagina beschreven.
 
 Voor het zover is moeten echter de onderstaande stappen genomen worden.
 
@@ -58,13 +58,13 @@ p{color:red}. *Noot Robert:* In het kader van het werken met communities, het in
 
 Op basis van de functionele eisen en wensen of de userstories wordt geïnventariseerd welke informatie-objecttypen, -relatietypen en -attribuuttypen er voor het koppelvlak nodig zijn. Deze worden vervolgens vastgelegd in een Semantisch InformatieModel dat specifiek voor het koppelvlak in beeld brengt om welke informatie het gaat.
 
-Nadere details over het [4.3.1 Opstellen van een Koppelvlak-informatiemodel](./obsolete.md) zijn op een aparte pagina uitgewerkt.
+Nadere details over het opstellen van een Koppelvlak-informatiemodel zullen op een aparte pagina worden uitgewerkt.
 
 ## Koppelvlak-uitwisselingsgegevensmodel opstellen
 
 Op basis van het koppelvlak Semantisch InformatieModel en eventueel te hergebruiken deel of delen van horizontale Uitwisselingsgegevensmodellen wordt een een koppelvlak UitwisselingsGegevensModel opgesteld.
 
-Nadere details over het [4.3.2 opstellen van een koppelvlak-UitwisselingsGegevensModel](./obsolete.md) zijn op een aparte pagina uitgewerkt.
+Nadere details over het opstellen van een koppelvlak-UitwisselingsGegevensModel zullen op een aparte pagina worden uitgewerkt.
 
 ## Koppelvlak-BerichtStructuurModel opstellen
 
