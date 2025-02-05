@@ -24,8 +24,7 @@ De nieuwste versie van dit script kan kostenloos worden opgehaald op de [website
 
 ### 1.1.3 Imvertor Addin installeren
 
-De imvertor Addin is noodzakelijk om UML-modellen vanuit EA te kunnen aanbieden aan de Armatiek-SAAS omgeving waar Imvertor draait. De nieuwste versie van deze Addin kan kostenloos worden opgehaald van het [Imvertor Dashboard](https://imvertor.armatiek.nl/imvertor-executor/dashboard/wiki?key=info-EAADDIN). De documentatie over deze Addin en het gebruik vind je [hier](https://imvertor.armatiek.nl/imvertor-executor/dashboard/wiki?key=info-IMVERTORHTSWWI).
-
+De imvertor Addin is noodzakelijk om UML-modellen vanuit EA te kunnen aanbieden aan de Armatiek-SAAS omgeving waar Imvertor draait. Download hier de Imvertor-addin : [32 bits](https://armatiek.nl/Imvertor/download/4.2.0.0/EAImvertorAddinSetup32.exe), [64 bits](https://armatiek.nl/Imvertor/download/4.2.0.0/EAImvertorAddinSetup64.exe). Stop EA vóór de installatie.
 
 ### 1.1.4 Profielen/Metamodellen MIM, MUG en MBG importeren
 
