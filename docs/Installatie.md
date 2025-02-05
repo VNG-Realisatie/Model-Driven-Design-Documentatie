@@ -27,7 +27,7 @@ De nieuwste versie van dit script kan kostenloos worden opgehaald op de [website
 De imvertor Addin is noodzakelijk om UML-modellen vanuit EA te kunnen aanbieden aan de Armatiek-SAAS omgeving waar Imvertor draait. De nieuwste versie van deze Addin kan kostenloos worden opgehaald van het [Imvertor Dashboard](https://imvertor.armatiek.nl/imvertor-executor/dashboard/wiki?key=info-EAADDIN). De documentatie over deze Addin en het gebruik vind je [hier](https://imvertor.armatiek.nl/imvertor-executor/dashboard/wiki?key=info-IMVERTORHTSWWI).
 
 
-### 1.1.4 Profielen/Metamodellen MIG en MUG importeren
+### 1.1.4 Profielen/Metamodellen MIM, MUG en MBG importeren
 
 De volgende metamodellen zijn beschikbaar (zie gelinkte bestanden):
  - [Metamodel Informatiemodellen Modellering:](./bestanden/VNGR%20SIM+Grouping%20NL-1.1-1.65.2.ea-toolbox.xml) (MIM)
