@@ -7,12 +7,13 @@ Deze folder bevat technische informatie voor Imvertor developers. Beschrijvingen
 Deze documentatie is dus niet bedoelt voor gebruikers van de iMvertor software.
 
 ## Inhoudsopgave
-### 1. [Omgang met datatypes](Omgang-met-datatypes.md)
-### 2. [Bepalen van de documentatieteksten](schema-documentatie-generatie)
+### 1. [Opzet lokale eclipse omgeving](Opzet-eclipse-omgeving.md)
+### 2. [Omgang met datatypes](Omgang-met-datatypes.md)
+### 3. [Bepalen van de documentatieteksten](schema-documentatie-generatie)
 Todo
-### 3. [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-en-parameters)
+### 4. [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-en-parameters)
 Todo
-### 4. [Vaststellen van acceptCRS en contentCRS](Determining-accept- en-contentCRS}
+### 5. [Vaststellen van acceptCRS en contentCRS](Determining-accept- en-contentCRS}
 Todo
-### 5. [Werking van de functie imf:get-most-relevant-compiled-taggedvalue()](get-most-relevant-compiled-taggedvalue)
+### 6. [Werking van de functie imf:get-most-relevant-compiled-taggedvalue()](get-most-relevant-compiled-taggedvalue)
 Todo
