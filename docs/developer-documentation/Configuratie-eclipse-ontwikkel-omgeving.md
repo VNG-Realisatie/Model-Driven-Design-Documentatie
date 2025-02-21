@@ -63,4 +63,4 @@
 
      Wijzig indien nodig de paden van de eerste en laatste regel;
 13.	Ga naar het tabblad ‘Environment’ en voeg daar de variabele ‘imvertor_os_basefolder’ toe met als waarde het path naar waar het Excel property bestand staat (waarschijnlijk iets als ``C:\Data\KING\Kern-taken\Imvertor\Imvertor-Maven\src\main\resources\input\KING\props``;
-14.	Herhaal stap 8 t/m 12 voor eventuele andere debug configuraties. 
+14.	Herhaal stap 8 t/m 12 voor eventuele andere debug configuraties. Kopiëren van een bestaande configuratie is overigens ook mogelijk.
