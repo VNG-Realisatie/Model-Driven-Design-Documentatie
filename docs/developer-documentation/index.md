@@ -5,7 +5,7 @@ title: Imvertor technische documentatie
 # Imvertor technische documentatie
 Deze folder bevat technische informatie voor Imvertor developers. Beschrijvingen hoe dingen binnen de Imvertor stylesheets maar ook met de Imvertor configuraties te realiseren.
 Deze documentatie is dus niet bedoelt voor gebruikers van de Imvertor software.
-In https://kinggemeenten.plan.io/svn/stuf-schemagenerator/Documentatie/Technische documentatie/Imvertor technische documentatie.docx staat nog het e.e.a. aan documentatie dat nog hierheen verhuisd moet worden.
+In [de Imvertor technische documentatie op subversion](https://kinggemeenten.plan.io/svn/stuf-schemagenerator/Documentatie/Technische documentatie/Imvertor technische documentatie.docx) staat nog het e.e.a. aan documentatie dat nog hierheen verhuisd moet worden.
 
 ## Inhoudsopgave
 ### 1. [Opzet lokale eclipse omgeving](Configuratie-eclipse-ontwikkel-omgeving.md)
