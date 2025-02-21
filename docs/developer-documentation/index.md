@@ -7,7 +7,7 @@ Deze folder bevat technische informatie voor Imvertor developers. Beschrijvingen
 Deze documentatie is dus niet bedoelt voor gebruikers van de iMvertor software.
 
 ## Inhoudsopgave
-### 1. [Opzet lokale eclipse omgeving](Opzet-eclipse-omgeving.md)
+### 1. [Opzet lokale eclipse omgeving](Configuratie-eclipse-ontwikkel-omgeving.md)
 ### 2. [Omgang met datatypes](Omgang-met-datatypes.md)
 ### 3. [Bepalen van de documentatieteksten](schema-documentatie-generatie)
 Todo
