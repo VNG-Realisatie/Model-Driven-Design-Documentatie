@@ -12,13 +12,14 @@
    * imvertor_work
    * imvertor_output
    en importeer deze eveneens;
-5. Plaats vervolgens nog het bestand 'server.properties' dat je [hier](https://github.com/VNG-Realisatie/Model-Driven-Design-Documentatie/blob/main/docs/bestanden/server.properties) kunt vinden in de root van de folder 'Imvertor-Maven'. Dit bestand mag niet opgenomen worden in GitHub, het is een lokaal bestand met installatie specifieke gegevens. Je kunt er bijv. voor zorgen dat deze door Git ignored wordt;
-6. Installeer evt. andere eclipse plugins zoals de Oxygen Developer of Oxygen Editor plugin. Download die vanaf de Oxygen website (deze of deze). Je hebt daarvoor wel een licentie nodig;
-7. Ga met de rechtermuistoets binnen ‘imvertor-source/src/nl.imvertor’ op ‘ChainTranslateAndReport.java’ staan en selecteer ‘Debug As – Debug Configurations…’ (kan ook door het kevertje in de bovenbalk te kiezen);
-8. Ga met de rechtermuistoets op ‘Java Application’ staan en kies ‘New Configuration’;
-9. Kies een naam voor de Debug configuration (bijv. ‘SIM RUIMTE’);
-10. Ga naar het tabblad ‘Arguments’;
-11.In het veld ‘Program arguments’ kun je vervolgens 2 dingen doen:
+5. Voer in een Shell de opdracht ``mvn validate`` uit. Het kan zijn dat je daarvoor eerst [Maven moet installeren](https://maven.apache.org/install.html);
+6. Plaats vervolgens nog het bestand 'server.properties' dat je [hier](https://github.com/VNG-Realisatie/Model-Driven-Design-Documentatie/blob/main/docs/bestanden/server.properties) kunt vinden in de root van de folder 'Imvertor-Maven'. Dit bestand mag niet opgenomen worden in GitHub, het is een lokaal bestand met installatie specifieke gegevens. Je kunt er bijv. voor zorgen dat deze door Git ignored wordt;
+7. Installeer evt. andere eclipse plugins zoals de Oxygen Developer of Oxygen Editor plugin. Download die vanaf de Oxygen website (deze of deze). Je hebt daarvoor wel een licentie nodig;
+8. Ga met de rechtermuistoets binnen ‘imvertor-source/src/nl.imvertor’ op ‘ChainTranslateAndReport.java’ staan en selecteer ‘Debug As – Debug Configurations…’ (kan ook door het kevertje in de bovenbalk te kiezen);
+9. Ga met de rechtermuistoets op ‘Java Application’ staan en kies ‘New Configuration’;
+10. Kies een naam voor de Debug configuration (bijv. ‘SIM RUIMTE’);
+11. Ga naar het tabblad ‘Arguments’;
+12.In het veld ‘Program arguments’ kun je vervolgens 2 dingen doen:
    * het volgende ingeven:
      
      ```-arguments [locatie-properties-bestand]```
@@ -51,7 +52,7 @@
      ```     
 
      Wijzig indien gewenst de processingmode in de eerste regel en het pad en filenaam in de tweede regel. De waarde van het argumenten ‘application’ is natuurlijk afhankelijk van het gekozen QEA file;
-12.	Vul in het veld ‘VM arguments’ het volgende in:
+13.	Vul in het veld ‘VM arguments’ het volgende in:
      ```
      -Dinstall.dir=C:\Data\KING\Kern-taken\Imvertor\Imvertor\src\main\resources
      -Downer.name=KING
@@ -62,5 +63,5 @@
      ```     
 
      Wijzig indien nodig de paden van de eerste en laatste regel;
-13.	Ga naar het tabblad ‘Environment’ en voeg daar de variabele ‘imvertor_os_basefolder’ toe met als waarde het path naar waar het Excel property bestand staat (waarschijnlijk iets als ``C:\Data\KING\Kern-taken\Imvertor\Imvertor-Maven\src\main\resources\input\KING\props``;
+14.	Ga naar het tabblad ‘Environment’ en voeg daar de variabele ‘imvertor_os_basefolder’ toe met als waarde het path naar waar het Excel property bestand staat (waarschijnlijk iets als ``C:\Data\KING\Kern-taken\Imvertor\Imvertor-Maven\src\main\resources\input\KING\props``;
 14.	Herhaal stap 8 t/m 12 voor eventuele andere debug configuraties. Kopiëren van een bestaande configuratie is overigens ook mogelijk.
