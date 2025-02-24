@@ -3,7 +3,7 @@
 1. Installeer de laatste java versie;
 2. Installeer de laatste versie van eclipse;
 3. Indien je al eerder een eclipse ontwikkelomgeving hebt gehad dan beschik je ergens over de folders
-   * Imverte-Maven
+   * Imvertor-Maven
    * imvertor_work
    * imvertor_output
    Importeer deze alledrie in eclipse waarbij je bij de eerste kiest voor 'Maven - Existing Maven Projects';
