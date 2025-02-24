@@ -12,7 +12,7 @@
    * imvertor_work
    * imvertor_output
    en importeer deze eveneens;
-5. Plaats vervolgens nog het bestand 'server.properties' dat je [hier](https://github.com/VNG-Realisatie/Model-Driven-Design-Documentatie/blob/main/docs/bestanden/server.properties) kunt vinden in de root van de folder 'Imverte-Maven'. Dit bestand mag niet opgenomen worden in GitHub, het is een lokaal bestand met installatie specifieke gegevens. Je kunt er bijv. voor zorgen dat deze door Git ignored wordt;
+5. Plaats vervolgens nog het bestand 'server.properties' dat je [hier](https://github.com/VNG-Realisatie/Model-Driven-Design-Documentatie/blob/main/docs/bestanden/server.properties) kunt vinden in de root van de folder 'Imvertor-Maven'. Dit bestand mag niet opgenomen worden in GitHub, het is een lokaal bestand met installatie specifieke gegevens. Je kunt er bijv. voor zorgen dat deze door Git ignored wordt;
 6. Installeer evt. andere eclipse plugins zoals de Oxygen Developer of Oxygen Editor plugin. Download die vanaf de Oxygen website (deze of deze). Je hebt daarvoor wel een licentie nodig;
 7. Ga met de rechtermuistoets binnen ‘imvertor-source/src/nl.imvertor’ op ‘ChainTranslateAndReport.java’ staan en selecteer ‘Debug As – Debug Configurations…’ (kan ook door het kevertje in de bovenbalk te kiezen);
 8. Ga met de rechtermuistoets op ‘Java Application’ staan en kies ‘New Configuration’;
@@ -53,7 +53,7 @@
      Wijzig indien gewenst de processingmode in de eerste regel en het pad en filenaam in de tweede regel. De waarde van het argumenten ‘application’ is natuurlijk afhankelijk van het gekozen QEA file;
 12.	Vul in het veld ‘VM arguments’ het volgende in:
      ```
-     -Dinstall.dir=C:\Data\KING\Kern-taken\Imvertor\Imvertor-Maven\src\main\resources
+     -Dinstall.dir=C:\Data\KING\Kern-taken\Imvertor\Imvertor\src\main\resources
      -Downer.name=KING
      -Djob.id=KING
      -Dfile.encoding=UTF-8[Uploading server.properties…]()
