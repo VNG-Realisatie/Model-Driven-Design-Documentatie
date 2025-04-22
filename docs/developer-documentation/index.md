@@ -10,11 +10,12 @@ In [de Imvertor technische documentatie op subversion](https://kinggemeenten.pla
 ## Inhoudsopgave
 ### 1. [Opzet lokale eclipse omgeving](Configuratie-eclipse-ontwikkel-omgeving.md)
 ### 2. [Omgang met datatypes](Omgang-met-datatypes.md)
-### 3. [Bepalen van de documentatieteksten](schema-documentatie-generatie)
+### 3. [Creatie en omgang met interface classes](Creatie-en-omgang-met-interface-classes.md)
+### 4. [Bepalen van de documentatieteksten](schema-documentatie-generatie)
 Todo
-### 4. [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-en-parameters)
+### 5. [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-en-parameters)
 Todo
-### 5. [Vaststellen van acceptCRS en contentCRS](Determining-accept- en-contentCRS}
+### 6. [Vaststellen van acceptCRS en contentCRS](Determining-accept- en-contentCRS}
 Todo
-### 6. [Werking van de functie imf:get-most-relevant-compiled-taggedvalue()](get-most-relevant-compiled-taggedvalue)
+### 7. [Werking van de functie imf:get-most-relevant-compiled-taggedvalue()](get-most-relevant-compiled-taggedvalue)
 Todo
