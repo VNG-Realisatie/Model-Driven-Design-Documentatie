@@ -3,11 +3,11 @@ Bij het modelleren kan de behoefte ontstaan bepaalde classes in meerdere modelle
 geval die classes niet in al die modellen opnieuw modelleren maar slechts eenmaal en ze hergebruiken. In dit 
 document beschrijven we hoe je dat kunt realiseren.
 
-Als eerste zul moet je een package creëren in het project (SIM, UGM of BSM) het niveau waarop je de classes wil 
+Als eerste moet je een package creëren in het project (SIM, UGM of BSM) het niveau waarop je de classes wil 
 kunnen hergebruiken. Geef dat package vervolgens het stereotype 'Basismodel'. In dat package plaats je (minimaal) 
-een 'Domein' package waarin je de herbruikbare classes plaatst. Vervolgens definieer je op dat package de volgende
+één 'Domein' package waarin je de herbruikbare classes plaatst. Vervolgens definieer je op dat package de volgende
 tagged values:
-*
+* Release
 *
 
 _**TODO** Check of dit principe ook werkt voor andere componenten dan objecttypes en entiteittypes en ook of het 
