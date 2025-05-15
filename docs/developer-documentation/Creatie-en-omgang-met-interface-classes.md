@@ -12,6 +12,7 @@ tagged values:
 
 _**TODO** Check of dit principe ook werkt voor andere componenten dan objecttypes en entiteittypes en ook of het 
 voor SIM en UGM ook werkt._
+
 _**TODO** In dit document het volgende verwerken. Een intern package moet dezelfde naam moet hebben als het gerelateerde externe package. 
 Echter als je een extern package met Imvertor wil verwerken en het staat in de Project Browser onder het gerelateerde interne package dan mag dat weer niet.
 Het interne package moet dan tijdelijk een andere naam krijgen._
