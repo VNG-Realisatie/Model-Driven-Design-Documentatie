@@ -91,7 +91,7 @@ De huidige interface van imvertor binnen Enterprise Architect biedt geen mogelij
 - comparewith, deze is alleen van toepassing als de parameter 'compare' de waarde 'release' heeft.
 
 Zo worden deze parameters gedefinieerd in het parameter bestand (voorbeeld):
-> compare         = release
+> compare         = release<br/>
 > comparewith  = 20160901
 
 Bewaar dit bestand waar je het later eenvoudig kunt vinden.
