@@ -13,7 +13,7 @@ In [de Imvertor technische documentatie op subversion](https://kinggemeenten.pla
 ### 3. [Creatie en omgang met interface classes](Creatie-en-omgang-met-interface-classes.md)
 ### 4. [Bepalen van de documentatieteksten](schema-documentatie-generatie)
 Todo
-### 5. [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-en-parameters)
+### 5. [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-and-query-parameters)
 Todo
 ### 6. [Vaststellen van acceptCRS en contentCRS](Determining-accept-en-contentCRS)
 Todo
