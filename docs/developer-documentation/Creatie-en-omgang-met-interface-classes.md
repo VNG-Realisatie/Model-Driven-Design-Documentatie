@@ -34,10 +34,10 @@ gerelateerde classes uit het 'Basismodel' package.
 
 Nu kan je in je model die 'Interface' componenten gebruiken i.p.v. de classes die je daar eerst gebruikte.
 
-<span style="color:red"><b>Tip</b> <i>Je kunt dit nog beter beheersbaar maken door ergens een template 'Intern' package aan te maken waarin je
+<b><span style="color:red">Tip</span></b> <i><span style="color:red">Je kunt dit nog beter beheersbaar maken door ergens een template 'Intern' package aan te maken waarin je
 voor alle classes in je 'Basismodel' package een 'Interface' component aanmaakt. Die kan je dan steeds in nieuwe 
 packages kopiëren waarin je hergebruik wil maken van de classes. Zo hoef je het 'Intern' package niet steeds opnieuw 
-aan te maken.</i></span>
+aan te maken.</span></i>
 
 Nu kun je de classes in je 'Basismodel' indien gewenst aanpassen en door achtereenvolgens dat 'Basismodel' package 
 en de modellen met de 'Intern' packages die dat model gebruiken te verwerken met Imvertor kan je je resultaten, bijv. 
