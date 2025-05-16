@@ -1,3 +1,7 @@
+---
+layout: page-with-side-nav
+title: Creatie en omgang met interface classes
+---
 _**TODO** Check of dit principe ook werkt voor andere componenten dan objecttypes en entiteittypes en of het 
 voor SIM en UGM ook werkt._
 
