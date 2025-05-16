@@ -30,7 +30,7 @@ gerelateerde classes uit het 'Basismodel' package.
 
 Nu kan je in je model die 'Interface' componenten gebruiken i.p.v. de classes die je daar eerst gebruikte.
 
-**Tip** _Je kunt dit nog beter beheersbaar maken door ergens een template 'Intern' package aan te maken waarin je
+> **Tip** _Je kunt dit nog beter beheersbaar maken door ergens een template 'Intern' package aan te maken waarin je
 voor alle classes in je 'Basismodel' package een 'Interface' component aanmaakt. Die kan je dan steeds in nieuwe 
 packages kopiëren waarin je hergebruik wil maken van de classes. Zo hoef je het 'Intern' package niet steeds opnieuw 
 aan te maken._
@@ -39,9 +39,7 @@ Nu kun je de classes in je 'Basismodel' indien gewenst aanpassen en door achtere
 en de modellen met de 'Intern' packages die dat model gebruiken te verwerken met Imvertor kan je je resultaten, bijv. 
 OAS specificaties, updaten.
 
-**Aandachtspunt** _Een intern package moet dezelfde naam hebben als het gerelateerde 'Basismodel' package. Als je 
+> **Aandachtspunt** _Een intern package moet dezelfde naam hebben als het gerelateerde 'Basismodel' package. Als je 
 een 'Basismodel' package met Imvertor wil verwerken en het staat in de Project Browser lager dan een 'Intern' package
 met dezelfde naam dan levert dat problemen op. In dat geval zal het 'Intern' package verwerkt worden en het resultaat
 niet als gewenst zijn. Geef in zo'n geval het interne package tijdelijk een andere naam._
-
-## Beheeruitdagingen
