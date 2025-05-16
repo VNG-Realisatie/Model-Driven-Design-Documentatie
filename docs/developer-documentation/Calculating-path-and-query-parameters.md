@@ -36,5 +36,5 @@ In het eerder genoemde stylesheet vindt de vergelijking in de volgende 3 stappen
 * **calculate uri structure**<br/>Zet de tree structure van de Entiteittype class(es) om naar eenzelfde machine leesbare
 vorm;
 * **check uri structure**<br/>De in beide voorgaande stappen verkregen structuren worden met elkaar vergeleken. Daarbij wordt
-wederom een vergelijkbare structuur als in de voorgaande stappen gegenereerd. Hierbij wordt ook bepaald of een parameter een
-query of een path parameter is.
+wederom een vergelijkbare structuur als in de voorgaande stappen gegenereerd. Hierbij wordt ook bepaald welke parameter in
+de structuur uit de tweede stap een path parameter is en welke query parameters zijn.
