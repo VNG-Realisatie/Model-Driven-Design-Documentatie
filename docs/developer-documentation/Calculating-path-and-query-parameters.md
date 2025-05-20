@@ -78,7 +78,7 @@ Een pad als bijv. '/mmm/{mmm-nummer}/nnn/ppp/{ppp-nummer}' wordt daartoe in deze
 </ep:uriStructure>
 ``` 
 
-## Calculate uri structure*
+## Calculate uri structure
 
 Hetzelfde gebeurd eigenlijk met de Entiteittype class(es) van de request tree structure. Een UML structuur als bijv.
 
