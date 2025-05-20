@@ -121,12 +121,18 @@ Wordt hier dus omgezet naar de volgende xml structuur:
 Zoals je ziet staan hier al weer wat meer gegevens in die gebruikt kunnen worden bij het genereren van de parameter 
 definities in de OAS specificatie.
 
+Tijdens het genereren van deze structuur wordt tevens gecheckt of er in de Entiteittype class request tree structure niet een van de volgende fouten voorkomt:
+* op een of meer van de Entiteittype classes in de request tree structure is geen 'tagged value 'Naam in meervoud' gedefinieerd;
+* een van de Entiteittype classes heeft meer dan één association;
+* een van de associations van de Entiteittype classes heeft geen tagged value 'Target rol in meervoud';
+* een van de associations in de Entiteittype class request tree structure creëert een recursieve relatie.
+
 # Check uri structure
 
 De in beide voorgaande stappen verkregen structuren worden in deze stap met elkaar vergeleken. Daarbij wordt
 wederom een vergelijkbare structuur als in de voorgaande stappen gegenereerd. Hierbij wordt ook bepaald welke parameter in
 de structuur uit de tweede stap een path parameter is en welke query parameters zijn. Daardoor is het uiteindelijk ook 
-mogelijk om het juiste dataformaat op de path en query paramaters te defeiniëren.
+mogelijk om het juiste dataformaat op de path en query parameters te definiëren.
 
 Eventuele fouten in de structuren worden hier ook gedetecteerd. Denk daarbij aan:
 * het definiëren van 2 path parameters na elkaar in de naam van de Padtype class zoals `/mmm/{mmm-nummer}/{nnn-nummer}`;
