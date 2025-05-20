@@ -69,7 +69,7 @@ Een pad als bijv. '/mmm/{mmm-nummer}/nnn/ppp/{ppp-nummer}' wordt daartoe in deze
 
 ## Calculate uri structure*
 
-Hetzelfde gebeurd eigenlijk met de tree structure van de Entiteittype class(es). Een UML structuur als bijv.
+Hetzelfde gebeurd eigenlijk met de Entiteittype class(es) van de request tree structure. Een UML structuur als bijv.
 
 <img src="https://github.com/user-attachments/assets/10f21c57-9826-46f9-81ca-aa0f47e826e6" width="230">
 
@@ -129,5 +129,12 @@ de structuur uit de tweede stap een path parameter is en welke query parameters 
 mogelijk om het juiste dataformaat op de path en query paramaters te defeiniëren.
 
 Eventuele fouten in de structuren worden hier ook gedetecteerd. Denk daarbij aan:
-* Het defeiniëren van 2 path parameters na elkaar in de naam van de Padtype class zoals `/mmm/{mmm-nummer}/{nnn-nummer}`;
-* 
+* het definiëren van 2 path parameters na elkaar in de naam van de Padtype class zoals `/mmm/{mmm-nummer}/{nnn-nummer}`;
+* er komen meer resources in de naam van de Padtype class voor dan in Entiteittype classes van de request tree structure;
+* er komt helemaal geen Entiteittype class in de request tree structure voor;
+* de naam van de PadType class eindigd op een '/';
+* de naam van een of meer van de resources in de naam van de PadType class komt niet overeen met een van de namen van de Entiteittype classes van de request tree structure;
+* een property in een van de Entiteittype classes die een path parameter vertegenwoordigd is niet gedefinieerd als een 'id';
+* er is geen property in een Entiteittype class die de in de naam van de PadType class gedefinieerde path parameter vertegenwoordigd;
+
+
