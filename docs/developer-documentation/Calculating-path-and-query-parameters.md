@@ -1,6 +1,6 @@
 ---
 layout: page-with-side-nav
-title: Berekenen van endpoint path en de path-, query-parameters
+title: Berekenen endpoint path, vaststellen path- en query-parameters en analyseren response tree
 ---
 Deze uitleg heeft alleen betrekking op de stylesheets in de YamlCompiler module.
 
@@ -19,11 +19,18 @@ associatie met de naam 'pad' en het stereotype 'Padrelatie';
 responsebody. Het koppelen gebeurt met een associatie met de naam 'request', 'requestbody' of 'response' en het stereotype
 'Entiteitrelatie';
 
-In het kader van dit verhaal is met name de Padtype class en de daarmee een berichttype class gemeen hebbende Entiteittype 
-class welke met een associatie met de naam 'request' aan de berichttype gekoppeld is van belang. Beide classes hebben nl. 
-een relatie. De eerste definieert dus zoals gezegd het pad van een bericht (incl. een evt. path parameter). De tweede 
-definieert de evt. query parameters, de typering daarvan en die van de pad parameter. In enkele gevallen worden de query 
-parameters overigens niet gedefinieerd maar afgeleid. Daarover later meer.
+In het kader van dit verhaal zijn met name de volgende classes van belang:
+1. de Padtype class;
+2. de, daarmee een berichttype class gemeen hebbende, Entiteittype class welke met een associatie met de naam 'request'
+aan de berichttype gekoppeld is;
+4. de, daarmee een berichttype class gemeen hebbende, Entiteittype class welke met een associatie met de naam 'response'
+aan de berichttype gekoppeld is.
+
+De eeste 2 classes hebben een relatie. De eerste definieert zoals al gezegd het pad van een bericht (incl. een evt. path 
+parameter). De tweede definieert de evt. query parameters, de typering daarvan en die van de pad parameter. In enkele 
+gevallen worden de query parameters overigens niet gedefinieerd maar afgeleid. Daarover later meer.
+
+**TODO** He genereren van de afgeleide parameters beschrijven.
 
 Om dit allemaal goed te kunnen doen moet de tree structuur die wordt uitgedrukt in de Padtype class overeenkomen met de tree 
 structuur die wordt gemodelleerd met de eerder genoemde Entiteittype class en de daar weer aan gekoppelde Entiteittype classes.
@@ -37,7 +44,11 @@ In het eerder genoemde stylesheet vindt de vergelijking in de volgende 3 stappen
 vorm;
 * **check uri structure**<br/>De in beide voorgaande stappen verkregen structuren worden met elkaar vergeleken.
 
-In de volgende paragrafen geven we meer uitleg over deze stappen.
+Tenslotte wordt in een 4e stap ook de response tree structure nog geanalyseerd in de stap:
+* **analyze response tree structure**<br/>Op basis van het resultaat van deze stap worden indien nodig ook nog query parameters 
+gegenereerd.
+
+In de volgende paragrafen geven we meer uitleg over deze 4 stappen.
 
 ## Determine uri structure
 
@@ -129,8 +140,7 @@ Tijdens het genereren van deze structuur wordt tevens gecheckt of er in de Entit
 
 # Check uri structure
 
-De in beide voorgaande stappen verkregen structuren worden in deze stap met elkaar vergeleken. Daarbij wordt
-wederom een vergelijkbare structuur als in de voorgaande stappen gegenereerd. Hierbij wordt ook bepaald welke parameter in
+De in beide voorgaande stappen verkregen structuren worden in deze stap met elkaar vergeleken. Hierbij wordt ook bepaald welke parameter in
 de structuur uit de tweede stap een path parameter is en welke query parameters zijn. Daardoor is het uiteindelijk ook 
 mogelijk om het juiste dataformaat op de path en query parameters te definiëren.
 
@@ -142,5 +152,6 @@ Eventuele fouten in de structuren worden hier ook gedetecteerd. Denk daarbij aan
 * de naam van een of meer van de resources in de naam van de PadType class komt niet overeen met een van de namen van de Entiteittype classes van de request tree structure;
 * een property in een van de Entiteittype classes die een path parameter vertegenwoordigd is niet gedefinieerd als een 'id';
 * er is geen property in een Entiteittype class die de in de naam van de PadType class gedefinieerde path parameter vertegenwoordigd;
+* de request tree bevat een of meer Entiteittype classes die geen onderdeel zijn van de naam van de PadType class.
 
-
+Tenslotte wordt wederom een vergelijkbare structuur als in de voorgaande stappen gegenereerd. 
