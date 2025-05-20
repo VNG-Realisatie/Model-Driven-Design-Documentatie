@@ -1,10 +1,10 @@
 ---
 layout: page-with-side-nav
-title: Berekenen endpoint path, vaststellen path- en query-parameters en analyseren response tree
+title: Berekenen endpoint path, vaststellen path- en query-parameters en analyseren response en requestbody tree
 ---
 Deze uitleg heeft alleen betrekking op de stylesheets in de YamlCompiler module.
 
-# Berekenen van endpoint path en de path-, query-parameters
+# Berekenen endpoint path, vaststellen path- en query-parameters en analyseren response en requestbody tree
 
 In een OAS specificatie worden een of meerdere berichten in yaml syntax gedefinieerd. Elk bericht bestaat daarbij uit 
 een header en optioneel een body en/of responsebody. Voor het modelleren van deze structuren gebruiken we een BSM model.
@@ -23,10 +23,10 @@ In het kader van dit verhaal zijn met name de volgende classes van belang:
 1. de Padtype class;
 2. de, daarmee een berichttype class gemeen hebbende, Entiteittype class welke met een associatie met de naam 'request'
 aan de berichttype gekoppeld is;
-4. de, daarmee een berichttype class gemeen hebbende, Entiteittype class welke met een associatie met de naam 'response'
-aan de berichttype gekoppeld is.
+3. de, daarmee een berichttype class gemeen hebbende, Entiteittype class welke met een associatie met de naam 'response'
+of 'requestbody' aan de berichttype gekoppeld is.
 
-De eeste 2 classes hebben een relatie. De eerste definieert zoals al gezegd het pad van een bericht (incl. een evt. path 
+De eerste 2 classes hebben een relatie. De eerste definieert zoals al gezegd het pad van een bericht (incl. een evt. path 
 parameter). De tweede definieert de evt. query parameters, de typering daarvan en die van de pad parameter. In enkele 
 gevallen worden de query parameters overigens niet gedefinieerd maar afgeleid. Daarover later meer.
 
@@ -44,9 +44,10 @@ In het eerder genoemde stylesheet vindt de vergelijking in de volgende 3 stappen
 vorm;
 * **check uri structure**<br/>De in beide voorgaande stappen verkregen structuren worden met elkaar vergeleken.
 
-Tenslotte wordt in een 4e stap ook de response tree structure nog geanalyseerd in de stap:
-* **analyze response tree structure**<br/>Op basis van het resultaat van deze stap worden indien nodig ook nog query parameters 
+Tenslotte wordt in een 4e en 5e stap ook de response en evt. de requestbody tree structure nog geanalyseerd in de stap:
+* **analyze response tree structure**<br/>Op basis van het resultaat van deze stap worden indien nodig header properties 
 gegenereerd.
+* **analyze requestbody structure**<br/>Idem.
 
 In de volgende paragrafen geven we meer uitleg over deze 4 stappen.
 
@@ -132,13 +133,14 @@ Wordt hier dus omgezet naar de volgende xml structuur:
 Zoals je ziet staan hier al weer wat meer gegevens in die gebruikt kunnen worden bij het genereren van de parameter 
 definities in de OAS specificatie.
 
-Tijdens het genereren van deze structuur wordt tevens gecheckt of er in de Entiteittype class request tree structure niet een van de volgende fouten voorkomt:
+Tijdens het genereren van deze structuur wordt tevens gecheckt of er in de Entiteittype class request tree structure niet een van de 
+volgende fouten voorkomt:
 * op een of meer van de Entiteittype classes in de request tree structure is geen 'tagged value 'Naam in meervoud' gedefinieerd;
 * een van de Entiteittype classes heeft meer dan één association;
 * een van de associations van de Entiteittype classes heeft geen tagged value 'Target rol in meervoud';
 * een van de associations in de Entiteittype class request tree structure creëert een recursieve relatie.
 
-# Check uri structure
+## Check uri structure
 
 De in beide voorgaande stappen verkregen structuren worden in deze stap met elkaar vergeleken. Hierbij wordt ook bepaald welke parameter in
 de structuur uit de tweede stap een path parameter is en welke query parameters zijn. Daardoor is het uiteindelijk ook 
@@ -149,9 +151,19 @@ Eventuele fouten in de structuren worden hier ook gedetecteerd. Denk daarbij aan
 * er komen meer resources in de naam van de Padtype class voor dan in Entiteittype classes van de request tree structure;
 * er komt helemaal geen Entiteittype class in de request tree structure voor;
 * de naam van de PadType class eindigd op een '/';
-* de naam van een of meer van de resources in de naam van de PadType class komt niet overeen met een van de namen van de Entiteittype classes van de request tree structure;
+* de naam van een of meer van de resources in de naam van de PadType class komt niet overeen met een van de namen van de Entiteittype
+classes van de request tree structure;
 * een property in een van de Entiteittype classes die een path parameter vertegenwoordigd is niet gedefinieerd als een 'id';
 * er is geen property in een Entiteittype class die de in de naam van de PadType class gedefinieerde path parameter vertegenwoordigd;
 * de request tree bevat een of meer Entiteittype classes die geen onderdeel zijn van de naam van de PadType class.
 
 Tenslotte wordt wederom een vergelijkbare structuur als in de voorgaande stappen gegenereerd. 
+
+## Analyze response en requestbody tree structure
+
+De mogelijke inhoud van het response bericht is van invloed op welke header properties op het bericht gedefinieerd moeten worden.
+Daartoe wordt gecheckt of het response-bericht of, indien van toepassing, de requestbody structure gml element (kan) bevatten. 
+Op basis van die informatie worden de volgende headers gegenereerd:
+* contentCrs
+* acceptCrs
+* 
