@@ -61,6 +61,7 @@ compare releases. Dit is een optionele stap waarvan een gebruiker zelf bepaald o
 Compileer templates en creëer een rapportage over de UML EAP.
 
 ### YamlCompiler
+Deze stap genereert op basis van een BSM model een yaml bestand waarmee de oAS specificatie wordt uitgedrukt. Daarbij worden teven json bestanden gegenereerd in 2 verschillende json formaten.
 
 ### RunAnalyzer
 Analiseer de huidige run.
