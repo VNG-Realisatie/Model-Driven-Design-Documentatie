@@ -24,8 +24,10 @@ Wat doet deze stap nog meer?
 
 ### XmiTranslator
 Deze step verwerkt het lastig te interpreteren XMI formaat naar het eenvoudigere imvertor formaat wat resulteert in het bestand ‘imvertor.01.init.xml’.
-Validator
+
+### Validator
 Deze stap voert een aantal canonicalisatie en validatie slagen uit op het resultaat van de voorgaande stap. Welke canonicalisatie en validaties worden uitgevoerd is deels afhankelijk van de organisatie.
+
 ### ReadmeAnalyzer
 
 ### ImvertCompiler
