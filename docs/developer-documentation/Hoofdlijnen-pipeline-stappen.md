@@ -29,7 +29,7 @@ Voor VNG Realisatie zijn op dit moment de volgende achtereenvolgens te doorlopen
 *	ReadmeCompiler
 *	ReleaseCompiler
 
-De functie van elke step wordt in de volgende paragraaf beschreven.
+De functie van elke step wordt hieronder in het kort beschreven.
 
 ## Steps
 **XmiCompiler:**
@@ -70,7 +70,7 @@ Analiseer de huidige run.
 Deze step wordt altijd gedraaid. Het pakt alle fragmenten en de status informatie in parms.xml en genereert documentatie.
 
 **ReadmeCompiler:**
-Een readme bevstand voorziet in toegang tot de gegenereerde documentatie, json en de yaml bestanden.
+Een readme bestand voorziet in toegang tot de gegenereerde documentatie, json en de yaml bestanden.
 
 **ReleaseCompiler:**
 Verwerkt tenslotte de release zowel als de ZIP release.
