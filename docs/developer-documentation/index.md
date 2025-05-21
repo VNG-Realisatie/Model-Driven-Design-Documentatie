@@ -3,7 +3,7 @@ layout: page-with-side-nav
 title: Imvertor technische documentatie
 ---
 # Imvertor technische documentatie
-Deze folder bevat technische informatie voor Imvertor developers. Beschrijvingen hoe dingen binnen de Imvertor stylesheets maar ook met de Imvertor configuraties te realiseren.
+Deze folder bevat technische informatie voor Imvertor developers. Beschrijvingen hoe dingen binnen de Imvertor stylesheets en met de Imvertor configuraties te realiseren zijn maar ook hoe dingen al gerealiseerd zijn in de Imvertor stylesheets.
 Deze documentatie is dus niet bedoelt voor gebruikers van de Imvertor software.
 In [de Imvertor technische documentatie op subversion](https://kinggemeenten.plan.io/svn/stuf-schemagenerator/Documentatie/Technische%20documentatie/Imvertor%20technische%20documentatie.docx) staat nog het e.e.a. aan documentatie dat nog hierheen verhuisd moet worden.
 
