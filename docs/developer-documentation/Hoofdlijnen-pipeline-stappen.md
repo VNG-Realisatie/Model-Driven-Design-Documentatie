@@ -29,7 +29,7 @@ Voor VNG Realisatie zijn op dit moment de volgende achtereenvolgens te doorlopen
 *	ReadmeCompiler
 *	ReleaseCompiler
 
-De functie van elke step wordt hieronder in het kort beschreven.
+De functie van elke step wordt in de volgende paragraaf in het kort beschreven.
 
 ## Steps
 **XmiCompiler:**
