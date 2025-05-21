@@ -157,7 +157,14 @@ classes van de request tree structure;
 * er is geen property in een Entiteittype class die de in de naam van de PadType class gedefinieerde path parameter vertegenwoordigd;
 * de request tree bevat een of meer Entiteittype classes die geen onderdeel zijn van de naam van de PadType class.
 
-Tenslotte wordt wederom een vergelijkbare structuur als in de voorgaande stappen gegenereerd. 
+Tenslotte wordt wederom een vergelijkbare structuur als in de voorgaande stappen gegenereerd. Op basis daarvan wordt weer bepaald of:
+* een 'expand' parameter mag worden aangemaakt;
+* een 'page' parameter mag worden aangemaakt;
+* een 'pagesize' parameter mag worden aangemaakt;
+* een 'sort' parameter mag worden aangemaakt;
+* een 'fields' parameter mag worden aangemaakt.
+
+en hoe de definitie van '200' response er uit moet zien.
 
 ## Analyze response en requestbody tree structure
 
