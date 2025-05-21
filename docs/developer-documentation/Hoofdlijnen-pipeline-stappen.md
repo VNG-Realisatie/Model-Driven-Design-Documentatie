@@ -76,4 +76,8 @@ Een readme bevstand voorziet in toegang tot de gegenereerde documentatie, json e
 Verwerkt tenslotte de release zowel als de ZIP release.
 
 ## Vormen van variabelen en configuratie
-
+Zoals al uit het de voorgaande paragraaf blijkt zijn er diverse bestanden met configuratie items waarmee de werking van Imvertor beïnvloed kan worden.
+We kennen de volgende:
+* de 'parms.xml' bestanden per Java stap;
+* het command line properties bestand. Voor VNG Realisatie is dat 'src\main\resources\input\KING\props\KING.xlsx';
+* 
