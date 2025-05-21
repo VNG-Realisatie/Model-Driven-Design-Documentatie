@@ -47,7 +47,7 @@ vorm;
 Tenslotte wordt in een 4e en 5e stap ook de response en evt. de requestbody tree structure nog geanalyseerd in de stap:
 * **analyze response tree structure**<br/>Op basis van het resultaat van deze stap worden indien nodig header properties 
 gegenereerd.
-* **analyze requestbody structure**<br/>Idem.
+* **analyze requestbody structure**<br/>Idem. Is alleen van toepassing op een POST, PATCH en PUT message.
 
 In de volgende paragrafen geven we meer uitleg over deze 4 stappen.
 
@@ -161,9 +161,11 @@ Tenslotte wordt wederom een vergelijkbare structuur als in de voorgaande stappen
 
 ## Analyze response en requestbody tree structure
 
-De mogelijke inhoud van het response bericht is van invloed op welke header properties op het bericht gedefinieerd moeten worden.
-Daartoe wordt gecheckt of het response-bericht of, indien van toepassing, de requestbody structure gml element (kan) bevatten. 
-Op basis van die informatie worden de volgende headers gegenereerd:
-* contentCrs
-* acceptCrs
-* 
+De mogelijke inhoud van het response bericht is van invloed op het wel of niet definiëren van enkele header parameters op het bericht.
+Zo moet, in het geval van een POST, PATCH en PUT bericht en als de requestbody structure geo (gml) informatie bevat, de header parameter 
+'contentCRS' gegenereerd worden. Een 'acceptCRS' header parameter moet, in het geval van een GET bericht en als de response structure 
+geo (gml) informatie bevat, worden gegenereerd. En ook in een '201' response op een POST, PATCH en PUT bericht moet de header parameter 
+'acceptCRS' gegenereerd worden.
+
+Hiertoe worden in de stappen 'Analyze response structure' en 'Analyze requestbody structure' de 'Entiteittype' classes van die structuren 
+gecheckt op properties waaraan als type een gml datatype is toegekend.
