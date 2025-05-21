@@ -14,7 +14,6 @@ In [de Imvertor technische documentatie op subversion](https://kinggemeenten.pla
 ### 4. [Bepalen van de documentatieteksten](schema-documentatie-generatie)
 Todo
 ### 5. [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-and-query-parameters)
-### 6. [Vaststellen van acceptCRS en contentCRS](Determining-accept-en-contentCRS#analyze-response-en-requestbody-tree-structure)
-Todo
+### 6. [Vaststellen van acceptCRS en contentCRS](Calculating-path-and-query-parameters#analyze-response-en-requestbody-tree-structure)
 ### 7. [Werking van de functie imf:get-most-relevant-compiled-taggedvalue()](get-most-relevant-compiled-taggedvalue)
 Todo
