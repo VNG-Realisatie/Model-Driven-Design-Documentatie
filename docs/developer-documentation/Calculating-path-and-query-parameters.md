@@ -166,7 +166,7 @@ Tenslotte wordt wederom een vergelijkbare structuur als in de voorgaande stappen
 
 en hoe de definitie van '200' response er uit moet zien.
 
-## Analyze response en requestbody tree structure
+## Analyze response en requestbody tree structure (contentCRS en acceptCRS)
 
 De mogelijke inhoud van het response bericht is van invloed op het wel of niet definiëren van enkele header parameters op het bericht.
 Zo moet, in het geval van een POST, PATCH en PUT bericht en als de requestbody structure geo (gml) informatie bevat, de header parameter 
