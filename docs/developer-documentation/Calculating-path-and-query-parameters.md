@@ -157,7 +157,7 @@ classes van de request tree structure;
 * er is geen property in een Entiteittype class die de in de naam van de PadType class gedefinieerde path parameter vertegenwoordigd;
 * de request tree bevat een of meer Entiteittype classes die geen onderdeel zijn van de naam van de PadType class.
 
-Tenslotte wordt wederom een vergelijkbare structuur als in de voorgaande stappen gegenereerd. Op basis daarvan wordt weer bepaald of:
+Tenslotte wordt wederom een vergelijkbare structuur als in de voorgaande stappen gegenereerd. Op basis waarvan weer wordt bepaald of:
 * een 'expand' parameter mag worden aangemaakt;
 * een 'page' parameter mag worden aangemaakt;
 * een 'pagesize' parameter mag worden aangemaakt;
