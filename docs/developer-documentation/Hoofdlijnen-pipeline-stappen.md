@@ -1,22 +1,32 @@
 #  Pipeline stappen op hoofdlijnen
-Imvertor is in wezen een pipeline applicatie die bestaat uit een aantal elkaar opvolgende steps en waarin de output van de ene step de input is van de andere step. In de Imvertor configuratie van VNG Realisatie onderscheiden we de volgende achtereenvolgens te doorlopen stappen:
+Imvertor is in wezen een Java pipeline applicatie die bestaat uit een aantal elkaar opvolgende stappen en waarin de output 
+van de ene stap de input is van de andere stap. Elke stap wordt gecontroleerd door een Java class. Daarbinnen kan sprake 
+zijn van een of meer sub-stappen waarmee aangegeven wordt welk input bestand met welk stylesheet tot welk output bestand 
+wordt verwerkt. In plaats van die informatie hard in de java code te coderen gebeurd dat met variabelen. Een in de Java 
+class voorkomende variabale wordt m.b.v. properties geconfigureerd in een gerelateerd 'parms.xml' bestand.
+
+Met de Java class 'ChainTranslateAndReport.java' wordt weer bepaald welke stappen worden uitgevoerd. Sommige stappen moeten 
+sowieso worden uitgevoerd maar voor andere stappen wordt dat bepaald met command line properties welke per organisatie zijn 
+geconfigureerd. Voor VNG Realisatie gebeurd dat in het bestand 'src\main\resources\input\KING\props\KING.xlsx'.
+
+Voor VNG Realisatie zijn op dit moment de volgende achtereenvolgens te doorlopen stappen geconfigureerd:
 *	XmiCompiler
+*	ConfigCompiler
 *	XmiTranslator
 *	Validator
-*	ReadmeAnalyzer
+*	ApcModifier
+*	ModelHistoryAnalyzer
 *	ImvertCompiler
-*	XsdCompiler
-*	ReleaseComparer
-*	SchemaValidator
-*	OfficeCompiler
-*	ComplyCompiler
+*	ReleaseComparer (optioneel)
+*	EapCompiler
+*	YamlCompiler
 *	RunAnalyzer
 *	Reporter
 *	ReadmeCompiler
 *	ReleaseCompiler
-*	YamlCompiler
-*	
+
 De functie van elke step wordt in de volgende paragraaf beschreven.
+
 ## Steps
 ### XmiCompiler
 Deze stap verzorgt wat voorbereidende stappen. Zo checkt het o.a. of het EA bestand wel de gewenste applicatie bevat.
@@ -51,3 +61,6 @@ Deze stap voert een aantal canonicalisatie en validatie slagen uit op het result
 ### ReleaseCompiler
 
 ### YamlCompiler
+
+## Variabelen en configuratie
+
