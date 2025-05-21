@@ -9,11 +9,14 @@ In [de Imvertor technische documentatie op subversion](https://kinggemeenten.pla
 
 ## Inhoudsopgave
 ### 1. [Opzet lokale eclipse omgeving](Configuratie-eclipse-ontwikkel-omgeving.md)
-### 2. [Omgang met datatypes](Omgang-met-datatypes.md)
-### 3. [Creatie en omgang met interface classes](Creatie-en-omgang-met-interface-classes.md)
+### 2. [Pipeline stappen op hoofdlijnen](Hoofdlijnen-pipeline-stappen.md)
+### 3. [Omgang met datatypes](Omgang-met-datatypes.md)
 ### 4. [Bepalen van de documentatieteksten](schema-documentatie-generatie)
 Todo
 ### 5. [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-and-query-parameters)
 ### 6. [Vaststellen van acceptCRS en contentCRS header parameters](Calculating-path-and-query-parameters#analyze-response-en-requestbody-tree-structure)
 ### 7. [Werking van de functie imf:get-most-relevant-compiled-taggedvalue()](get-most-relevant-compiled-taggedvalue)
 Todo
+
+Volgende hoofdstuk moet wellicht overgezet worden naar de 'Model Driven Design documentatie'
+### 8. [Creatie en omgang met interface classes](Creatie-en-omgang-met-interface-classes.md)
