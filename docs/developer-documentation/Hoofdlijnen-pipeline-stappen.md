@@ -32,47 +32,47 @@ Voor VNG Realisatie zijn op dit moment de volgende achtereenvolgens te doorlopen
 De functie van elke step wordt in de volgende paragraaf beschreven.
 
 ## Steps
-### XmiCompiler
+**XmiCompiler:**
 Deze stap verzorgt wat voorbereidende stappen. Zo checkt het o.a. of het EA bestand wel de gewenste applicatie bevat.
 Wat doet deze stap nog meer?
 
-### ConfigCompiler
+**ConfigCompiler:**
 De werking van Imvertor wordt sterk gedreven door de configuratie. Hier wordt het complete configuratiebestand opgebouwd.
 
-### XmiTranslator
+**XmiTranslator:**
 Deze step verwerkt het lastig te interpreteren XMI formaat naar het eenvoudigere imvertor formaat wat resulteert in het bestand ‘imvertor.01.init.xml’.
 
-### Validator
+**Validator:**
 Deze stap voert een aantal canonicalisatie en validatie slagen uit op het resultaat van de voorgaande stap. Welke canonicalisatie en validaties worden uitgevoerd is deels afhankelijk van de organisatie.
 
-### ApcModifier
+**ApcModifier:**
 Voeg informatie toe aan het Imvertor bestand welke specifiek is voor bepaalde verwerkingsrun.
 
-### ModelHistoryAnalyzer
+**ModelHistoryAnalyzer:**
 In deze stap wordt de status van de voorgaande release van het in bewerking zijnde model geanalyseerd.
 
-### ImvertCompiler
+**ImvertCompiler:**
 Compileer een uiteindelijke representatie van het input bestand t.b.v. schema generatie.
 
-### ReleaseComparer
+**ReleaseComparer:**
 compare releases. Dit is een optionele stap waarvan een gebruiker zelf bepaald of deze moet gan lopen.
 
-### EapCompiler
+**EapCompiler:**
 Compileer templates en creëer een rapportage over de UML EAP.
 
-### YamlCompiler
+**YamlCompiler:**
 Deze stap genereert op basis van een BSM model een yaml bestand waarmee de oAS specificatie wordt uitgedrukt. Daarbij worden teven json bestanden gegenereerd in 2 verschillende json formaten.
 
-### RunAnalyzer
+**RunAnalyzer:**
 Analiseer de huidige run.
 
-### Reporter
+**Reporter:**
 Deze step wordt altijd gedraaid. Het pakt alle fragmenten en de status informatie in parms.xml en genereert documentatie.
 
-### ReadmeCompiler
+**ReadmeCompiler:**
 Een readme bevstand voorziet in toegang tot de gegenereerde documentatie, json en de yaml bestanden.
 
-### ReleaseCompiler
+**ReleaseCompiler:**
 Verwerkt tenslotte de release zowel als de ZIP release.
 
 ## Vormen van variabelen en configuratie
