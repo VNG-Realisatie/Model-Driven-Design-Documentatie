@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: landing-page
 title: Configuratie eclipse ontwikkelomgeving
 ---
 Terug naar de [inhoudsopgave](index),
