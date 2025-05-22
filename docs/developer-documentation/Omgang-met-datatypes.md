@@ -2,6 +2,8 @@
 layout: page-with-side-nav
 title: Omgang met datatypes
 ---
+Terug naar de [inhoudsopgave](index),
+
 # Omgang met datatypes
 In dit hoofdstuk leggen we het verschil tussen de verschillende datatypes uit, geven we een toelichting op de wijze waarop XSLT stylesheets hiermee omgaan en geven 
 we voor alle soorten aan hoe je nieuwe datatypes kunt toevoegen. Op basis daarvan moet je ook in staat zijn een lokaal datatype te promoveren tot een generiek dadatype.
