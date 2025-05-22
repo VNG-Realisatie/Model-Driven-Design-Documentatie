@@ -76,20 +76,23 @@ Een readme bestand voorziet in toegang tot de gegenereerde documentatie, json en
 Verwerkt tenslotte de release zowel als de ZIP release.
 
 ## Vormen van variabelen en configuratie
-Zoals al uit het de voorgaande paragraaf blijkt zijn er diverse bestanden met configuratie items waarmee de werking van Imvertor beïnvloed kan worden.
-We kennen de volgende:
-* de 'parms.xml' bestanden per Java stap;
-* het command line properties bestand. Voor VNG Realisatie is dat 'src\main\resources\input\KING\props\KING.xlsx';
-* configuraties voor:
+Zoals al uit het de voorgaande paragraaf blijkt zijn er diverse bestanden met variabelen en configuratie items waarmee de werking van Imvertor beïnvloed kan worden.
+Hieronder behandelen we deze kort.
+**de parameter ('parms.xml') bestanden voor de Java classes**
+
+**het command line properties bestand (voor VNG Realisatie 'src\main\resources\input\KING\props\KING.xlsx')**
+
+**diverse configuraties**
   - comparerules;
-  - docrules
-  - translationrules
-  - metamodels
-  - notesrules
-  - owners
-  - schemarules
-  - shaclrules
-  - tvsets
-  - versionrules
-  - visuals 
-* conceptual schema constructs;
+  - docrules;
+  - translationrules;
+  - metamodels;
+  - notesrules;
+  - owners;
+  - schemarules;
+  - shaclrules;
+  - tvsets;
+  - versionrules;
+  - visuals.
+**conceptual schema constructs.**
+Voor de verwerking verwijs ik naar de paragraaf die daarover gaat op de [pagina over datatypes](../Omgang-met-datatypes.html#conceptual-schemas).
