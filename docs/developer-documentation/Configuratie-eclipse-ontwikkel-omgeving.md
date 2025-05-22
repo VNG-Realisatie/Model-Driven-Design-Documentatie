@@ -1,3 +1,7 @@
+---
+layout: page-with-side-nav
+title: Configuratie eclipse ontwikkelomgeving
+---
 Terug naar de [inhoudsopgave](index),
 
 # Configuratie eclipse ontwikkelomgeving
