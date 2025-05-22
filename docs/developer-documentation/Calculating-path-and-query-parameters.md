@@ -2,6 +2,8 @@
 layout: page-with-side-nav
 title: Berekenen endpoint path, vaststellen path- en query-parameters en analyseren response en requestbody tree
 ---
+Terug naar de [inhoudsopgave](index),
+
 Deze uitleg heeft alleen betrekking op de stylesheets in de YamlCompiler module.
 
 # Berekenen endpoint path, vaststellen path- en query-parameters en analyseren response en requestbody tree
