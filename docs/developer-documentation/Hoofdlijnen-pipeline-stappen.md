@@ -36,10 +36,13 @@ De functie van elke step wordt in de volgende paragraaf in het kort beschreven.
 ## Steps
 **XmiCompiler:**<br/>
 Deze stap verzorgt wat voorbereidende verwerkingen. Zo checkt het o.a. of het EA bestand wel de gewenste applicatie bevat.
-Wat doet deze stap nog meer?
+
+*Wat doet deze stap nog meer?*
 
 **ConfigCompiler:**<br/>
 De werking van Imvertor wordt sterk gedreven door de configuratie. Hier wordt het complete configuratiebestand opgebouwd.
+
+*Aan welke configuraties moet ik hierbij denken?*
 
 **XmiTranslator:**<br/>
 Deze step verwerkt het lastig te interpreteren XMI formaat naar het eenvoudigere imvertor formaat wat resulteert in het bestand ‘imvertor.01.init.xml’.
