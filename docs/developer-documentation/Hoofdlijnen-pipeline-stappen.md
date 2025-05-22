@@ -94,5 +94,6 @@ Hieronder behandelen we deze kort.
   - tvsets;
   - versionrules;
   - visuals.
+
 **conceptual schema constructs.**
 Voor de verwerking verwijs ik naar de paragraaf die daarover gaat op de [pagina over datatypes](../Omgang-met-datatypes.html#conceptual-schemas).
