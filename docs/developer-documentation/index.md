@@ -8,15 +8,17 @@ Deze documentatie is dus niet bedoelt voor gebruikers van de Imvertor software.
 In [de Imvertor technische documentatie op subversion](https://kinggemeenten.plan.io/svn/stuf-schemagenerator/Documentatie/Technische%20documentatie/Imvertor%20technische%20documentatie.docx) staat nog het e.e.a. aan documentatie dat nog hierheen verhuisd moet worden.
 
 ## Inhoudsopgave
-### 1. [Opzet lokale eclipse omgeving](Configuratie-eclipse-ontwikkel-omgeving.md)
-### 2. [Pipeline stappen op hoofdlijnen](Hoofdlijnen-pipeline-stappen.md)
-### 3. [Omgang met datatypes](Omgang-met-datatypes.md)
-### 4. [Bepalen van de documentatieteksten](schema-documentatie-generatie)
-Todo
-### 5. [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-and-query-parameters)
-### 6. [Vaststellen van acceptCRS en contentCRS header parameters](Calculating-path-and-query-parameters#analyze-response-en-requestbody-tree-structure)
-### 7. [Werking van de functie imf:get-most-relevant-compiled-taggedvalue()](get-most-relevant-compiled-taggedvalue)
-Todo
+### 1. Ontwikkelomgeving
+**1.1 [Opzet lokale eclipse omgeving](Configuratie-eclipse-ontwikkel-omgeving.md)**
 
-Volgende hoofdstuk moet wellicht overgezet worden naar de 'Model Driven Design documentatie'
-### 8. [Creatie en omgang met interface classes](Creatie-en-omgang-met-interface-classes.md)
+### 2. Toegepaste en toe te passen technieken
+**2.1 [Pipeline stappen op hoofdlijnen](Hoofdlijnen-pipeline-stappen.md)**<br/>
+**2.2 [Omgang met datatypes](Omgang-met-datatypes.md)**<br/>
+**2.3 [Bepalen van de documentatieteksten](schema-documentatie-generatie)** Todo<br/>
+**2.4 [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-and-query-parameters)**<br/>
+**2.5 [Vaststellen van acceptCRS en contentCRS header parameters](Calculating-path-and-query-parameters#analyze-response-en-requestbody-tree-structure)**<br/>
+**2.6 [Werking van de functie imf:get-most-relevant-compiled-taggedvalue()](get-most-relevant-compiled-taggedvalue)** Todo
+
+### 3. Wetenswaardigheden
+Volgende hoofdstuk wellicht overzetten naar de 'Model Driven Design documentatie'<br/>
+**3.1. [Creatie en omgang met interface classes](Creatie-en-omgang-met-interface-classes.md)**
