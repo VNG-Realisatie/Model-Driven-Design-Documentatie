@@ -33,7 +33,7 @@ De functie van elke step wordt in de volgende paragraaf in het kort beschreven.
 
 ## Steps
 **XmiCompiler:**<br/>
-Deze stap verzorgt wat voorbereidende stappen. Zo checkt het o.a. of het EA bestand wel de gewenste applicatie bevat.
+Deze stap verzorgt wat voorbereidende verwerkingen. Zo checkt het o.a. of het EA bestand wel de gewenste applicatie bevat.
 Wat doet deze stap nog meer?
 
 **ConfigCompiler:**<br/>
@@ -43,7 +43,7 @@ De werking van Imvertor wordt sterk gedreven door de configuratie. Hier wordt he
 Deze step verwerkt het lastig te interpreteren XMI formaat naar het eenvoudigere imvertor formaat wat resulteert in het bestand ‘imvertor.01.init.xml’.
 
 **Validator:**<br/>
-Deze stap voert een aantal canonicalisatie en validatie slagen uit op het resultaat van de voorgaande stap. Welke canonicalisatie en validaties worden uitgevoerd is deels afhankelijk van de organisatie.
+Deze stap voert een aantal canonicalisatie en validatie slagen uit op het resultaat van de voorgaande stap. Welke canonicalisatie en validaties worden uitgevoerd is deels afhankelijk van de organisatie die gebruik maakt van Imvertor..
 
 **ApcModifier:**<br/>
 Voeg informatie toe aan het Imvertor bestand welke specifiek is voor bepaalde verwerkingsrun.
@@ -80,4 +80,16 @@ Zoals al uit het de voorgaande paragraaf blijkt zijn er diverse bestanden met co
 We kennen de volgende:
 * de 'parms.xml' bestanden per Java stap;
 * het command line properties bestand. Voor VNG Realisatie is dat 'src\main\resources\input\KING\props\KING.xlsx';
-* 
+* configuraties voor:
+  - comparerules;
+  - docrules
+  - translationrules
+  - metamodels
+  - notesrules
+  - owners
+  - schemarules
+  - shaclrules
+  - tvsets
+  - versionrules
+  - visuals 
+* conceptual schema constructs;
