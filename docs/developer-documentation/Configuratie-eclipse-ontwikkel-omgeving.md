@@ -1,3 +1,5 @@
+Terug naar de [inhoudsopgave](index),
+
 # Configuratie eclipse ontwikkelomgeving
 
 1. Installeer de laatste java versie;
