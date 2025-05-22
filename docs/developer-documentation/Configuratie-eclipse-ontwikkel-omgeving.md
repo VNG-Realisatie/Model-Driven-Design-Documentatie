@@ -1,5 +1,5 @@
 ---
-layout: page-with-side-nav
+layout: page
 title: Configuratie eclipse ontwikkelomgeving
 ---
 Terug naar de [inhoudsopgave](index),
