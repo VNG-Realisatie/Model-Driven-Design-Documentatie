@@ -16,7 +16,7 @@ In [de Imvertor technische documentatie op subversion](https://kinggemeenten.pla
 **2.2 [Omgang met datatypes](Omgang-met-datatypes.md)**<br/>
 **2.3 [Werking van de functie imf:get-most-relevant-compiled-taggedvalue()](get-most-relevant-compiled-taggedvalue)** Todo
 
-### 3. In YamlCompiler toegepaste en toe te passen technieken
+### 3. In YamlCompiler toegepaste technieken
 **3.1 [Bepalen van de documentatieteksten](schema-documentatie-generatie)** Todo<br/>
 **3.2 [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-and-query-parameters)**<br/>
 **3.3 [Vaststellen van acceptCRS en contentCRS header parameters](Calculating-path-and-query-parameters#analyze-response-en-requestbody-tree-structure)**<br/>
