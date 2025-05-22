@@ -2,7 +2,7 @@
 layout: page-with-side-nav
 title: Pipeline stappen op hoofdlijnen
 ---
-Terug naar de [inhoudsopgave](../index),
+Terug naar de [inhoudsopgave](index),
 
 #  Pipeline stappen op hoofdlijnen
 Imvertor is in wezen een Java pipeline applicatie die bestaat uit een aantal elkaar opvolgende stappen en waarin de output 
