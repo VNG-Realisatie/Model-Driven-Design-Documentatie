@@ -80,13 +80,20 @@ Zoals al uit het de voorgaande paragraaf blijkt zijn er diverse bestanden met va
 Hieronder behandelen we deze kort.
 
 ### Parameter bestanden voor de Java classes
-De Java classes (in 'src\main\java\nl\imvertor') zijn in principe op dezelfde wijze georganiseerd als de xslt stylesheets (in 'src\main\resources\xsl'), per Imvertor module. De classes zijn gelardeerd met variabelen welke in de parameter bestanden (in 'src\main\resources\cfg') worden gedeclareerd. Ook deze zijn op dezelfde wijze georganiseerd als de xslt stylesheets. Elke Java class heeft over het algemeen dus zijn eigen parameter bestand ('parms.xml'). Deze parameter bestanden zijn voor elke organisatie gelijk. In de Java classes kunnen echter takken voorkomen die specifiek voor een organisatie geldt. In dat geval kunnen daar specifieke variabelen in gebruik zijn welke dan dus in de parameter bestanden zijn gedeclareerd. Geen parameter bestanden per organisatie dus maar evt. wel specifieke variabelen per organisatie.
+De Java classes (in 'src\main\java\nl\imvertor') zijn in principe op dezelfde wijze georganiseerd als de xslt stylesheets (in 'src\main\resources\xsl'), per Imvertor module. Elke module komt grofweg overeen met een Imvertor stap. De classes zijn gelardeerd met variabelen welke in de parameter bestanden (in 'src\main\resources\cfg') worden gedeclareerd. Ook deze zijn op dezelfde wijze georganiseerd als de xslt stylesheets. Elke Java class heeft over het algemeen dus zijn eigen parameter bestand ('parms.xml'). Deze parameter bestanden zijn voor elke organisatie gelijk. In de Java classes kunnen echter takken voorkomen die specifiek voor een organisatie geldt. In dat geval kunnen daar specifieke variabelen in gebruik zijn welke dan dus in de parameter bestanden zijn gedeclareerd. Geen parameter bestanden per organisatie dus maar evt. wel specifieke variabelen per organisatie.
 
 ### Command line properties bestand 
 Elke organisatie heeft zijn eigen Command line property bestand (in 'src\main\resources\input\KING\props'). Dat kunnen tekst bestanden zijn ('*.properties) maar steeds vaker ook Excel spreadsheets. Voor VNG Realisatie is dat laatste het geval ('src\main\resources\input\KING\props\KING.xlsx').
 
 In deze bestanden wordt per Imvertor verwerkingstype de waarde van de properties gedefinieerd, waarden die gelden voor alle gebruikers van de betreffende organisatie. Een gebruiker kan deze waarden echter wel overrulen door bij de verwerking een eigen '*.properties' bestand mee te geven waarin de afwijkingen t.o.v. de Command line property bestand zijn gedefinieerd.
 Zo kan deze bijv. aangeven dat voor de verwerking van een specifiek model Respec documentatie moet worden gegenereerd of een compare moet worden uitgevoerd.
+
+De Command line properties zijn in de xslt stylesheets vaak te herkennen aan de mnemonic 'cli', zoals bijv. in de volgende regel code
+
+```jsn
+if (succeeds && configurator.isTrue("cli","createjsonschema",false)) {
+```
+'createjsonschema' is in dit geval de specifieke command line property.
 
 ### Diverse configuraties
   - comparerules;
