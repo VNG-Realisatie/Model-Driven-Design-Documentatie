@@ -19,7 +19,7 @@ In [de Imvertor technische documentatie op subversion](https://kinggemeenten.pla
 ### 3. In YamlCompiler toegepaste technieken
 **3.1 [Bepalen van de documentatieteksten](schema-documentatie-generatie)** Todo<br/>
 **3.2 [Berekenen van endpoint path en de path-, query-parameters](Calculating-path-and-query-parameters)**<br/>
-**3.3 [Vaststellen van acceptCRS en contentCRS header parameters](Calculating-path-and-query-parameters/#analyze-response-en-requestbody-tree-structure)**<br/>
+**3.3 [Vaststellen van acceptCRS en contentCRS header parameters](https://vng-realisatie.github.io/Model-Driven-Design-Documentatie/developer-documentation/Calculating-path-and-query-parameters#analyze-response-en-requestbody-tree-structure-contentcrs-en-acceptcrs)**<br/>
 
 ### 4. Wetenswaardigheden
 Volgende hoofdstuk wellicht overzetten naar de 'Model Driven Design documentatie'<br/>
