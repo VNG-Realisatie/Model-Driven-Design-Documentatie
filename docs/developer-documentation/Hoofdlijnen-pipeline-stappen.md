@@ -45,10 +45,12 @@ De werking van Imvertor wordt sterk gedreven door de configuratie. Hier wordt he
 *Aan welke configuraties moet ik hierbij denken?*
 
 **XmiTranslator:**<br/>
-Deze step verwerkt het lastig te interpreteren XMI formaat naar het eenvoudigere imvertor formaat wat resulteert in het bestand ‘imvertor.01.init.xml’.
+Deze step verwerkt het lastig te interpreteren XMI formaat naar het eenvoudigere imvertor formaat wat resulteert in het 
+bestand ‘imvertor.01.init.xml’.
 
 **Validator:**<br/>
-Deze stap voert een aantal canonicalisatie en validatie slagen uit op het resultaat van de voorgaande stap. Welke canonicalisatie en validaties worden uitgevoerd is deels afhankelijk van de organisatie die gebruik maakt van Imvertor..
+Deze stap voert een aantal canonicalisatie en validatie slagen uit op het resultaat van de voorgaande stap. Welke 
+canonicalisatie en validaties worden uitgevoerd is deels afhankelijk van de organisatie die gebruik maakt van Imvertor..
 
 **ApcModifier:**<br/>
 Voeg informatie toe aan het Imvertor bestand welke specifiek is voor bepaalde verwerkingsrun.
@@ -66,7 +68,8 @@ compare releases. Dit is een optionele stap waarvan een gebruiker zelf bepaald o
 Compileer templates en creëer een rapportage over de UML EAP.
 
 **YamlCompiler:**<br/>
-Deze stap genereert op basis van een BSM model een yaml bestand waarmee de oAS specificatie wordt uitgedrukt. Daarbij worden teven json bestanden gegenereerd in 2 verschillende json formaten.
+Deze stap genereert op basis van een BSM model een yaml bestand waarmee de oAS specificatie wordt uitgedrukt. Daarbij 
+worden teven json bestanden gegenereerd in 2 verschillende json formaten.
 
 **RunAnalyzer:**<br/>
 Analiseer de huidige run.
@@ -81,17 +84,29 @@ Een readme bestand voorziet in toegang tot de gegenereerde documentatie, json en
 Verwerkt tenslotte de release zowel als de ZIP release.
 
 ## Vormen van variabelen en configuratie
-Zoals al uit het de voorgaande paragraaf blijkt zijn er diverse bestanden met variabelen en configuratie items waarmee de werking van Imvertor beïnvloed kan worden.
+Zoals al uit het de voorgaande paragraaf blijkt zijn er diverse bestanden met variabelen en configuratie items waarmee de 
+werking van Imvertor beïnvloed kan worden.
 Hieronder behandelen we deze kort.
 
 ### Parameter bestanden voor de Java classes
-De Java classes (in 'src\main\java\nl\imvertor') zijn in principe op dezelfde wijze georganiseerd als de xslt stylesheets (in 'src\main\resources\xsl'), per Imvertor module. Elke module komt grofweg overeen met een Imvertor stap. De classes zijn gelardeerd met variabelen welke in de parameter bestanden (in 'src\main\resources\cfg') worden gedeclareerd. Ook deze zijn op dezelfde wijze georganiseerd als de xslt stylesheets. Elke Java class heeft over het algemeen dus zijn eigen parameter bestand ('parms.xml'). Deze parameter bestanden zijn voor elke organisatie gelijk. In de Java classes kunnen echter takken voorkomen die specifiek voor een organisatie geldt. In dat geval kunnen daar specifieke variabelen in gebruik zijn welke dan dus in de parameter bestanden zijn gedeclareerd. Geen parameter bestanden per organisatie dus maar evt. wel specifieke variabelen per organisatie.
+De Java classes (in 'src\main\java\nl\imvertor') zijn in principe op dezelfde wijze georganiseerd als de xslt stylesheets (in 
+'src\main\resources\xsl'), per Imvertor module. Elke module komt grofweg overeen met een Imvertor stap. De classes zijn gelardeerd 
+met variabelen welke in de parameter bestanden (in 'src\main\resources\cfg') worden gedeclareerd. Ook deze zijn op dezelfde 
+wijze georganiseerd als de xslt stylesheets. Elke Java class heeft over het algemeen dus zijn eigen parameter bestand ('parms.xml'). 
+Deze parameter bestanden zijn voor elke organisatie gelijk. In de Java classes kunnen echter takken voorkomen die specifiek voor 
+een organisatie geldt. In dat geval kunnen daar specifieke variabelen in gebruik zijn welke dan dus in de parameter bestanden zijn 
+gedeclareerd. Geen parameter bestanden per organisatie dus maar evt. wel specifieke variabelen per organisatie.
 
 ### Command line properties bestand 
-Elke organisatie heeft zijn eigen Command line property bestand (in 'src\main\resources\input\KING\props'). Dat kunnen tekst bestanden zijn ('*.properties) maar steeds vaker ook Excel spreadsheets. Voor VNG Realisatie is dat laatste het geval ('src\main\resources\input\KING\props\KING.xlsx').
+Elke organisatie heeft zijn eigen Command line property bestand (in 'src\main\resources\input\KING\props'). Dat kunnen tekst 
+bestanden zijn ('*.properties) maar steeds vaker ook Excel spreadsheets. Voor VNG Realisatie is dat laatste het geval 
+('src\main\resources\input\KING\props\KING.xlsx').
 
-In deze bestanden wordt per Imvertor verwerkingstype de waarde van de properties gedefinieerd, waarden die gelden voor alle gebruikers van de betreffende organisatie. Een gebruiker kan deze waarden echter wel overrulen door bij de verwerking een eigen '*.properties' bestand mee te geven waarin de afwijkingen t.o.v. de Command line property bestand zijn gedefinieerd.
-Zo kan deze bijv. aangeven dat voor de verwerking van een specifiek model Respec documentatie moet worden gegenereerd of een compare moet worden uitgevoerd.
+In deze bestanden wordt per Imvertor verwerkingstype de waarde van de properties gedefinieerd, waarden die gelden voor alle 
+gebruikers van de betreffende organisatie. Een gebruiker kan deze waarden echter wel overrulen door bij de verwerking een eigen 
+'*.properties' bestand mee te geven waarin de afwijkingen t.o.v. de Command line property bestand zijn gedefinieerd.
+Zo kan deze bijv. aangeven dat voor de verwerking van een specifiek model Respec documentatie moet worden gegenereerd of een compare 
+moet worden uitgevoerd.
 
 De Command line properties zijn in de xslt stylesheets vaak te herkennen aan de mnemonic 'cli', zoals bijv. in de volgende regel code
 
@@ -101,17 +116,45 @@ if (succeeds && configurator.isTrue("cli","createjsonschema",false)) {
 'createjsonschema' is in dit geval de specifieke command line property.
 
 ### Diverse configuraties
-  - comparerules;
-  - docrules;
-  - translationrules;
-  - metamodels;
-  - notesrules;
-  - owners;
-  - schemarules;
-  - shaclrules;
-  - tvsets;
-  - versionrules;
-  - visuals.
+Elke organisatie heeft zijn eigen set aan configuraties welke te vinden zijn in 'src\main\resources\input\KING\cfg'. 
+Daarbij zal de waarde 'KING' voor een andere organisatie natuurlijk anders zijn.
+Deze configuraties zijn in een antal gevallen gestapeld waarmee wordt bedoelt dat ze configuraties van hetzelfde type
+maar die hoger in hierarchie staan includen.
+
+Een goed voorbeeld daarvan is de metamodels configuratie. Het bestand 'KING-MIM-1-SIM.xml' start als volgt:
+
+```xml
+<metamodel type="config" xmlns:xi="http://www.w3.org/2001/XInclude">
+   <xi:include href="../../../MIM/cfg/metamodels/MIM11.xml"/>
+   <xi:include href="../../../Imvertor/cfg/metamodels/Grouping-MIM111.xml"/>
+```
+
+Dit betekent dat voor de metamodel configuratie voor SIM's o.a. de standaard MIM configuratie wordt gebruikt die door meer 
+organisaties wordt gebruikt. In het bestand 'KING-MIM-1-SIM.xml' worden dan de extensies op dat metamodel geconfigureerd 
+die alleen voor VNG Realisatie gelden.
+
+**comparerules**<br/>
+
+**docrules**<br/>
+  
+**translationrules**<br/>
+  
+**metamodels**<br/>
+  
+**notesrules**<br/>
+  
+**owners**<br/>
+  
+**schemarules**<br/>
+  
+**shaclrules**<br/>
+  
+**tvsets**<br/>
+  
+**versionrules**<br/>
+  
+**visuals**<br/>
+  
 
 ### conceptual schema constructs.
 Voor de verwerking verwijs ik naar de paragraaf die daarover gaat op de [pagina over datatypes](../Omgang-met-datatypes.html#conceptual-schemas).
