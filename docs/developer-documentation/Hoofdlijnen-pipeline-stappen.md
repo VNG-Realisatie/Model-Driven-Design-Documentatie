@@ -118,7 +118,7 @@ if (succeeds && configurator.isTrue("cli","createjsonschema",false)) {
 ### Diverse configuraties
 Elke organisatie heeft zijn eigen set aan configuraties welke te vinden zijn in 'src\main\resources\input\KING\cfg'. 
 Daarbij zal de waarde 'KING' voor een andere organisatie natuurlijk anders zijn.
-Deze configuraties zijn in een antal gevallen gestapeld waarmee wordt bedoelt dat ze configuraties van hetzelfde type
+Deze configuraties zijn in een aantal gevallen gestapeld waarmee wordt bedoelt dat ze configuraties van hetzelfde type
 maar die hoger in hierarchie staan includen.
 
 Een goed voorbeeld daarvan is de metamodels configuratie. Het bestand 'KING-MIM-1-SIM.xml' start als volgt:
@@ -130,13 +130,15 @@ Een goed voorbeeld daarvan is de metamodels configuratie. Het bestand 'KING-MIM-
 ```
 
 Dit betekent dat voor de metamodel configuratie voor SIM's o.a. de standaard MIM configuratie wordt gebruikt die door meer 
-organisaties wordt gebruikt. In het bestand 'KING-MIM-1-SIM.xml' worden dan de extensies op dat metamodel geconfigureerd 
+organisaties wordt gebruikt. In het bestand 'KING-MIM-1-SIM.xml' worden dan evt. extensies op dat metamodel geconfigureerd 
 die alleen voor VNG Realisatie gelden.
 
 **comparerules**<br/>
+Hierin wordt gespecificeerd wat in een evt. compare op welke wijze moet worden meegenomen en wat genegeerd moet worden.
 
 **docrules**<br/>
-  
+
+
 **translationrules**<br/>
   
 **metamodels**<br/>
