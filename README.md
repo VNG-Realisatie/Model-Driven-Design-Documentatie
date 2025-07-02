@@ -1,3 +1,8 @@
+| Eigenaar | Ingevuld door |
+| --- | --- |
+| Kennis centrum Architectuur | Robert Melskens |
+<hr/>
+
 # Imvertor-Documentatie
 In deze repository vind je de door VNG-Realisatie vastgelegde documentatie. Het betreft werkwijzen die binnen VNG Realisatie gehanteerd worden, niet per definitie werkwijzen zoals die door Armatiek worden voorgeschreven. E.e.a. is op basis van ervaring tot stand gekomen. Ook bevat het beschrijvingen van de wijze waarop gewerkt dient te worden met de door de VNG zelf ontwikkelde componenten.
 
