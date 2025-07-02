@@ -16,6 +16,15 @@ VNG Realisatie werkt nog met versie 15.2, zij installeren dus [die versie](https
 
 <span style="color:red">Inmiddels kan ook gebruik maken van [versie 16.1](https://vngrealisatie.plan.io/svn/king.stufmaster/algemeen/Software/easetupfull161_x64.msi). Er is nog weinig ervaring bij VNG-R in de configuratie van die versie dus de in de volgende paragrafen beschreven procedures kunnen afwijken. Bij het openen van een oude EA versie bestand in EA 16.1 zal gevraagd worden deze te migreren naar een ander bestandsformaat. Het oude bestand blijft overigens wel beschikbaar maar het lijkt verstandiger dat dan niet meer te gebruiken en zelfs te verwijderen. Het nieuwe formaat kan niet in een oudere versie van EA worden geöpend. Dat geldt natuurlijk niet voor de XMI bestanden.<br/><br/>Een [Enterprise Architect viewer](https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition) kan vrij van licentiekosten worden gedownload zodat de Enterprise Architect bestanden ook door anderen bestudeert kunnen worden.</span>
 
+#### Registreren licentie key
+Zodra je EA voor de eerste keer start, krijg je de vraag om de key van de licentie toe te voegen. 
+Kies voor 'Enter private key'.
+![image](https://github.com/user-attachments/assets/1a3351d5-7ccc-4b87-82f3-e5fb194a69ff)
+
+Na het sluiten van het key registration window krijg je de vraag om de key te activeren met je activation code.
+
+Hierna start EA op en kun je beginnen met de configuratie.
+
 ### 1.1.2 EA Toolpack installeren
 
 Alhoewel deze toolpack niet meer noodzakelijk is voor het gebruik van imvertor biedt deze wel enkel handige tools zoals de Navigator en de Message Composer.
