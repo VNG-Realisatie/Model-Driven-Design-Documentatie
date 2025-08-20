@@ -48,6 +48,7 @@ De volgende metamodellen zijn beschikbaar (zie gelinkte bestanden):
 Welke je moet installeren is afhankelijk van je werkzaamheden. Ben je alleen verantwoordelijk voor het produceren van SIM's of CIM's dan installeer je alleen de eerste. Indien je ook of juist verantwoordelijk bent voor het vervaardigen van UGM's dan installeer je de eerste en de tweede en als je BSM's moet kunnen maken dan dien je ze alledrie te installeren.
 
 In Enterprise Architect kan je via **Specialize / Technologies / Publish-Tech / Import MDG Technology** de profielen met de metamodellen voor de diverse model-varianten importeren.<br/><br/>![MDG-Technology](./images/MDG-Technology1.jpg)
+
 <span style="color:red">In Enterprise Architect 16.1 gaat dat via **Specialize / Technologies / Publish Technology / Import MDG Technology**</span>
 
 Let er wel op dat je de **"Import to User"** gebruikt, dan heb je immers in ieder project dat je opent of nieuw maakt de beschikking over deze profielen.
