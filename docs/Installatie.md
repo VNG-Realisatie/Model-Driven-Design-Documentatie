@@ -19,6 +19,7 @@ VNG Realisatie werkt nog met versie 15.2, zij installeren dus [die versie](https
 #### Registreren licentie key
 Zodra je EA voor de eerste keer start, krijg je de vraag om de key van de licentie toe te voegen. 
 Kies voor 'Enter private key'.
+
 ![image](https://github.com/user-attachments/assets/1a3351d5-7ccc-4b87-82f3-e5fb194a69ff)
 
 Na het sluiten van het key registration window krijg je de vraag om de key te activeren met je activation code.
