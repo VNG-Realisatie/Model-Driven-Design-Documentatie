@@ -11,10 +11,12 @@ Ten eerste moet EA geïnstalleerd worden. Daarna moeten er een aantal externe to
 
 ### 1.1.1 Installeren EA
 
-Benader voor het verkrijgen van het installatiebestand de daarvoor verantwoordelijke persoon binnen uw organisatie.
-VNG Realisatie werkt nog met versie 15.2, zij installeren dus [die versie](https://vngrealisatie.plan.io/svn/king.stufmaster/algemeen/Software/easetupfull_152.msi). Als je deze al geïnstalleerd hebt hoef je EA natuurlijk niet opnieuw te installeren.
+Maak voor het downloaden van het installatiebestand van Enterprise Architect geen gebruik van de de versie die je via sparxsystems.com kan verkrijgen. Dit is slechts een 30 dagen geldende trial versie en VNG Realisatie heeft installatie bestanden voor diverse versies op een eigen locatie beschikbaar. Neem, indien de door jou gewenste versie daar niet bij zit, contact op met de daarvoor verantwoordelijke persoon binnen het Kennis Centrum Architectuur.
+Een deel van VNG Realisatie werkt nog met versie 15.2 een ander deel werkt al met versie 16.1. Welke versie voor jou van toepassing is hangt o.a. af van het type Enterprise Architect bestand waarmee gewerkt wordt. De in versie 16.1 en later gemaakte EAPX bestanden kunnen niet geöpend worden in oudere versies. Bij het openen van een in de oudere versies gemaakte EAP bestand zal gevraagd worden deze te migreren naar een nieuw bestandsformaat (EAPX). Het oude bestand blijft wel beschikbaar maar het lijkt verstandiger dat dan niet meer te gebruiken en zelfs te verwijderen. Is dat niet gewenst, download en installeer dan [versie 15.2 (64 bits)](https://vngrealisatie.plan.io/svn/king.stufmaster/algemeen/Software/easetupfull_152.msi). 
 
-<span style="color:red">Inmiddels kan ook gebruik gemaakt worden van [versie 16.1](https://vngrealisatie.plan.io/svn/king.stufmaster/algemeen/Software/easetupfull161_x64.msi) en [versie 17.1](https://vngrealisatie.plan.io/svn/king.stufmaster/algemeen/Software/easetupfull171_x64.msi). Er is nog weinig ervaring bij VNG-R in de configuratie van versie 16.1 en helemaal niet in die van 17.1 dus de in de volgende paragrafen beschreven procedures kunnen afwijken. Bij het openen van een oude EA versie bestand in EA 16.1 en 17.1 zal gevraagd worden deze te migreren naar een ander bestandsformaat. Het oude bestand blijft overigens wel beschikbaar maar het lijkt verstandiger dat dan niet meer te gebruiken en zelfs te verwijderen. Het nieuwe formaat kan niet in een oudere versie van EA worden geöpend. Dat geldt natuurlijk niet voor de XMI bestanden.<br/><br/>Een [Enterprise Architect viewer](https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition) kan vrij van licentiekosten worden gedownload zodat de Enterprise Architect bestanden ook door anderen bestudeert kunnen worden.</span>
+Is het geen probleem te werken met het nieuwere EAPX formaat of vormt het EAP(X) bestand niet de eenheid waarop gewerkt wordt, bijv. omdat een xmi formaat van elk model wordt opgeslagen in subversion, dan kan [versie 16.1 (64 bits)](https://vngrealisatie.plan.io/svn/king.stufmaster/algemeen/Software/easetupfull161_x64.msi) gedownload worden.
+
+<span style="color:red">Inmiddels kan ook gebruik gemaakt worden van [versie 17.1 (64 bits)](https://vngrealisatie.plan.io/svn/king.stufmaster/algemeen/Software/easetupfull171_x64.msi). Er is echter nog weinig ervaring bij VNG-R in de configuratie van 17.1 dus de in de volgende paragrafen beschreven procedures kunnen afwijken.<br/><br/>Een [Enterprise Architect viewer](https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition) kan vrij van licentiekosten worden gedownload zodat de Enterprise Architect bestanden ook door anderen bestudeert kunnen worden.</span>
 
 #### Registreren licentie key
 Zodra je EA voor de eerste keer start, krijg je de vraag om de key van de licentie toe te voegen. 
@@ -28,12 +30,14 @@ Hierna start EA op en kun je beginnen met de configuratie.
 
 ### 1.1.2 EA Toolpack installeren
 
+<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span>
 Alhoewel deze toolpack niet meer noodzakelijk is voor het gebruik van imvertor biedt deze wel enkel handige tools zoals de Navigator en de Message Composer.
 
-De nieuwste versie van dit script kan kostenloos worden opgehaald op de [website van Geert Bellekens](https://bellekens.com/product/bellekens-enterprise-architect-toolpack/) . Voeg EA Toolpack toe aan de winkelwagen. De website gebruikt een webshop om downloads aan te bieden. Het is niet verplicht een account aan te maken maar even naam en organisatie invullen moet wel. Na "afrekenen" (het bestand is gratis te verkrijgen) kun je het bestand downloaden.
+De nieuwste versie van dit script kan kostenloos worden opgehaald op de [website van Geert Bellekens](https://bellekens.com/product/bellekens-enterprise-architect-toolpack/). Voeg EA Toolpack toe aan de winkelwagen. De website gebruikt een webshop om downloads aan te bieden. Het is niet verplicht een account aan te maken maar even naam en organisatie invullen moet wel. Na "afrekenen" (het bestand is gratis te verkrijgen) kun je het bestand downloaden.
 
 ### 1.1.3 Imvertor Addin installeren
 
+<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span>
 De imvertor Addin is noodzakelijk om UML-modellen vanuit EA te kunnen aanbieden aan de Armatiek-SAAS omgeving waar Imvertor draait. Download hier de Imvertor-Addin : [32 bits](https://armatiek.nl/Imvertor/download/4.2.0.0/EAImvertorAddinSetup32.exe), [64 bits](https://armatiek.nl/Imvertor/download/4.2.0.0/EAImvertorAddinSetup64.exe). Stop EA vóór de installatie.
 
 [Hier](https://armatiek.nl/doc/imvertor/imvertor-startup/1.0/) vind je nog wat meer informatie m.b.t. de Addin.
@@ -86,6 +90,7 @@ Na processen vind je in de folder 'ea' van de zipfile het nieuwe in Enterprise A
 
 ### 1.1.7 SVN configureren voor EA
 
+<span style="color:red">Als je geen gebruik gaat maken van Subversion om de xmi versies van de modellen op te slaan dan kan deze stap achterwege blijven.</span>
 Hieronder worden de stappen beschreven die je moet doorlopen om Enterprise Architect geschikt te maken voor het werken met Subversion.
 
 - Enterprise Architect werkt direct op subversion en niet met Tortoise. Je moet er dus voor zorgen dat je over de SVN executable ‘svn.exe’ beschikt. Dit kan door Tortoise te installeren (wat sowieso handig is voor een van de volgende stappen). Heb je Tortoise al geïnstalleerd dan is de kans groot dat je de svn command line client niet hebt geïnstalleerd.  Installeer dan Tortoise opnieuw of download de laatste versie van Tortoise en installeer deze. Selecteer daarbij in het Tortoise setup menu de optie ‘Will be installed on local hard drive’ bij ‘command line client tools’ en start daarna opnieuw op:<br/><br/>![Tortoise-setup](./images/Tortoise%20Custom%20Setup.jpg)
@@ -123,12 +128,14 @@ De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde 
 
 ### 1.1.8 Tagged value SourceAttribute navigeerbaar (klikbaar) maken
 
+<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span>
 - Ga naar **Configure / Reference Data / UML Types** (<span style="color:red">in EA 16.1 **Settings / Reference Data / UML Types**</span>), voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:<br/><br/><img src="./images/sourceattribute-instellingen-ea.JPG" alt="sourceAttribute" width="1000"/>
 
 - Klik op _Save_.
 
 ### 1.1.9 Traceability script beschikbaar maken in project browser.
 
+<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span>
 Installeer de laatste versie van het traceability script. Zie daar voor [dit zip bestand](./bestanden/Set%20Traceability%20Scripts%20with%20and%20without%20transformation%202023-06-08.zip).
 
 Het set traceability script wordt geimporteerd via **Configure / Model / Transfer / Import Reference Data / Import File**
