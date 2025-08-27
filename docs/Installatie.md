@@ -51,9 +51,9 @@ De volgende metamodellen zijn beschikbaar (zie gelinkte bestanden):
 
 Welke je moet installeren is afhankelijk van je werkzaamheden. Ben je alleen verantwoordelijk voor het produceren van SIM's of CIM's dan installeer je alleen de eerste. Indien je ook of juist verantwoordelijk bent voor het vervaardigen van UGM's dan installeer je de eerste en de tweede en als je BSM's moet kunnen maken dan dien je ze alledrie te installeren.
 
-In Enterprise Architect kan je via **Specialize / Technologies / Publish-Tech / Import MDG Technology** de profielen met de metamodellen voor de diverse model-varianten importeren.<br/><br/>![MDG-Technology](./images/MDG-Technology1.jpg)
+In Enterprise Architect versie 15.2 kan je via **Specialize / Technologies / Publish-Tech / Import MDG Technology** de profielen met de metamodellen voor de diverse model-varianten importeren.<br/><br/>![MDG-Technology](./images/MDG-Technology1.jpg)
 
-<span style="color:red">In Enterprise Architect 16.1 gaat dat via **Specialize / Technologies / Publish Technology / Import MDG Technology**</span>
+In Enterprise Architect versie 16.1 gaat dat via **Specialize / Technologies / Publish Technology / Import MDG Technology**
 
 Let er wel op dat je de **"Import to User"** gebruikt, dan heb je immers in ieder project dat je opent of nieuw maakt de beschikking over deze profielen.
 
@@ -129,7 +129,7 @@ De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde 
 ### 1.1.8 Tagged value SourceAttribute navigeerbaar (klikbaar) maken
 
 <span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span><br/>
-- Ga naar **Configure / Reference Data / UML Types** (<span style="color:red">in EA 16.1 **Settings / Reference Data / UML Types**</span>), voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:<br/><br/><img src="./images/sourceattribute-instellingen-ea.JPG" alt="sourceAttribute" width="1000"/>
+- Ga in Enterprise Architect versie 15.2 naar **Configure / Reference Data / UML Types** en in Enterprise Architect versie 16.1 naar **Settings / Reference Data / UML Types**, voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:<br/><br/><img src="./images/sourceattribute-instellingen-ea.JPG" alt="sourceAttribute" width="1000"/>
 
 - Klik op _Save_.
 
