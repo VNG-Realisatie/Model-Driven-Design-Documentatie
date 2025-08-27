@@ -30,14 +30,14 @@ Hierna start EA op en kun je beginnen met de configuratie.
 
 ### 1.1.2 EA Toolpack installeren
 
-<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span>
+<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span><br/>
 Alhoewel deze toolpack niet meer noodzakelijk is voor het gebruik van imvertor biedt deze wel enkel handige tools zoals de Navigator en de Message Composer.
 
 De nieuwste versie van dit script kan kostenloos worden opgehaald op de [website van Geert Bellekens](https://bellekens.com/product/bellekens-enterprise-architect-toolpack/). Voeg EA Toolpack toe aan de winkelwagen. De website gebruikt een webshop om downloads aan te bieden. Het is niet verplicht een account aan te maken maar even naam en organisatie invullen moet wel. Na "afrekenen" (het bestand is gratis te verkrijgen) kun je het bestand downloaden.
 
 ### 1.1.3 Imvertor Addin installeren
 
-<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span>
+<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span><br/>
 De imvertor Addin is noodzakelijk om UML-modellen vanuit EA te kunnen aanbieden aan de Armatiek-SAAS omgeving waar Imvertor draait. Download hier de Imvertor-Addin : [32 bits](https://armatiek.nl/Imvertor/download/4.2.0.0/EAImvertorAddinSetup32.exe), [64 bits](https://armatiek.nl/Imvertor/download/4.2.0.0/EAImvertorAddinSetup64.exe). Stop EA vóór de installatie.
 
 [Hier](https://armatiek.nl/doc/imvertor/imvertor-startup/1.0/) vind je nog wat meer informatie m.b.t. de Addin.
@@ -90,7 +90,7 @@ Na processen vind je in de folder 'ea' van de zipfile het nieuwe in Enterprise A
 
 ### 1.1.7 SVN configureren voor EA
 
-<span style="color:red">Als je geen gebruik gaat maken van Subversion om de xmi versies van de modellen op te slaan dan kan deze stap achterwege blijven.</span>
+<span style="color:red">Als je geen gebruik gaat maken van Subversion om de xmi versies van de modellen op te slaan dan kan deze stap achterwege blijven.</span><br/>
 Hieronder worden de stappen beschreven die je moet doorlopen om Enterprise Architect geschikt te maken voor het werken met Subversion.
 
 - Enterprise Architect werkt direct op subversion en niet met Tortoise. Je moet er dus voor zorgen dat je over de SVN executable ‘svn.exe’ beschikt. Dit kan door Tortoise te installeren (wat sowieso handig is voor een van de volgende stappen). Heb je Tortoise al geïnstalleerd dan is de kans groot dat je de svn command line client niet hebt geïnstalleerd.  Installeer dan Tortoise opnieuw of download de laatste versie van Tortoise en installeer deze. Selecteer daarbij in het Tortoise setup menu de optie ‘Will be installed on local hard drive’ bij ‘command line client tools’ en start daarna opnieuw op:<br/><br/>![Tortoise-setup](./images/Tortoise%20Custom%20Setup.jpg)
@@ -128,14 +128,14 @@ De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde 
 
 ### 1.1.8 Tagged value SourceAttribute navigeerbaar (klikbaar) maken
 
-<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span>
+<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span><br/>
 - Ga naar **Configure / Reference Data / UML Types** (<span style="color:red">in EA 16.1 **Settings / Reference Data / UML Types**</span>), voeg daar de tag name 'SourceAttribute' toe (***Let op!*** hoofdletter 'S' en 'A') met de onderstaande vulling:<br/><br/><img src="./images/sourceattribute-instellingen-ea.JPG" alt="sourceAttribute" width="1000"/>
 
 - Klik op _Save_.
 
 ### 1.1.9 Traceability script beschikbaar maken in project browser.
 
-<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span>
+<span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span><br/>
 Installeer de laatste versie van het traceability script. Zie daar voor [dit zip bestand](./bestanden/Set%20Traceability%20Scripts%20with%20and%20without%20transformation%202023-06-08.zip).
 
 Het set traceability script wordt geimporteerd via **Configure / Model / Transfer / Import Reference Data / Import File**
