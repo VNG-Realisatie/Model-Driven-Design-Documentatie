@@ -16,7 +16,9 @@ Een deel van VNG Realisatie werkt nog met versie 15.2 een ander deel werkt al me
 
 Is het geen probleem te werken met het nieuwere EAPX formaat of vormt het EAP(X) bestand niet de eenheid waarop gewerkt wordt, bijv. omdat een xmi formaat van elk model wordt opgeslagen in subversion, dan kan [versie 16.1 (64 bits)](https://vngrealisatie.plan.io/svn/king.stufmaster/algemeen/Software/easetupfull161_x64.msi) gedownload worden.
 
-<span style="color:red">Inmiddels kan ook gebruik gemaakt worden van [versie 17.1 (64 bits)](https://vngrealisatie.plan.io/svn/king.stufmaster/algemeen/Software/easetupfull171_x64.msi). Er is echter nog weinig ervaring bij VNG-R in de configuratie van 17.1 dus de in de volgende paragrafen beschreven procedures kunnen afwijken.<br/><br/>Een [Enterprise Architect viewer](https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition) kan vrij van licentiekosten worden gedownload zodat de Enterprise Architect bestanden ook door anderen bestudeert kunnen worden.</span>
+<span style="color:red">Inmiddels kan ook gebruik gemaakt worden van [versie 17.1 (64 bits)](https://vngrealisatie.plan.io/svn/king.stufmaster/algemeen/Software/easetupfull171_x64.msi). Er is echter nog weinig ervaring bij VNG-R in de configuratie van 17.1 dus de in de volgende paragrafen beschreven procedures kunnen afwijken.</span>
+
+Een [Enterprise Architect viewer](https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition) kan vrij van licentiekosten worden gedownload zodat de Enterprise Architect bestanden ook door anderen bestudeert kunnen worden.
 
 #### Registreren licentie key
 Zodra je EA voor de eerste keer start, krijg je de vraag om de key van de licentie toe te voegen. 
