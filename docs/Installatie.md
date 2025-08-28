@@ -140,7 +140,7 @@ De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde 
 <span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span><br/>
 Installeer de laatste versie van het traceability script. Zie daar voor [dit zip bestand](./bestanden/Set%20Traceability%20Scripts%20with%20and%20without%20transformation%202023-06-08.zip).
 
-Het set traceability script wordt geimporteerd via **Configure / Model / Transfer / Import Reference Data / Import File**
+Het set traceability script wordt geimporteerd via **Configure / Model / Transfer / Import Reference Data / Import File**  en in Enterprise Architect versie 16.1 via **Settings / Model / Transfer / Import Reference Data / Import File**.
 
 Als je dat gedaan hebt zal je zien dat er nu in je 'Specialize' context menu bij het rechtsklikken op een package een optie is bijgekomen:
 'Scripts' met de subopties 'Set Traceability with Transformation' en 'Set Traceability without Transformation'. 
