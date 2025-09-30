@@ -260,7 +260,7 @@ definieert.
 uitgerold naar de master is het bruikbaar in de laatste release van Imvertor. Vanaf dat moment kan het datatype gebruikt worden in Enterprise Architect.
 
 ### Toevoegen nieuw GML datatype
-1. Voeg een nieuw Datatype element toe aan het package 'MIM Primitieve datatypen' met de naam van het nieuwe primitieve datatype en geeft dit als stereotype 
+1. Voeg een nieuw Datatype element toe aan het package 'GML3' met de naam van het nieuwe primitieve datatype en geeft dit als stereotype 
 'VNG-R SIM+Grouping NL::interface';
 2. Definieer in het conceptual schema bestand 'cm-GML322.xml' (of een nieuwere versie daarvan) een nieuwe 'cs:Construct' waarin je de gewenste mappings (XSD en/of OAS) 
 definieert.
