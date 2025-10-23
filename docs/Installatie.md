@@ -135,6 +135,14 @@ De volgorde waarin de configuraties zijn opgevoerd is bepalend voor de volgorde 
 
 - Klik op _Save_.
 
+In datzelfde menu moet, zoals je ziet, overigens ook 'SourceAssociation' aanwezig zijn met de waarde
+
+```
+Type=String;
+AppliesTo=Association,Aggregation;
+```
+in het 'detal' veld.
+
 ### 1.1.9 Traceability script beschikbaar maken in project browser.
 
 <span style="color:red">Indien je geen gebruik gaat maken van Imvertor kan deze stap achterwege blijven.</span><br/>
