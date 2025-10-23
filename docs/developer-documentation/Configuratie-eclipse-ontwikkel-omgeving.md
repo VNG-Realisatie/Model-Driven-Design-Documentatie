@@ -8,8 +8,9 @@ Terug naar de [inhoudsopgave](index),
 
 1. Installeer de laatste java versie (ik meen dat dit een 32 bits versie moet zijn);
 2. Installeer de laatste versie van eclipse;
-3. Bij het opstarten van eclipse wordt er gevraagd om een workspace te kiezen en ga naar punt 7.<br/><br/>
-Heb je voorheen een workspace gehad open die dan. Heb je nog niet eerder een workspace hebt gehad kies dan een lokatie voor die workspace en ga verder bij punt 4.
+3. Bij het opstarten van eclipse wordt er gevraagd om een workspace te kiezen.<br/><br/>
+   * Heb je voorheen een workspace gehad open die dan en ga naar punt 7.
+   * Heb je nog niet eerder een workspace hebt gehad kies dan een lokatie voor die workspace en ga verder bij punt 4.
 <!--Indien je al eerder een eclipse ontwikkelomgeving hebt gehad dan beschik je ergens over de folders
    * Imvertor-Maven
    * imvertor_work
