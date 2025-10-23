@@ -6,13 +6,15 @@ Terug naar de [inhoudsopgave](index),
 
 # Configuratie eclipse ontwikkelomgeving
 
-1. Installeer de laatste java versie;
+1. Installeer de laatste java versie (ik meen dat dit een 32 bits versie moet zijn);
 2. Installeer de laatste versie van eclipse;
-3. Indien je al eerder een eclipse ontwikkelomgeving hebt gehad dan beschik je ergens over de folders
+3. Bij het opstarten van eclipse wordt er gevraagd om een workspace te kiezen en ga naar punt 7. 
+Heb je voorheen een workspace gehad open die dan. Heb je nog niet eerder een workspace hebt gehad kies dan een lokatie voor die workspace en ga verder bij punt 4.
+<!--Indien je al eerder een eclipse ontwikkelomgeving hebt gehad dan beschik je ergens over de folders
    * Imvertor-Maven
    * imvertor_work
    * imvertor_output
-   Importeer deze alledrie in eclipse waarbij je bij de eerste kiest voor 'Maven - Existing Maven Projects';
+   Importeer deze alledrie in eclipse waarbij je bij de eerste kiest voor 'Maven - Existing Maven Projects';-->
 4. Indien je nog niet eerder een eclipse ontwikkelomgeving hebt gehad of je wil weer helemaal van scratch af aan beginnen check dan de GitHub repo 'https://github.com/Imvertor/Imvertor-Maven' uit en importeer deze in eclipse. Daarbij kies je bij het importeren voor 'Maven - Existing Maven Projects'.
    Creëer ook de folders:
    * imvertor_work
