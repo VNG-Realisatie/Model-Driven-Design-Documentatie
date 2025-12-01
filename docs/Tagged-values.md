@@ -61,7 +61,7 @@ Generated: 2023-03-01
 | 'Ref-release' | Domein, View, Extern | Nee | **Wie kan hier een definitie van geven ?** | | Nee |
 | 'Ref-version' | Domein, View, Extern | Nee | **Wie kan hier een definitie van geven ?** | | Nee |
 | 'Relatiemodelleringtype' | Informatiemodel | Ja | MIM 1.1: Aanduiding van een in MIM gedefinieerd alternatief voor een modelleringswijze, en welke keuze hierbij is gemaakt. | *'Relatiesoort leidend'*, 'Relatierol leidend' | Ja |
-| 'Release' | Informatiemodel, Basismodel, Toepassing, Domein, View, Extern, Intern | Informatiemodel, Basismodel, Toepassing, Domein, View, Intern | Het releasenummer van het betreffende package. | | Nee |
+| 'Release' | Informatiemodel, Basismodel, Toepassing, Domein, View, Extern, Intern | Informatiemodel, Basismodel, Toepassing, Domein, View, Intern  |Dit bevat de releasedatum in het format yyyymmdd . De releasedatum wordt mede gebruikt om een package uniek te identificeren in Imvertor. | | Nee |
 | 'Supplier-name' | Informatiemodel, Basismodel, Toepassing | Toepassing | De naam van het supplier model. Alleen opnemen wanneer van afleiding sprake is. | | Nee |
 | 'Supplier-package-name' | Domein, View | Nee | De naam van de supplier (domein of view) package. Deze naam wordt opgegeven als deze niet gelijk is aan de naam van het package waar de tagged value op geplaatst is. | | Nee |
 | 'Supplier-project' | Informatiemodel, Basismodel, Toepassing | Toepassing | De naam van het supplier project. Alleen opnemen wanneer van afleiding sprake is. | | Nee |
