@@ -61,7 +61,7 @@ Generated: 2023-03-01
 | 'Ref-release' | Domein, View, Extern | Nee | **Wie kan hier een definitie van geven ?** | | Nee |
 | 'Ref-version' | Domein, View, Extern | Nee | **Wie kan hier een definitie van geven ?** | | Nee |
 | 'Relatiemodelleringtype' | Informatiemodel | Ja | MIM 1.1: Aanduiding van een in MIM gedefinieerd alternatief voor een modelleringswijze, en welke keuze hierbij is gemaakt. | *'Relatiesoort leidend'*, 'Relatierol leidend' | Ja |
-| 'Release' | Informatiemodel, Basismodel, Toepassing, Domein, View, Extern, Intern | Informatiemodel, Basismodel, Toepassing, Domein, View, Intern | **Wie kan hier een definitie van geven ?** | | Nee |
+| 'Release' | Informatiemodel, Basismodel, Toepassing, Domein, View, Extern, Intern | Informatiemodel, Basismodel, Toepassing, Domein, View, Intern | Het releasenummer van het betreffende package. | | Nee |
 | 'Supplier-name' | Informatiemodel, Basismodel, Toepassing | Toepassing | De naam van het supplier model. Alleen opnemen wanneer van afleiding sprake is. | | Nee |
 | 'Supplier-package-name' | Domein, View | Nee | De naam van de supplier (domein of view) package. Deze naam wordt opgegeven als deze niet gelijk is aan de naam van het package waar de tagged value op geplaatst is. | | Nee |
 | 'Supplier-project' | Informatiemodel, Basismodel, Toepassing | Toepassing | De naam van het supplier project. Alleen opnemen wanneer van afleiding sprake is. | | Nee |
@@ -101,7 +101,7 @@ Generated: 2023-03-01
 | 'Minimum lengte' | Element, Data element, Datatype Primitief datatype, Tabel Element | Nee | De minimale lengte die een attribuut moet hebben. | | Nee |
 | 'Minimum waarde (inclusief)' | Element, Data element, Datatype Primitief datatype | Nee | De minimale waarde (inclusief) dat een attribuut moet hebben | | Nee |
 | 'Mogelijk geen waarde' | Element, Groep, Relatie, Gegevensgroep | Nee | Indicatie waarmee wordt aangegeven dat het gegeven ook geen waarde kan hebben. | 'Ja', *'Nee'* | Ja |
-| 'Naam' | Project, Basismodel, Toepassing, Domein, View, Extern, Intern | Nee | **Wie kan hier een definitie van geven ?** | | |
+| 'Naam' | Project, Basismodel, Toepassing, Domein, View, Extern, Intern | Nee | De naam van het package. | | |
 | 'Naam in meervoud' | Entiteittype | Ja | Voorziening om een entiteit een meervoudsnaam te kunnen geven. Deze wordt gebruikt als propertynaam van een entiteit in het yaml bestand. | | |
 | 'Niveau' | Basismodel | Nee | Het niveau is een waarde uit een beperkte set: "algemeen" betekent dat het model een fundament is van een ander model en moet worden opgenomen. Het modelleert generieke constructies die deel uitmaken van de echte wereld. Dit omvat meestal abstracte object typen. Het kan andere constructen bevatten. "specifiek" betekent dat het model een bepaald domein beschrijft of een samenhangend deel ervan . | 'generiek', *'specifiek'* | Nee |
 | 'Patroon' | Element, Complex datatype, Data element, Union element, Datatype Primitief datatype | Nee | Beschrijving van het gegevenspatroon van een element. Dit kan de basis zijn voor een reguliere expressie. | | Nee |
@@ -170,7 +170,7 @@ Generated: 2023-03-01
 | 'Minimum lengte' | Element, Data element, Datatype Primitief datatype, Tabel Element | Nee | De minimale lengte die een attribuut moet hebben. | | Nee |
 | 'Minimum waarde (inclusief)' | Element, Data element, Datatype Primitief datatype | Nee | De minimale waarde (inclusief) dat een attribuut moet hebben | | Nee |
 | 'Mogelijk geen waarde' | Element, Groep, Relatie, Gegevensgroep | Nee | Indicatie waarmee wordt aangegeven dat het gegeven ook geen waarde kan hebben. | 'Ja', *'Nee'* | Ja |
-| 'Naam' | Project, Basismodel, Koppelvlak Toepassing, Domein, View, Extern, Intern | Nee | **Wie kan hier een definitie van geven ?** | | |
+| 'Naam' | Project, Basismodel, Koppelvlak Toepassing, Domein, View, Extern, Intern | Nee | De naam van het package. | | |
 | 'Naam in meervoud' | Entiteittype | Ja | Voorziening om een entiteit een meervoudsnaam te kunnen geven. Deze wordt gebruikt als propertynaam van een entiteit in het yaml bestand. | | |
 | 'Niveau' | Basismodel | Nee | Het niveau is een waarde uit een beperkte set: "algemeen" betekent dat het model een fundament is van een ander model en moet worden opgenomen. Het modelleert generieke constructies die deel uitmaken van de echte wereld. Dit omvat meestal abstracte object typen. Het kan andere constructen bevatten. "specifiek" betekent dat het model een bepaald domein beschrijft of een samenhangend deel ervan . | 'generiek', *'specifiek'* | Nee |
 | 'noValue toegestaan' | Koppelvlak Toepassing | Nee | Geeft aan of het StUF:noValue attribute in de XML-schema's mee gegenereerd wordt. Standaard wordt dit mee gegenereerd. Kan alleen op Koppelvlak niveau worden gedefinieerd. Heeft alleen een functie bij het genereren van StUF schema's. | 'Nee', *'Ja'* | |
