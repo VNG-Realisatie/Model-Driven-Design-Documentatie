@@ -46,6 +46,6 @@ en de modellen met de 'Intern' packages die dat model gebruiken te verwerken met
 OAS specificaties, updaten.
 
 <b><span style="color:red">Aandachtspunt</span></b> <i><span style="color:red">Een intern package moet dezelfde naam hebben als het gerelateerde 'Basismodel' package. Als je 
-een 'Basismodel' package met Imvertor wil verwerken en het staat in de Project Browser lager dan een 'Intern' package
-met dezelfde naam dan levert dat problemen op. In dat geval zal het 'Intern' package verwerkt worden en het resultaat
+een 'Basismodel' package met Imvertor wil verwerken en het staat in de Project Browser op een lagere positie dan een model dat een 'Intern' package
+met dezelfde naam bevat dan levert dat problemen op. In dat geval zal het 'Intern' package verwerkt worden en het resultaat
 niet als gewenst zijn. Geef in zo'n geval het interne package tijdelijk een andere naam.</span></i>
