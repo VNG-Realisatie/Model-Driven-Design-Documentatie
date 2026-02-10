@@ -19,7 +19,7 @@ document beschrijven we hoe je dat kunt realiseren.
 Als eerste moet je een package creëren in het project (SIM, UGM of BSM) niveau waarop je de classes wil kunnen 
 hergebruiken. Geef dat package vervolgens een duidelijke, de inhoud omschrijvende, naam en het stereotype 
 'Basismodel', tenslotte definieer je op dat package een datum in de tagged value 'release'. In dat package plaats 
-je (minimaal) één 'Domein' package waarin je de herbruikbare classes plaatst. Ook daarop definieer je een datum 
+je (minimaal) één 'Domein' package waarin je de herbruikbare classes plaatst. Ook op dat 'Domein' package definieer je een datum 
 in de tagged value 'release'.
 
 Daarna kan je het zojuist vervaardigde 'Basismodel' package verwerken met Imvertor. Dat betekent dat de daarin 
