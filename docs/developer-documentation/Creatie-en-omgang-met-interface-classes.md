@@ -38,7 +38,7 @@ Nu kan je in je model die 'Interface' componenten gebruiken i.p.v. de classes di
 
 <b><span style="color:red">Tip</span></b> <i><span style="color:red">Je kunt dit nog beter beheersbaar maken door ergens een template 'Intern' package aan te maken waarin je
 voor alle classes in je 'Basismodel' package een 'Interface' component aanmaakt. Die kan je dan steeds in nieuwe 
-packages kopiëren waarin je hergebruik wil maken van de classes. Zo hoef je het 'Intern' package niet steeds opnieuw 
+modellen kopiëren waarin je hergebruik wil maken van de classes. Zo hoef je het 'Intern' package niet steeds opnieuw 
 aan te maken.</span></i>
 
 Nu kun je de classes in je 'Basismodel' indien gewenst aanpassen en door achtereenvolgens dat 'Basismodel' package 
