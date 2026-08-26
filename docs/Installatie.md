@@ -153,6 +153,15 @@ Het set traceability script wordt geimporteerd via **Configure / Model / Transfe
 Als je dat gedaan hebt zal je zien dat er nu in je 'Specialize' context menu bij het rechtsklikken op een package een optie is bijgekomen:
 'Scripts' met de subopties 'Set Traceability with Transformation' en 'Set Traceability without Transformation'. 
 
+### 1.1.9 Association Selctor script beschikbaar maken in project browser.
+
+Soms is het lastig het juiste diagram te vinden waarin een Association is gevisualiseerd. Het Association Selector script maakt dat eenvoudiger voor zowel een specifieke Class of voor een geheel package.
+Na selectie van de Class of Package kan het script gedraaid worden door er met de rechter muistoets op de klikken en te kiezen voor 'Specialize - Scripts - Association Selector'. Daardoor wordt een lijst met Associations gegenereerd. In het menu dat volgt kun je nu het nummer van de gewenste Association ingeven waarna door op 'OK' te klikken een diagram wordt gegenereerd waarin de Association is gevisualiseerd.
+
+Installatie van het 'Association Selector' script gaat als volgt. Download daarvoor eerst [dit zip bestand](./bestanden/Association%20Selector%202026-08-26.zip).
+
+Vervolgens importeer je het via **Configure / Model / Transfer / Import Reference Data / Import File**  en in Enterprise Architect versie 16.1 via **Settings / Model / Transfer / Import Reference Data / Import File**.
+
 ## Aan het werk
 
 Je bent nu klaar om aan het werk te gaan. Het is echter handig om eerst de hoofdstukken [2 Begrippen](./Begrippen) en [3 Het drie-lagen model](./Drielagen-model) door te lezen. Daarna kun je m.b.v. hoofdstuk [4 Model Driven Design](./ModelDrivenDesign)  daadwerkelijk aan de slag.
