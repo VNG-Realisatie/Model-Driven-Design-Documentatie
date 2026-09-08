@@ -38,7 +38,7 @@ Bijvoorbeeld:
 
 ## Resources en Properties
 
-Voor de naamgeving van resources en properties conformeren we ons aan de [API design rules](https://publicatie.centrumvoorstandaarden.nl/api/adr/) en [API Designrule extentions](https://geonovum.github.io/KP-APIs/API-strategie-extensies/) Van de Nederlandse API-strategie. 
+Voor de naamgeving van resources en properties conformeren we ons aan de [NLgov REST API Design Rules](https://logius-standaarden.github.io/API-Design-Rules/) Van de Nederlandse API-strategie. 
 
 ## Component namen
 
