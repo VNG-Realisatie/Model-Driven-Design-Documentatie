@@ -78,9 +78,10 @@
  *      van de EA-versie), met de gewenste package geselecteerd in de
  *      Project Browser (of laat ROOT_PACKAGE_GUID leeg voor het hele model).
  *
- * Vereisten (standaard aanwezig op Windows):
+ * Technische vereisten (standaard aanwezig op Windows):
  *   - MSXML (Msxml2.DOMDocument.6.0) voor het inlezen van de profiel-XML's.
  *   - ADODB.Stream voor het wegschrijven van UTF-8 HTML.
+ *   - Bron- en doel profielen moeten in EA geïmporteerd zijn en als bestand beschikbaar zijn 
  *
  * Beperkingen:
  *   - Dit script behandelt stereotypes op Element-, Attribute- EN
