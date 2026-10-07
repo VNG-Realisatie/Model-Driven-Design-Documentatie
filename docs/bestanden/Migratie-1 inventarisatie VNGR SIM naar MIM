@@ -1,0 +1,1955 @@
+/* =========================================================================
+ * Script:   Migratie_inventarisatie_VNGR_SIM_naar_VNGRMIM12.js
+ * Omgeving: Enterprise Architect - Scripting venster (taal: JScript)
+ *
+ * Doel:
+ *   Doorzoekt het HUIDIGE EA-model (dat is opgebouwd met het profiel
+ *   VNGR_SIM_Grouping_NL) en bepaalt per element/attribuut/connector met
+ *   een stereotype welke wijzigingen nodig zijn om het model te laten
+ *   voldoen aan het profiel VNGR_MIM_1.2_Grouping_NL.
+ *
+ *   Het script wijzigt WEL tagged values als APPLY_CHANGES=true: het
+ *   schoont ze op (vervallen tags verwijderen, ongeldige enumeratie-
+ *   waarden herstellen indien opgegeven in VALUE_REMAP) en signaleert
+ *   niet-ingevulde verplichte velden.
+ *
+ *   Het script wijzigt GEEN STEREOTYPES (bewuste keuze, zie hieronder).
+ *   Voor gedeelde stereotypes (zelfde naam in beide profielen, zoals
+ *   "Objecttype") is dat ook niet nodig: de naam klopt al. Alleen de
+ *   onderliggende technology-koppeling (zichtbaar als het vinkje in de
+ *   "Choose stereotype"-popup, en in t_xref) blijft tot de eindopschoning
+ *   naar VNGR_SIM_Grouping_NL wijzen - functioneel/inhoudelijk (naam +
+ *   data) is de migratie compleet, alleen die ene technische koppeling
+ *   niet. Voor STEREOTYPE_REMAP-gevallen (stereotype zonder equivalent)
+ *   wordt de naamswijziging ook uitgesteld tot de eindopschoning.
+ *
+ *   WAAROM stereotypes niet door dit script worden aangepast (na
+ *   uitgebreid testen zijn ALLE onderstaande routes geprobeerd en
+ *   afgewezen):
+ *     1. element.Stereotype = "TechnologyName::Stereotype" (qualifier) -
+ *        EA parsed dit NIET als technology+naam, maar zoekt naar een
+ *        stereotype met exact die hele string als naam, vindt niets, en
+ *        MAAKT EEN NIEUW, LOS STEREOTYPE AAN met die rommelige tekst als
+ *        letterlijke naam (live bevestigd).
+ *     2. element.Stereotype = "Objecttype" (ongekwalificeerd) nadat
+ *        VNGR_SIM_Grouping_NL is gedeactiveerd - resolvet niet
+ *        betrouwbaar naar VNGR_MIM_1.2_Grouping_NL; t_xref en de Choose-
+ *        stereotype-popup bleven VNGR_SIM tonen, ook na een volledige
+ *        herstart van het EA-project.
+ *     3. EA-gebruikersrecht "Configure new Stereotypes" - uitgesloten:
+ *        Repository.IsSecurityEnabled = false voor dit (via Subversion
+ *        gedeelde) model, dus er gelden geen rechten-beperkingen.
+ *     4. Eerst leegmaken (Stereotype = ""), dan pas de nieuwe waarde
+ *        zetten, elk met een eigen Update() - werkt HANDMATIG in de
+ *        Properties-popup, maar NIET via exact dezelfde volgorde in de
+ *        Automation-API.
+ *     5. XMI-roundtrip (export -> FQName tekstueel vervangen -> herimport
+ *        via Project.ImportPackageXMI): dit WERKTE voor de stereotype-
+ *        koppeling zelf, maar bleek elementen te DUPLICEREN (nieuwe GUID,
+ *        nieuw package) in plaats van ze in-place bij te werken - een
+ *        te groot risico om op productiedata te gebruiken zonder eerst
+ *        de exacte ImportPackageXMI-parameters in een geïsoleerde
+ *        testomgeving te verifiëren.
+ *   Gekozen aanpak: accepteer de tijdelijk verouderde technology-
+ *   koppeling; behandel die pas in de allerlaatste opschoonstap, wanneer
+ *   VNGR_SIM_Grouping_NL nul resterende gebruikers heeft (op dat moment
+ *   is er ook geen dubbelzinnigheid meer om tegenaan te lopen). Het
+ *   (alleen-lezen) statusoverzicht onderaan elk logboek toont de
+ *   voortgang daarnaartoe.
+ *
+ *   De inventarisatie is gegroepeerd volgens:
+ *     Objecttype          -> Attribuutsoort
+ *     Referentielijst       -> Referentie element
+ *     Gegevensgroeptype    -> Attribuutsoort
+ *     Relatieklasse         -> Attribuutsoort
+ *     Datatype               -> Data element
+ *     Enumeratie             -> Enumeratiewaarde
+ *
+ *   Elementen/attributen met een stereotype dat NIET in VNGR_MIM_1.2_Grouping_NL
+ *   bestaat, komen in een aparte sectie "Stereotypes zonder equivalent"
+ *   terecht -- dit zijn de kritieke migratie-aandachtspunten.
+ *
+ * Installatie in EA:
+ *   1. Project Browser > tabblad "Scripts" (of: View > Scripting).
+ *   2. Rechtermuisknop op een scriptgroep > "Add Script" > taal "JScript".
+ *   3. Geef het een naam, plak deze volledige inhoud erin.
+ *   4. Pas het blok CONFIGURATIE hieronder aan (bestandslocaties!).
+ *   5. Rechtermuisknop op het script > "Run" (of Ctrl+F5 / F5, afhankelijk
+ *      van de EA-versie), met de gewenste package geselecteerd in de
+ *      Project Browser (of laat ROOT_PACKAGE_GUID leeg voor het hele model).
+ *
+ * Technische vereisten (standaard aanwezig op Windows):
+ *   - MSXML (Msxml2.DOMDocument.6.0) voor het inlezen van de profiel-XML's.
+ *   - ADODB.Stream voor het wegschrijven van UTF-8 HTML.
+ *   - Bron- en doel profielen moeten in EA geïmporteerd zijn en als bestand beschikbaar zijn 
+ *
+ * Beperkingen:
+ *   - Dit script behandelt stereotypes op Element-, Attribute- EN
+ *     Connector-niveau (klassen, attributen, associaties/generalisaties).
+ *     Connectoren worden gevonden via Element.Connectors (een aparte EA-
+ *     collectie, niet Package.Elements) en per stereotype-naam op precies
+ *     dezelfde manier beoordeeld/gemigreerd als Elements en Attributes.
+ *     Ze vallen buiten de zes hoofdgroepen en verschijnen daarom onder
+ *     "Overige gedeelde stereotypes" resp. "Stereotypes zonder equivalent".
+ * ========================================================================= */
+
+// =====================================================================
+// CONFIGURATIE - pas dit aan voor uw omgeving
+// =====================================================================
+
+// Beide profielen staan als MDG Technology geregistreerd in het model
+// (Configure > Technology > Manage Technologies). Het script PROBEERT ze
+// eerst rechtstreeks uit de repository te lezen via
+// Repository.GetTechnologyXML(id) - maar let op: deze methode werkt
+// alleen voor "referenced technologies" (als los, geregistreerd XML-
+// bestand bekend bij EA), niet voor profielen die via
+// Extensions > UML Profiles > Import Reference Data rechtstreeks in de
+// repository zijn geimporteerd ("imported technologies"). Werkt de
+// repository-lookup niet (leeg resultaat/foutmelding), dan valt het
+// script terug op onderstaande bestanden.
+//
+// Gebruik desgewenst eerst Diagnose_technology_ids.js om te testen welke
+// technology-ID's (indien van toepassing) via GetTechnologyXML werken.
+var SOURCE_TECHNOLOGY_ID = "VNGRSNL";   // probeerwaarde; leeg ("") om direct naar het fallbackbestand te gaan
+var SOURCE_LABEL          = "VNGR_SIM_Grouping_NL";
+
+var TARGET_TECHNOLOGY_ID = "VNGRMIM1-2NL";     // probeerwaarde; leeg ("") om direct naar het fallbackbestand te gaan
+var TARGET_LABEL          = "VNGR MIM 1-2 Grouping NL";
+
+// Fallback (aanbevolen als startpunt): exporteer de profielen vanuit EA
+// naar deze bestanden (Configure > Technology > Manage Technologies >
+// [profiel] > Export Reference Data, of Extensions > UML Profiles >
+// Export Reference Data) en verwijs hier naar de geëxporteerde bestanden.
+var SOURCE_PROFILE_XML_FALLBACK = "file:///C:/Users/johan/AppData/Roaming/Sparx%20Systems/EA/MDGTechnologies/scope/VNGR%20SIM+Grouping%20NL-1.0-1.67.1.ea-toolbox.xml";
+var TARGET_PROFILE_XML_FALLBACK = "file:///C:/Users/johan/AppData/Roaming/Sparx%20Systems/EA/MDGTechnologies/VNGR%20MIM%201-2%20Grouping%20NL.ea-toolbox.xml";
+
+
+// Uitvoerbestand:
+var OUTPUT_HTML_PATH    = "C:\\temp\\Migratie_inventarisatie_VNGR_SIM_naar_VNGRMIM12.html";
+
+// Rapport na genereren automatisch openen in de standaardbrowser:
+var OPEN_AFTER_GENERATE = true;
+
+// Laat leeg ("") om het VOLLEDIGE model te doorzoeken, of vul een
+// Package-GUID in om de scan te beperken tot één package/boom:
+var ROOT_PACKAGE_GUID = "{2E213CB6-1DA2-4ced-9984-E122F0CF9FA9}";
+
+// Welke velden van een tagged-value-definitie worden vergeleken tussen
+// de twee profielen:
+var TAG_FIELDS = ["type", "description", "unit", "values", "default"];
+
+// De zes gevraagde groepen (parent-stereotype -> child-stereotype(s)):
+var GROUPS = [
+    { parent: "Objecttype",        children: ["Attribuutsoort"] },
+    { parent: "Referentielijst",   children: ["Referentie element"] },
+    { parent: "Gegevensgroeptype", children: ["Attribuutsoort"] },
+    { parent: "Relatieklasse",     children: ["Attribuutsoort"] },
+    { parent: "Datatype",          children: ["Data element"] },
+    { parent: "Enumeratie",        children: ["Enumeratiewaarde"] }
+];
+
+// =====================================================================
+// APPLY-CONFIGURATIE - dit script kan de wijzigingen ook DOORVOEREN in
+// het model, niet alleen rapporteren. Dit is potentieel onomkeerbaar.
+//
+//   *** MAAK EERST EEN BACKUP VAN HET MODEL (of werk op een kopie). ***
+//   *** Laat APPLY_CHANGES op false staan totdat je het dry-run-     ***
+//   *** rapport hebt gecontroleerd en akkoord bevindt.               ***
+//
+// Wat er gebeurt als APPLY_CHANGES = true:
+//   - Tagged values die niet in MIG_Grouping_NL bestaan ("Vervalt")
+//     worden verwijderd van het element/attribuut (REMOVE_OBSOLETE_TAGS).
+//   - Tagged values met een ongeldig geworden enumeratiewaarde worden
+//     alleen aangepast als je in VALUE_REMAP zelf een vervangwaarde hebt
+//     opgegeven; zonder mapping wordt niets geraden.
+//   - Stereotypes worden ALLEEN herkoppeld als SOURCE_TECHNOLOGY_
+//     DISABLED_CONFIRMED op true staat (zie verderop) - dus pas nadat je
+//     VNGR_SIM_Grouping_NL handmatig hebt gedeactiveerd. Zonder die
+//     bevestiging worden alleen de tags-only fixes hierboven gedaan en
+//     blijven stereotypes ongemoeid (met een duidelijke SKIP-melding).
+// =====================================================================
+var APPLY_CHANGES = true; // dry-run totdat expliciet op true gezet
+
+var REMOVE_OBSOLETE_TAGS = true;   // vervallen tagged values verwijderen (tags-only, veilig met beide technologies actief)
+
+// Vul hier handmatig in hoe stereotypes zonder equivalent omgezet moeten
+// worden (bronstereotype -> doelstereotype, moet een stereotype zijn dat
+// in MIG_Grouping_NL bestaat). Leeg = deze elementen blijven ongewijzigd.
+var STEREOTYPE_REMAP = {
+    // "Process": "Objecttype",
+    // "Product": "Objecttype"
+};
+
+// Vul hier handmatig in welke ongeldig geworden enumeratiewaarden naar
+// welke nieuwe waarde omgezet moeten worden. Structuur:
+// { "Stereotype": { "TagNaam": { "OudeWaarde": "NieuweWaarde" } } }
+// Niet-opgenomen combinaties worden overgeslagen (blijven ongewijzigd,
+// gelogd als "handmatig vereist").
+var VALUE_REMAP = {
+    // "Attribuutsoort": { "Indicatie materiele historie": { "Ja, zie regels": "Ja" } }
+	"Attribuutsoort": { "Indicatie classificerend": { "": "Nee" } }
+};
+
+	// TAG_REMAP: verplaats de waarde van een OUDE tagnaam (die vervalt, want
+// bestaat niet onder die naam in het doelprofiel) naar een NIEUWE tagnaam
+// (die wel in het doelprofiel bestaat) - voor het geval een tag simpelweg
+// is hernoemd tussen de profielen, in plaats van echt te zijn vervallen.
+// Structuur: { "Stereotype": { "OudeTagNaam": "NieuweTagNaam" } }
+// Gedrag:
+//   - De NIEUWE tagnaam moet in het doelprofiel bestaan voor dat
+//     stereotype, anders wordt de mapping genegeerd (FOUT in het log).
+//   - Heeft de NIEUWE tag op dit element al een eigen (niet-lege) waarde,
+//     dan wordt NIET automatisch overschreven - dit wordt gemeld als
+//     conflict, ter handmatige beoordeling.
+//   - Is de NIEUWE tag leeg/afwezig, dan wordt de waarde van de OUDE tag
+//     erin gezet en vervalt de OUDE tag.
+var TAG_REMAP = {
+    "Objecttype": {
+        "Datum opname objecttype": "Datum opname",
+        "Herkomst definitie objecttype": "Herkomst definitie",
+        "Herkomst objecttype": "Herkomst",
+        "Populatie objecttype": "Populatie",
+        "Toelichting objecttype": "Toelichting"
+    },
+    "Attribuutsoort": {
+        "Maximumwaarde": "Maximumwaarde inclusief",
+        "Minimumwaarde": "Minimumwaarde inclusief"
+    },
+    "Relatiesoort": {
+        "Datum opname relatiesoort": "Datum opname",
+        "Herkomst definitie relatiesoort": "Herkomst definitie",
+        "Herkomst relatiesoort": "Herkomst",
+		"Regels relatiesoort": "Regels",
+		"Toelichting relatiesoort": "Toelichting"
+    },
+    "Data element": {
+        "Maximumwaarde": "Maximumwaarde inclusief",
+        "Minimumwaarde": "Minimumwaarde inclusief"
+    },
+    "Gestructureerd datatype": {
+        "Maximumwaarde": "Maximumwaarde inclusief",
+        "Minimumwaarde": "Minimumwaarde inclusief"
+    },
+	"Referentielijst": {
+        "Datum opname referentielijst": "Datum opname",
+        "Herkomst definitie referentielijst": "Herkomst definitie",
+        "Herkomst referentielijst": "Herkomst",
+		"Regels referentielijst": "Regels",
+		"Toelichting referentielijst": "Toelichting"
+    },
+	"Referentie element": {
+        "Datum opname referentiegegeven": "Datum opname",
+        "Herkomst definitie referentiegegeven": "Herkomst definitie",
+        "Herkomst referentiegegeven": "Herkomst",
+		"Regels referentiegegeven": "Regels",
+		"Toelichting referentiegegeven": "Toelichting"
+    }
+};
+
+// CUSTOM_TAG_ACTIONS: voor tags die je apart wilt MARKEREN in het rapport
+// (in het rood, status "Aangepast (aparte actie)") omdat er voor die tag
+// een andere aanpak nodig is dan gewoon behouden/vervallen - bijvoorbeeld
+// omdat de waarde eigenlijk een systeemeigenschap moet worden (zoals
+// Attribute.IsDerived) in plaats van een tagged value. Structuur:
+//   { "Stereotype": { "TagNaam": function(rawValue, obj, actionLog, loc) { ... } } }
+// - rawValue: de huidige (tekst)waarde van de tag op dit model-exemplaar.
+// - obj: het live EA-object (Element, Attribute of Connector).
+// - actionLog, loc: voor eigen logregels (optioneel, gebruik logAction()).
+//
+// BELANGRIJK: dit is STANDAARD ALLEEN RAPPORTAGE. De functie wordt NIET
+// automatisch uitgevoerd en de tag wordt NIET automatisch verwijderd,
+// ongeacht APPLY_CHANGES - je ziet alleen in het overzicht (rood) welke
+// tags zo geconfigureerd zijn en wat de bedoelde actie is. Zet
+// EXECUTE_CUSTOM_TAG_ACTIONS hieronder pas op true als je de functie(s)
+// ook daadwerkelijk wilt laten uitvoeren (dan geldt nog steeds ook
+// APPLY_CHANGES=true als vereiste, en wordt de tag na uitvoering
+// verwijderd).
+var CUSTOM_TAG_ACTIONS = {
+     "Attribuutsoort": {
+         "Indicatie afleidbaar": function (rawValue, obj, actionLog, loc) {
+             var isDerived = (trimStr(String(rawValue)).toLowerCase() === "nee");
+             obj.IsDerived = isDerived;
+             logAction(actionLog, "  Native eigenschap IsDerived staat nu op " + isDerived + " op " + loc + ".");
+         }
+    }
+};
+
+// Master-schakelaar: staat los van APPLY_CHANGES. Laat op false staan om
+// CUSTOM_TAG_ACTIONS uitsluitend als markering in het rapport te tonen,
+// zonder dat er ooit iets automatisch wordt uitgevoerd of verwijderd.
+var EXECUTE_CUSTOM_TAG_ACTIONS = false;
+
+// TAG_EXCLUDE_FROM_REMOVAL: per stereotype een lijst van tagnamen die
+// NOOIT verwijderd mogen worden, ook niet als ze niet in het doelprofiel
+// voorkomen. Zo'n tag krijgt status "uitgezonderd" (blijft gewoon staan,
+// wordt niet aangeraakt). Deze check gaat VOOR TAG_REMAP - een
+// uitgezonderde tag wordt dus ook niet hernoemd, puur met rust gelaten.
+// Structuur: { "Stereotype": ["TagNaam1", "TagNaam2"] }
+var TAG_EXCLUDE_FROM_REMOVAL = {
+// 	"Attribuutsoort": ["Aanduiding strijdigheid/nietigheid"],
+//	"Objecttype": ["Aanduiding strijdigheid/nietigheid"],
+// 	"Relatiesoort": ["Aanduiding strijdigheid/nietigheid"]
+};
+	
+// Zet op false om het toevoegen van ontbrekende tags UIT te schakelen: dan
+// worden alleen bestaande tagged values opgeschoond (vervallen verwijderen,
+// hernoemen, etc.) en wordt er niets nieuws aangemaakt, ook niet als het
+// doelprofiel een tag definieert die nog niet op het element voorkomt.
+var ADD_MISSING_TAGS = false;
+
+// Dit script herkoppelt stereotypes RECHTSTREEKS, in dezelfde run als de
+// scan - dat is empirisch bevestigd veilig: het lezen van stereotypes
+// werkt gewoon door met VNGR_SIM_Grouping_NL gedeactiveerd (geen
+// afzonderlijk vervolgscript meer nodig). De enige voorwaarde is dat
+// VNGR_SIM_Grouping_NL AL is gedeactiveerd VOORDAT je dit script met
+// APPLY_CHANGES = true draait, omdat EA een stereotype-toewijzing op kale
+// naam anders dubbelzinnig over beide actieve technologies resolvet
+// (bevestigd in de Sparx-documentatie over "Apply Stereotypes").
+//
+// Dit script WIJZIGT GEEN STEREOTYPES MEER - zie de scriptheader voor het
+// overzicht van alle geprobeerde en afgewezen methoden. Stereotype-
+// herkoppeling wordt bewust uitgesteld tot de allerlaatste opschoonstap,
+// wanneer VNGR_SIM_Grouping_NL geen enkele gebruiker meer heeft.
+
+// De geregistreerde naam (met spaties) van het DOELPROFIEL, zoals die in
+// het <Documentation name="..."> attribuut van het profiel-XML staat.
+// Wordt gebruikt voor het (alleen-lezen) statusoverzicht van de
+// technology-koppeling.
+var TARGET_TECHNOLOGY_QUALIFIER_FOR_VERIFICATION = "VNGR MIM 1-2 Grouping NL";
+
+// Dezelfde, maar voor het BRONPROFIEL - eveneens alleen voor het
+// statusoverzicht.
+var SOURCE_TECHNOLOGY_QUALIFIER_NAME = "VNGR SIM+Grouping NL";
+
+
+// =====================================================================
+// Hoofdfunctie
+// =====================================================================
+function main() {
+    try {
+        Session.Output("Migratie-inventarisatie: profielen inlezen uit de repository...");
+        var sourceProfile = loadProfile(SOURCE_TECHNOLOGY_ID, SOURCE_PROFILE_XML_FALLBACK, SOURCE_LABEL);
+        var targetProfile = loadProfile(TARGET_TECHNOLOGY_ID, TARGET_PROFILE_XML_FALLBACK, TARGET_LABEL);
+
+        Session.Output("Model doorzoeken...");
+        seenConnectorGuids = {}; // register leegmaken vóór een nieuwe scan
+        var instances = [];
+        if (ROOT_PACKAGE_GUID !== "") {
+            var rootPkg = Repository.GetPackageByGuid(ROOT_PACKAGE_GUID);
+            if (rootPkg) {
+                walkPackage(rootPkg, safeName(rootPkg), instances);
+            } else {
+                Session.Output("WAARSCHUWING: ROOT_PACKAGE_GUID '" + ROOT_PACKAGE_GUID + "' levert geen package op.");
+            }
+        } else {
+            var modelCount = Repository.Models.Count;
+            for (var i = 0; i < modelCount; i++) {
+                try {
+                    var rootModel = Repository.Models.GetAt(i);
+                    if (rootModel) {
+                        walkPackage(rootModel, safeName(rootModel), instances);
+                    } else {
+                        Session.Output("WAARSCHUWING: Repository.Models item #" + i + " is leeg, overgeslagen.");
+                    }
+                } catch (eRootModel) {
+                    Session.Output("WAARSCHUWING: kon Repository.Models item #" + i + " niet verwerken (overgeslagen): " + eRootModel.description);
+                }
+            }
+        }
+        Session.Output("Gevonden: " + instances.length + " elementen/attributen/connectoren met een stereotype.");
+
+        if (APPLY_CHANGES) {
+            Session.Output("!!! APPLY_CHANGES staat op TRUE - dit script gaat het model nu daadwerkelijk WIJZIGEN. Zorg dat er een backup is. !!!");
+        } else {
+            Session.Output("APPLY_CHANGES staat op false - dit is een dry-run, er wordt niets geschreven naar het model.");
+        }
+        var actionLog = applyMigration(sourceProfile, targetProfile, instances);
+
+        reportTechnologyLinkStatus(targetProfile, actionLog);
+
+        Session.Output("Rapport opbouwen...");
+        var reportHtml = buildReport(sourceProfile, targetProfile, instances, actionLog);
+
+        writeTextFileUtf8(OUTPUT_HTML_PATH, reportHtml);
+        Session.Output("Klaar. Rapport geschreven naar: " + OUTPUT_HTML_PATH);
+
+        if (OPEN_AFTER_GENERATE) {
+            try {
+                var shell = new ActiveXObject("WScript.Shell");
+                shell.Run('"' + OUTPUT_HTML_PATH + '"', 1, false);
+            } catch (eOpen) {
+                Session.Output("Kon het rapport niet automatisch openen: " + eOpen.description);
+            }
+        }
+    } catch (e) {
+        Session.Output("FOUT: " + e.description);
+    }
+}
+
+
+// =====================================================================
+// Profiel inlezen: bij voorkeur rechtstreeks uit de repository
+// (Repository.GetTechnologyXML), met een optionele fallback naar een
+// los XML-bestand als de technology niet geregistreerd is.
+// =====================================================================
+function loadProfile(technologyId, fallbackPath, label) {
+    var xml = "";
+
+    if (technologyId && technologyId !== "") {
+        try {
+            xml = Repository.GetTechnologyXML(technologyId);
+        } catch (eTech) {
+            xml = "";
+        }
+    }
+
+    if (xml && trimStr(xml) !== "") {
+        Session.Output("  " + label + ": ingelezen uit repository (technology-id '" + technologyId + "').");
+        return parseProfileXmlString(xml);
+    }
+
+    if (fallbackPath && fallbackPath !== "") {
+        Session.Output("  " + label + ": niet gevonden als technology in de repository, val terug op bestand: " + fallbackPath);
+        return parseProfileXmlFile(fallbackPath);
+    }
+
+    throw new Error(
+        "Kan profiel '" + label + "' niet vinden. Technology-id '" + technologyId + "' is niet geregistreerd " +
+        "in deze repository (Configure > Technology > Manage Technologies) en er is geen fallbackbestand opgegeven. " +
+        "Controleer het technology-id, of vul SOURCE_PROFILE_XML_FALLBACK / TARGET_PROFILE_XML_FALLBACK in."
+    );
+}
+
+function parseProfileXmlFile(path) {
+    var doc = new ActiveXObject("Msxml2.DOMDocument.6.0");
+    doc.async = false;
+    doc.setProperty("SelectionLanguage", "XPath");
+    var ok = doc.load(path);
+    if (!ok) {
+        throw new Error("Kan profiel-XML niet laden: " + path + " (" + doc.parseError.reason + ")");
+    }
+    return extractProfileFromDom(doc);
+}
+
+function parseProfileXmlString(xmlString) {
+    var doc = new ActiveXObject("Msxml2.DOMDocument.6.0");
+    doc.async = false;
+    doc.setProperty("SelectionLanguage", "XPath");
+    var ok = doc.loadXML(xmlString);
+    if (!ok) {
+        throw new Error("Kan technology-XML uit de repository niet parsen (" + doc.parseError.reason + ")");
+    }
+    return extractProfileFromDom(doc);
+}
+
+function extractProfileFromDom(doc) {
+    var stereoNodes = doc.selectNodes("//UMLProfiles/UMLProfile/Content/Stereotypes/Stereotype");
+    var profile = {}; // naam -> { notes, applies:[...], tags: { tagNaam: {type,description,unit,values,default} } }
+
+    for (var i = 0; i < stereoNodes.length; i++) {
+        var sNode = stereoNodes.nextNode ? stereoNodes.item(i) : stereoNodes[i];
+        var name = sNode.getAttribute("name");
+        var notes = sNode.getAttribute("notes");
+
+        var applies = [];
+        var applyNodes = sNode.selectNodes("AppliesTo/Apply");
+        for (var a = 0; a < applyNodes.length; a++) {
+            applies.push(applyNodes.item(a).getAttribute("type"));
+        }
+
+        var tags = {};
+        var tagNodes = sNode.selectNodes("TaggedValues/Tag");
+        for (var t = 0; t < tagNodes.length; t++) {
+            var tNode = tagNodes.item(t);
+            var tName = tNode.getAttribute("name");
+            var tDescription = tNode.getAttribute("description") || "";
+            tags[tName] = {
+                "type": tNode.getAttribute("type") || "",
+                "description": tDescription,
+                "unit": tNode.getAttribute("unit") || "",
+                "values": tNode.getAttribute("values") || "",
+                "default": tNode.getAttribute("default") || "",
+                // Het profiel-XML-formaat kent GEEN apart "verplicht"-attribuut;
+                // dit wordt best-effort afgeleid uit het woord "verplicht" in de
+                // omschrijving. Dit is beperkt betrouwbaar (afhankelijk van hoe
+                // consistent dat woord in de profieldocumentatie gebruikt wordt).
+                "mandatory": tDescription.toLowerCase().indexOf("verplicht") !== -1
+            };
+        }
+
+        profile[name] = { notes: notes || "", applies: applies, tags: tags };
+    }
+    return profile;
+}
+
+
+// =====================================================================
+// Model doorlopen
+// =====================================================================
+function walkPackage(pkg, currentPath, instances) {
+    if (!pkg) { return; }
+    var i;
+    var elements;
+    try {
+        elements = pkg.Elements;
+    } catch (eElems) {
+        Session.Output("WAARSCHUWING: kon elementen van package '" + currentPath + "' niet ophalen: " + eElems.description);
+        elements = null;
+    }
+    if (elements) {
+        for (i = 0; i < elements.Count; i++) {
+            try {
+                var el = elements.GetAt(i);
+                if (el) { walkElement(el, currentPath, instances); }
+            } catch (eEl) {
+                Session.Output("WAARSCHUWING: kon element #" + i + " in package '" + currentPath + "' niet verwerken (overgeslagen): " + eEl.description);
+            }
+        }
+    }
+
+    var subPackages;
+    try {
+        subPackages = pkg.Packages;
+    } catch (ePkgs) {
+        Session.Output("WAARSCHUWING: kon subpackages van '" + currentPath + "' niet ophalen: " + ePkgs.description);
+        subPackages = null;
+    }
+    if (subPackages) {
+        for (i = 0; i < subPackages.Count; i++) {
+            try {
+                var sub = subPackages.GetAt(i);
+                if (sub) {
+                    var subName = "(naam onbekend)";
+                    try { subName = sub.Name; } catch (eName) { /* negeren */ }
+                    walkPackage(sub, currentPath + " / " + subName, instances);
+                }
+            } catch (eSub) {
+                Session.Output("WAARSCHUWING: kon subpackage #" + i + " in '" + currentPath + "' niet verwerken (overgeslagen): " + eSub.description);
+            }
+        }
+    }
+}
+
+function safeName(obj) {
+    try {
+        return obj.Name;
+    } catch (e) {
+        return "(naam onbekend)";
+    }
+}
+
+// Register om te voorkomen dat een connector twee keer wordt verwerkt (hij
+// hangt namelijk aan ZOWEL zijn bron- als zijn doel-element se .Connectors
+// collectie). Wordt aan het begin van main() geleegd.
+var seenConnectorGuids = {};
+
+// Connectoren (associaties, generalisaties e.d.) zitten NIET in
+// Package.Elements/Element.Elements - EA houdt ze bij in de aparte
+// Element.Connectors-collectie van elk van de twee verbonden elementen.
+// Deze functie wordt vanuit walkElement voor elk element aangeroepen.
+function walkConnectors(el, pathPrefix, instances) {
+    var conns;
+    try {
+        conns = el.Connectors;
+    } catch (eConnGet) {
+        Session.Output("WAARSCHUWING: kon connectoren van '" + safeName(el) + "' niet ophalen: " + eConnGet.description);
+        return;
+    }
+    if (!conns) { return; }
+
+    for (var i = 0; i < conns.Count; i++) {
+        try {
+            var conn = conns.GetAt(i);
+            if (!conn) { continue; }
+
+            var connGuid = conn.ConnectorGUID;
+            if (connGuid && hasOwn(seenConnectorGuids, connGuid)) { continue; } // al verwerkt via het andere uiteinde
+            if (connGuid) { seenConnectorGuids[connGuid] = true; }
+
+            var connStereos = splitStereotypes(getStereotypeExSafe(conn));
+            if (connStereos.length === 0) { continue; }
+
+            var srcName = "?", tgtName = "?";
+            try {
+                var srcEl = Repository.GetElementByID(conn.ClientID);
+                if (srcEl) { srcName = safeName(srcEl); }
+            } catch (eSrc) { /* negeren */ }
+            try {
+                var tgtEl = Repository.GetElementByID(conn.SupplierID);
+                if (tgtEl) { tgtName = safeName(tgtEl); }
+            } catch (eTgt) { /* negeren */ }
+
+            var connType = "";
+            try { connType = conn.Type; } catch (eType) { connType = ""; }
+            var connOwnName = "";
+            try { connOwnName = conn.Name; } catch (eName2) { connOwnName = ""; }
+            var displayName = (connOwnName && connOwnName !== "") ? connOwnName : (connType + ": " + srcName + " -> " + tgtName);
+
+            for (var k = 0; k < connStereos.length; k++) {
+                if (connStereos[k] === "") { continue; }
+                instances.push({
+                    kind: "Connector",
+                    name: displayName,
+                    stereotype: connStereos[k],
+                    guid: connGuid,
+                    ownerGuid: (srcEl ? srcEl.ElementGUID : ""), // element om de connector via .Connectors terug te vinden
+                    ownerName: "",
+                    path: pathPrefix + " (connector " + connType + ": " + srcName + " -> " + tgtName + ")",
+                    taggedValues: collectTags(conn.TaggedValues),
+                    obj: conn
+                });
+            }
+        } catch (eConn) {
+            Session.Output("WAARSCHUWING: kon connector #" + i + " van '" + safeName(el) + "' niet verwerken (overgeslagen): " + eConn.description);
+        }
+    }
+}
+
+function walkElement(el, pathPrefix, instances) {
+    if (!el) { return; }
+    var i;
+    var elName = safeName(el);
+
+    var stereos = splitStereotypes(getStereotypeExSafe(el));
+    for (i = 0; i < stereos.length; i++) {
+        if (stereos[i] === "") { continue; }
+        try {
+            instances.push({
+                kind: "Element",
+                name: elName,
+                stereotype: stereos[i],
+                guid: el.ElementGUID,
+                ownerGuid: "",
+                ownerName: "",
+                path: pathPrefix,
+                taggedValues: collectTags(el.TaggedValues),
+                obj: el
+            });
+        } catch (eInst) {
+            Session.Output("WAARSCHUWING: kon element '" + elName + "' (stereotype '" + stereos[i] + "') niet verwerken (overgeslagen): " + eInst.description);
+        }
+    }
+
+    // Connectoren die aan dit element hangen (associaties, generalisaties e.d.)
+    walkConnectors(el, pathPrefix + " / " + elName, instances);
+
+    // Attributen (bv. Attribuutsoort, Data element, Referentie element, Enumeratiewaarde)
+    var attrs;
+    try {
+        attrs = el.Attributes;
+    } catch (eAttrsGet) {
+        Session.Output("WAARSCHUWING: kon attributen van '" + elName + "' niet ophalen: " + eAttrsGet.description);
+        attrs = null;
+    }
+    if (attrs) {
+        for (i = 0; i < attrs.Count; i++) {
+            try {
+                var attr = attrs.GetAt(i);
+                if (!attr) { continue; }
+                var attrName = safeName(attr);
+                var attrStereos = splitStereotypes(getStereotypeExSafe(attr));
+                for (var k = 0; k < attrStereos.length; k++) {
+                    if (attrStereos[k] === "") { continue; }
+                    instances.push({
+                        kind: "Attribute",
+                        name: attrName,
+                        stereotype: attrStereos[k],
+                        guid: attr.AttributeGUID,
+                        ownerGuid: el.ElementGUID,
+                        ownerName: elName,
+                        path: pathPrefix + " / " + elName,
+                        taggedValues: collectTags(attr.TaggedValues),
+                        obj: attr
+                    });
+                }
+            } catch (eAttr) {
+                Session.Output("WAARSCHUWING: kon attribuut #" + i + " van '" + elName + "' niet verwerken (overgeslagen): " + eAttr.description);
+            }
+        }
+    }
+
+    // Geneste elementen (embedded classifiers e.d.)
+    var nested;
+    try {
+        nested = el.Elements;
+    } catch (eNestedGet) {
+        Session.Output("WAARSCHUWING: kon geneste elementen van '" + elName + "' niet ophalen: " + eNestedGet.description);
+        nested = null;
+    }
+    if (nested) {
+        for (i = 0; i < nested.Count; i++) {
+            try {
+                var nestedEl = nested.GetAt(i);
+                if (nestedEl) { walkElement(nestedEl, pathPrefix + " / " + elName, instances); }
+            } catch (eNested) {
+                Session.Output("WAARSCHUWING: kon genest element #" + i + " van '" + elName + "' niet verwerken (overgeslagen): " + eNested.description);
+            }
+        }
+    }
+}
+
+function getStereotypeExSafe(obj) {
+    var s = "";
+    try { s = obj.StereotypeEx; } catch (e1) { s = ""; }
+    if (!s) {
+        try { s = obj.Stereotype; } catch (e2) { s = ""; }
+    }
+    return s || "";
+}
+
+function splitStereotypes(raw) {
+    if (!raw) { return []; }
+    var parts = raw.split(";");
+    var out = [];
+    for (var i = 0; i < parts.length; i++) {
+        var v = trimStr(parts[i]);
+        if (v !== "") { out.push(v); }
+    }
+    return out;
+}
+
+function collectTags(tvCollection) {
+    var result = {};
+    for (var i = 0; i < tvCollection.Count; i++) {
+        var tv = tvCollection.GetAt(i);
+        var name = tv.Name;
+        var val = getTagValueSafe(tv);
+
+        if (!hasOwn(result, name)) {
+            result[name] = val;
+        } else {
+            // Tagnaam komt dubbel voor op dit element/attribuut/connector -
+            // niet zomaar de laatste laten winnen. Een ingevulde waarde
+            // nooit overschrijven met een lege duplicaat; is de bestaande
+            // leeg en heeft deze duplicaat wel een waarde, dan die
+            // alsnog gebruiken.
+            var existingVal = result[name];
+            var existingHasValue = existingVal !== undefined && existingVal !== null && trimStr(String(existingVal)) !== "";
+            var newHasValue = val !== undefined && val !== null && trimStr(String(val)) !== "";
+
+            if (!existingHasValue && newHasValue) {
+                result[name] = val;
+            } else if (existingHasValue && newHasValue && trimStr(String(existingVal)) !== trimStr(String(val))) {
+                Session.Output("WAARSCHUWING: tag '" + name + "' komt dubbel voor met TWEE VERSCHILLENDE waarden (\"" + existingVal + "\" en \"" + val + "\") - \"" + existingVal + "\" wordt gebruikt, controleer dit element handmatig.");
+            }
+            // (leeg + leeg, of gelijke waarde aan beide kanten: niets te doen)
+        }
+    }
+    return result;
+}
+
+function getTagValueSafe(tv) {
+    var v = tv.Value;
+    // Alleen bij de letterlijke "<memo>"-placeholder (het bekende EA-patroon
+    // voor memo-tags, maar gebleken ook gebruikt voor ELKE tag zonder
+    // inline value= attribuut, bv. een tag die alleen uit de profiel-
+    // omschrijving bestaat) terugvallen op .Notes.
+    if (v === "<memo>") {
+        try {
+            if (tv.Notes) { v = tv.Notes; }
+        } catch (e) { /* negeren */ }
+    }
+    // Bescherming tegen profiel-metadata die per ongeluk als "waarde"
+    // wordt gelezen (via .Notes, zoals hierboven, maar mogelijk ook
+    // rechtstreeks via .Value bij een kapot/leeg tag-element): EA's eigen
+    // export-formaat voor tag-definitiemetadata begint altijd met
+    // "Values: ", "Default: " of "Description: " (zie het <UML:Comment
+    // name="..."> patroon in een geëxporteerde XMI). Zulke tekst is NOOIT
+    // een echte, door een gebruiker ingevulde waarde - behandel als leeg.
+    if (v && (v.indexOf("Description: ") === 0 || v.indexOf("Values: ") === 0 || v.indexOf("Default: ") === 0)) {
+        v = "";
+    }
+    return v;
+}
+
+
+// =====================================================================
+// Diff-logica (profielniveau, per stereotype)
+// =====================================================================
+function diffStereotypeTags(stereoName, sourceProfile, targetProfile) {
+    var srcTags = (sourceProfile[stereoName] ? sourceProfile[stereoName].tags : {});
+    var tgtTags = (targetProfile[stereoName] ? targetProfile[stereoName].tags : {});
+    var names = unionSortedKeys(srcTags, tgtTags);
+
+    var rows = [];
+    for (var i = 0; i < names.length; i++) {
+        var tName = names[i];
+        var inSrc = hasOwn(srcTags, tName);
+        var inTgt = hasOwn(tgtTags, tName);
+        var status, changedFields = [];
+
+        if (inSrc && !inTgt) {
+            status = "removed";
+        } else if (inTgt && !inSrc) {
+            status = "added";
+        } else {
+            var a = srcTags[tName], b = tgtTags[tName];
+            for (var f = 0; f < TAG_FIELDS.length; f++) {
+                var fld = TAG_FIELDS[f];
+                if (trimStr(a[fld] || "") !== trimStr(b[fld] || "")) { changedFields.push(fld); }
+            }
+            status = (changedFields.length > 0) ? "changed" : "unchanged";
+        }
+
+        rows.push({
+            name: tName, status: status, changedFields: changedFields,
+            src: srcTags[tName], tgt: tgtTags[tName]
+        });
+    }
+    return rows;
+}
+
+function stereotypeMigrationStatus(stereoName, sourceProfile, targetProfile) {
+    var inSrc = hasOwn(sourceProfile, stereoName);
+    var inTgt = hasOwn(targetProfile, stereoName);
+    if (inSrc && inTgt) { return "shared"; }
+    if (inSrc && !inTgt) { return "no-equivalent"; }
+    if (!inSrc && inTgt) { return "target-only"; }
+    return "unknown";
+}
+
+// Per concreet model-exemplaar: welke acties horen bij de daadwerkelijk
+// ingevulde tagged values?
+function buildInstanceActions(instance, tagDiffRows, targetTags) {
+    var diffByName = {};
+    for (var i = 0; i < tagDiffRows.length; i++) { diffByName[tagDiffRows[i].name] = tagDiffRows[i]; }
+
+    // Index van doelprofiel-tagnamen op hun spatie-genormaliseerde vorm
+    // (dubbele spaties -> 1, vooraan/achteraan spaties weg), zodat een
+    // tagnaam die alleen in spatiegebruik afwijkt van de officiële
+    // profieldefinitie toch herkend wordt in plaats van als "onbekend"
+    // te worden afgekeurd.
+    var normalizedTargetNames = {};
+    for (var ni = 0; ni < tagDiffRows.length; ni++) {
+        if (tagDiffRows[ni].tgt) {
+            normalizedTargetNames[normalizeWhitespace(tagDiffRows[ni].name)] = tagDiffRows[ni].name;
+        }
+    }
+
+    var remapForStereotype = TAG_REMAP[instance.stereotype] || {};
+    var excludedTagNames = TAG_EXCLUDE_FROM_REMOVAL[instance.stereotype] || [];
+    var successfulRemaps = []; // { oldTagName, newTagName, value } - voor de "ontvangt waarde"-rij hieronder
+    var customActionsForStereo = CUSTOM_TAG_ACTIONS[instance.stereotype] || {};
+
+    var actions = [];
+    for (var tagName in instance.taggedValues) {
+        if (!hasOwn(instance.taggedValues, tagName)) { continue; }
+        var val = instance.taggedValues[tagName];
+        if (val === undefined || val === null || trimStr(String(val)) === "") { continue; } // alleen ingevulde waarden
+
+        // PRIORITEIT: een geconfigureerde aparte actie (CUSTOM_TAG_ACTIONS)
+        // gaat altijd voor de normale behouden/vervalt/hernoem-logica.
+        if (hasOwn(customActionsForStereo, tagName)) {
+            actions.push({
+                tagName: tagName, value: val, status: "custom-action",
+                note: "Gemarkeerd voor een aparte actie (CUSTOM_TAG_ACTIONS) - wordt standaard NIET automatisch uitgevoerd, alleen getoond. Zet EXECUTE_CUSTOM_TAG_ACTIONS op true om de geconfigureerde functie ook echt te laten draaien.",
+                customActionFn: customActionsForStereo[tagName]
+            });
+            continue;
+        }
+
+        var diffRow = diffByName[tagName];
+        var status, note;
+        var existsInTarget = diffRow && diffRow.tgt; // deze exacte naam is een geldige tag in het doelprofiel
+
+        if (!existsInTarget) {
+            // Deze tagnaam bestaat niet (onder deze naam) in het doelprofiel -
+            // hetzij omdat hij alleen in het bronprofiel stond ("vervalt"),
+            // hetzij omdat hij in GEEN van beide profielen formeel is
+            // gedefinieerd (bv. een los/handmatig aangemaakte tag die wel op
+            // het model staat). Eerst TAG_EXCLUDE_FROM_REMOVAL checken (die
+            // wint altijd - een uitgezonderde tag wordt ook niet hernoemd),
+            // dan pas TAG_REMAP.
+            if (arrayContains(excludedTagNames, tagName)) {
+                actions.push({
+                    tagName: tagName, value: val, status: "excluded",
+                    note: "Uitgezonderd van verwijdering (TAG_EXCLUDE_FROM_REMOVAL) - blijft ongewijzigd staan, ook al bestaat deze tag niet in " + TARGET_LABEL + "."
+                });
+                continue;
+            }
+
+            // Spatie-verschil? (dubbele spatie, of vooraan/achteraan spatie)
+            // Dan automatisch herkennen als dezelfde tag en "hernoemen" naar
+            // de correcte, schone naam uit de profieldefinitie - dezelfde
+            // afhandeling als een TAG_REMAP, maar dan automatisch gedetecteerd.
+            var normalizedTagName = normalizeWhitespace(tagName);
+            if (normalizedTagName !== tagName && hasOwn(normalizedTargetNames, normalizedTagName)) {
+                var cleanTargetName = normalizedTargetNames[normalizedTagName];
+                var cleanCurrentVal = instance.taggedValues[cleanTargetName];
+                var cleanHasValue = cleanCurrentVal !== undefined && cleanCurrentVal !== null && trimStr(String(cleanCurrentVal)) !== "";
+                if (cleanHasValue) {
+                    actions.push({
+                        tagName: tagName, value: val, status: "remap-conflict",
+                        note: "Tagnaam wijkt alleen af door spatiegebruik van de juiste naam '" + cleanTargetName + "', maar die tag heeft op dit element al een eigen waarde (\"" + cleanCurrentVal + "\"). Combineer handmatig."
+                    });
+                } else {
+                    successfulRemaps.push({ oldTagName: tagName, newTagName: cleanTargetName, value: val });
+                    actions.push({
+                        tagName: tagName, value: val, status: "renamed",
+                        note: "Automatisch herkend als spatie-variant van '" + cleanTargetName + "' - hernoemd naar de correcte schrijfwijze.",
+                        remapTarget: cleanTargetName
+                    });
+                }
+                continue;
+            }
+
+            var remapTargetTagName = hasOwn(remapForStereotype, tagName) ? remapForStereotype[tagName] : null;
+
+            if (remapTargetTagName) {
+                var targetDefExists = hasOwn(diffByName, remapTargetTagName) && diffByName[remapTargetTagName].tgt;
+                if (!targetDefExists) {
+                    status = diffRow ? "removed" : "unknown";
+                    note = "FOUT in TAG_REMAP: doeltag '" + remapTargetTagName + "' bestaat niet in " + TARGET_LABEL + " voor dit stereotype - mapping genegeerd. De waarde gaat verloren tenzij handmatig elders vastgelegd.";
+                } else {
+                    var targetCurrentVal = instance.taggedValues[remapTargetTagName];
+                    var targetHasValue = targetCurrentVal !== undefined && targetCurrentVal !== null && trimStr(String(targetCurrentVal)) !== "";
+                    if (targetHasValue) {
+                        status = "remap-conflict";
+                        note = "Kan niet automatisch hernoemen naar '" + remapTargetTagName + "' - die tag heeft op dit element al een eigen waarde (\"" + targetCurrentVal + "\"). Combineer handmatig.";
+                    } else {
+                        status = "renamed";
+                        note = "Hernoemd/verplaatst naar tag '" + remapTargetTagName + "' (via TAG_REMAP).";
+                        successfulRemaps.push({ oldTagName: tagName, newTagName: remapTargetTagName, value: val });
+                        actions.push({ tagName: tagName, value: val, status: status, note: note, remapTarget: remapTargetTagName });
+                        continue;
+                    }
+                }
+            } else if (!diffRow) {
+                status = "unknown";
+                note = "Vervalt: komt in GEEN van beide profielen voor als tagdefinitie voor dit stereotype (mogelijk handmatig toegevoegd, of een naam die niet (meer) overeenkomt met de profieldefinitie - controleer op onzichtbare verschillen: " + describeTagNameForDebug(tagName) + "). De waarde gaat verloren tenzij handmatig elders vastgelegd.";
+            } else {
+                status = "removed";
+                note = "Vervalt: deze tagged value bestaat niet in " + TARGET_LABEL + ". De waarde gaat verloren tenzij handmatig elders vastgelegd.";
+            }
+        } else if (diffRow.status === "changed") {
+            if (diffRow.changedFields.length === 1 && diffRow.changedFields[0] === "description") {
+                // Alleen de omschrijving/toelichting van de tag is anders - dat is
+                // puur tekstueel en heeft geen invloed op de waarde zelf.
+                status = "kept";
+                note = "Blijft behouden - waarde wordt ongewijzigd overgenomen. (Alleen de toelichting/omschrijving van deze tag is in " + TARGET_LABEL + " aangepast; dat heeft geen invloed op de waarde zelf.)";
+            } else {
+                status = "changed";
+                note = "Blijft behouden, waarde wordt overgenomen. Let op: de tagdefinitie wijkt functioneel af tussen de profielen (" + diffRow.changedFields.join(", ") + ") - controleer of de waarde nog geldig/toegestaan is.";
+            }
+        } else {
+            status = "kept";
+            note = "Blijft behouden - waarde wordt ongewijzigd overgenomen.";
+        }
+
+        // Extra controle specifiek voor enumeratie-tags: staat de HUIDIGE
+        // waarde nog letterlijk in de toegestane lijst van het doelprofiel?
+        // Alleen relevant als de tag uberhaupt overleeft (niet 'removed'/
+        // 'unknown'), en alleen als het doelprofiel de tag als enumeratie
+        // typeert. Best-effort: zie de kanttekening bij parseEnumValues().
+        if (status !== "removed" && status !== "unknown" && diffRow && diffRow.tgt && diffRow.tgt.type === "enumeration") {
+            var allowedValues = parseEnumValues(diffRow.tgt.values);
+            if (allowedValues.length > 0 && !arrayContains(allowedValues, trimStr(String(val)))) {
+                status = "invalid-value";
+                note = "Waarde \"" + val + "\" komt niet (meer) voor in de toegestane enumeratiewaarden van " + TARGET_LABEL +
+                    " (" + allowedValues.join(", ") + "). Let op: deze vergelijking is hoofdlettergevoelig. Deze waarde moet handmatig worden aangepast/vertaald naar een geldige keuze.";
+            }
+        }
+
+        actions.push({ tagName: tagName, value: val, status: status, note: note });
+    }
+
+    // Extra pas: tags die via TAG_REMAP een waarde ONTVANGEN vanaf een
+    // hernoemde, oude tagnaam - apart tonen zodat beide kanten van de
+    // hernoeming zichtbaar zijn in het rapport.
+    var effectiveValues = {}; // tagNaam -> waarde die dit veld effectief zal krijgen (voor de verplicht-check hieronder)
+    for (var r = 0; r < successfulRemaps.length; r++) {
+        var remap = successfulRemaps[r];
+        actions.push({
+            tagName: remap.newTagName, value: remap.value, status: "renamed",
+            note: "Ontvangt waarde \"" + remap.value + "\" van hernoemde tag '" + remap.oldTagName + "' (via TAG_REMAP).",
+            remapSource: remap.oldTagName
+        });
+        effectiveValues[remap.newTagName] = remap.value;
+    }
+
+    // Extra pas: verplichte tagged values uit het DOELPROFIEL die op dit
+    // element/attribuut niet zijn ingevuld. Dit staat los van de vorige
+    // loop (die alleen al-ingevulde tags behandelt) - een verplicht veld
+    // dat leeg is, komt daar per definitie niet in voor. Een tag die via
+    // TAG_REMAP alsnog een waarde krijgt, telt niet als leeg.
+    for (var m = 0; m < tagDiffRows.length; m++) {
+        var mrow = tagDiffRows[m];
+        if (!mrow.tgt || !mrow.tgt.mandatory) { continue; }
+        var curVal = instance.taggedValues[mrow.name];
+        var hasCurVal = curVal !== undefined && curVal !== null && trimStr(String(curVal)) !== "";
+        var hasEffectiveVal = hasOwn(effectiveValues, mrow.name);
+        if (!hasCurVal && !hasEffectiveVal) {
+            actions.push({
+                tagName: mrow.name,
+                value: "",
+                status: "mandatory-missing",
+                note: "Verplicht veld volgens " + TARGET_LABEL + " is niet ingevuld op dit element/attribuut. (Verplichting is afgeleid uit het woord \"verplicht\" in de omschrijving - controleer dit bij twijfel.)"
+            });
+        }
+    }
+
+    // Extra pas: tags die in het DOELPROFIEL voor dit stereotype bestaan,
+    // maar nog helemaal niet op dit element/attribuut aanwezig zijn (dus
+    // niet eens als lege tag) - worden toegevoegd met een lege waarde.
+    // Een tag die via TAG_REMAP al een waarde krijgt, wordt hier niet
+    // nogmaals toegevoegd (staat al als "renamed"-ontvanger hierboven).
+    // Volledig uit te schakelen via ADD_MISSING_TAGS = false.
+    if (ADD_MISSING_TAGS) {
+        for (var defTagName in targetTags) {
+            if (!hasOwn(targetTags, defTagName)) { continue; }
+            if (hasOwn(instance.taggedValues, defTagName)) { continue; } // al aanwezig (leeg of gevuld)
+            if (hasOwn(effectiveValues, defTagName)) { continue; } // komt al binnen via TAG_REMAP
+            actions.push({
+                tagName: defTagName, value: "", status: "tag-added",
+                note: "Ontbreekt op dit element en wordt toegevoegd (leeg) omdat " + TARGET_LABEL + " deze tag voor dit stereotype definieert."
+            });
+        }
+    }
+
+    // op naam sorteren voor een stabiele weergave
+    actions.sort(function (x, y) { return x.tagName < y.tagName ? -1 : (x.tagName > y.tagName ? 1 : 0); });
+    return actions;
+}
+
+// Voor een stereotype dat GEEN equivalent heeft in het doelprofiel: dan
+// vervalt elke ingevulde tagged value op dat element/attribuut, ongeacht
+// de tagnaam - er is immers geen stereotype meer om de tag aan te hangen.
+function buildAllRemovedActions(instance) {
+    var actions = [];
+    for (var tagName in instance.taggedValues) {
+        if (!hasOwn(instance.taggedValues, tagName)) { continue; }
+        var val = instance.taggedValues[tagName];
+        if (val === undefined || val === null || trimStr(String(val)) === "") { continue; } // alleen ingevulde waarden
+
+        actions.push({
+            tagName: tagName,
+            value: val,
+            status: "removed",
+            note: "Vervalt: het stereotype \"" + instance.stereotype + "\" bestaat niet in " + TARGET_LABEL + ", dus ook deze tagged value kan niet worden overgenomen."
+        });
+    }
+    actions.sort(function (x, y) { return x.tagName < y.tagName ? -1 : (x.tagName > y.tagName ? 1 : 0); });
+    return actions;
+}
+
+
+// =====================================================================
+// Apply-fase: de wijzigingen daadwerkelijk (of, in dry-run, hypothetisch)
+// doorvoeren in het model. Retourneert een logboek (array van strings)
+// dat ook in het HTML-rapport wordt opgenomen.
+// =====================================================================
+
+function deleteTagFromCollection(tvCollection, tagName) {
+    for (var i = 0; i < tvCollection.Count; i++) {
+        if (tvCollection.GetAt(i).Name === tagName) {
+            tvCollection.Delete(i);
+            tvCollection.Refresh();
+            return true;
+        }
+    }
+    return false;
+}
+
+function setTagValueInCollection(tvCollection, tagName, newValue) {
+    for (var i = 0; i < tvCollection.Count; i++) {
+        var tv = tvCollection.GetAt(i);
+        if (tv.Name === tagName) {
+            tv.Value = newValue;
+            tv.Update();
+            return true;
+        }
+    }
+    return false;
+}
+
+function logAction(actionLog, line) {
+    actionLog.push(line);
+    Session.Output(line);
+}
+
+// t_xref-gebaseerde verificatie van de daadwerkelijke technology-koppeling
+// (bevestigd patroon uit een eerdere XMI-inspectie van dit model):
+//   t_xref.Name = 'Stereotypes', t_xref.Client = <element/attribuut/
+//   connector GUID>, t_xref.Type = 'element property' | 'attribute
+//   property' | 'connector property', t_xref.Description bevat
+//   "...FQName=<Technology>::<Stereotype>;...".
+function getStereotypeFQName(guid, xrefType) {
+    var sql = "SELECT Description FROM t_xref WHERE Name='Stereotypes' AND Client='" + guid + "' AND Type='" + xrefType + "'";
+    var resultXml = "";
+    try {
+        resultXml = Repository.SQLQuery(sql);
+    } catch (eSql) {
+        return null;
+    }
+    if (!resultXml) { return null; }
+
+    var descStart = resultXml.indexOf("<Description>");
+    if (descStart === -1) { return null; }
+    descStart += "<Description>".length;
+    var descEnd = resultXml.indexOf("</Description>", descStart);
+    if (descEnd === -1) { return null; }
+    var description = resultXml.substring(descStart, descEnd);
+
+    var fqMarker = "FQName=";
+    var fqStart = description.indexOf(fqMarker);
+    if (fqStart === -1) { return null; }
+    fqStart += fqMarker.length;
+    var fqEnd = description.indexOf(";", fqStart);
+    if (fqEnd === -1) { fqEnd = description.length; }
+    return description.substring(fqStart, fqEnd);
+}
+
+function verifyRetarget(inst, expectedQualifiedName, actionLog) {
+    var xrefType = (inst.kind === "Element") ? "element property"
+                 : (inst.kind === "Attribute") ? "attribute property"
+                 : "connector property";
+    var fqName = getStereotypeFQName(inst.guid, xrefType);
+    if (fqName === null) {
+        logAction(actionLog, "  Verificatie via t_xref niet mogelijk (geen resultaat) - geen bevestiging, maar ook geen aanwijzing voor een fout.");
+    } else if (fqName === expectedQualifiedName) {
+        logAction(actionLog, "  Geverifieerd via t_xref: FQName is nu correct '" + fqName + "'.");
+    } else {
+        logAction(actionLog, "  WAARSCHUWING: t_xref toont FQName '" + fqName + "', verwacht werd '" + expectedQualifiedName + "'. Controleer dit element handmatig.");
+    }
+}
+
+function applyMigration(sourceProfile, targetProfile, instances) {
+    var actionLog = [];
+    var prefix = APPLY_CHANGES ? "[UITGEVOERD] " : "[DRY-RUN, niet uitgevoerd] ";
+
+    logAction(actionLog, "=== Start migratie-acties (" + (APPLY_CHANGES ? "ECHT - tag-wijzigingen worden geschreven" : "DRY-RUN - er wordt niets geschreven") + ") ===");
+    logAction(actionLog, "Dit script wijzigt GEEN stereotypes meer (zie scriptheader: elke geprobeerde methode bleek");
+    logAction(actionLog, "onbetrouwbaar of risicovol). Alleen tagged values worden opgeschoond/hersteld. De");
+    logAction(actionLog, "technology-koppeling van stereotypes wordt pas in de allerlaatste opschoonstap behandeld,");
+    logAction(actionLog, "nadat VNGR_SIM_Grouping_NL nul resterende gebruikers heeft.");
+
+    for (var i = 0; i < instances.length; i++) {
+        var inst = instances[i];
+        var loc = inst.path + " / " + inst.name + " (" + inst.kind + ", stereotype '" + inst.stereotype + "')";
+
+        if (inst.stereotype.indexOf("::") !== -1) {
+            logAction(actionLog, "GECORRUMPEERDE STEREOTYPE-NAAM (blijft liggen tot de eindopschoning): " + loc);
+            continue;
+        }
+
+        var migStatus = stereotypeMigrationStatus(inst.stereotype, sourceProfile, targetProfile);
+
+        var targetStereotypeName = null;
+        if (migStatus === "no-equivalent") {
+            var mappedName = STEREOTYPE_REMAP[inst.stereotype];
+            if (!mappedName) {
+                logAction(actionLog, "SKIP - handmatig vereist: " + loc + " heeft geen equivalent in " + TARGET_LABEL + " en er is geen STEREOTYPE_REMAP opgegeven.");
+                continue;
+            }
+            if (!hasOwn(targetProfile, mappedName)) {
+                logAction(actionLog, "FOUT: STEREOTYPE_REMAP wijst '" + inst.stereotype + "' naar '" + mappedName + "', maar dat stereotype bestaat niet in " + TARGET_LABEL + ". Overgeslagen: " + loc);
+                continue;
+            }
+            targetStereotypeName = mappedName;
+            logAction(actionLog, "Tags alvast opschonen voor " + loc + " (stereotype-hernoeming naar '" + mappedName + "' volgt bij de eindopschoning).");
+        } else if (migStatus === "shared") {
+            targetStereotypeName = inst.stereotype; // naam is al correct; alleen technology-koppeling blijft nog staan
+        } else {
+            continue; // target-only/unknown: niets te doen
+        }
+
+        var targetTags = targetProfile[targetStereotypeName].tags;
+        var tagDiffRows = diffStereotypeTags(inst.stereotype, sourceProfile, targetProfile);
+        var actions = buildInstanceActions(inst, tagDiffRows, targetTags);
+
+        for (var a = 0; a < actions.length; a++) {
+            var act = actions[a];
+
+            if (act.status === "removed" || act.status === "unknown") {
+                logAction(actionLog, prefix + "Tagged value '" + act.tagName + "' (waarde \"" + act.value + "\") verwijderen op " + loc + " - " + (act.status === "removed" ? "vervalt in " + TARGET_LABEL : "komt in geen van beide profielen voor") + ".");
+                if (APPLY_CHANGES && REMOVE_OBSOLETE_TAGS) {
+                    deleteTagFromCollection(inst.obj.TaggedValues, act.tagName);
+                    inst.obj.Update();
+                }
+            } else if (act.status === "invalid-value") {
+                var remapForStereo = VALUE_REMAP[inst.stereotype];
+                var remapForTag = remapForStereo ? remapForStereo[act.tagName] : null;
+                var newVal = remapForTag ? remapForTag[act.value] : null;
+
+                if (newVal) {
+                    logAction(actionLog, prefix + "Tagged value '" + act.tagName + "' op " + loc + " aanpassen: \"" + act.value + "\" -> \"" + newVal + "\".");
+                    if (APPLY_CHANGES) {
+                        setTagValueInCollection(inst.obj.TaggedValues, act.tagName, newVal);
+                        inst.obj.Update();
+                    }
+                } else {
+                    logAction(actionLog, "SKIP - handmatig vereist: " + loc + ", tag '" + act.tagName + "' heeft ongeldige waarde \"" + act.value + "\" en er is geen VALUE_REMAP opgegeven.");
+                }
+            } else if (act.status === "mandatory-missing") {
+                logAction(actionLog, "WAARSCHUWING - verplicht veld leeg: " + loc + ", tag '" + act.tagName + "' is verplicht volgens " + TARGET_LABEL + " maar niet ingevuld.");
+            } else if (act.status === "renamed" && act.remapTarget) {
+                // Dit is de OUDE tag-kant van een geslaagde TAG_REMAP: waarde
+                // overzetten naar de nieuwe tagnaam, dan de oude verwijderen.
+                logAction(actionLog, prefix + "Tagged value '" + act.tagName + "' (waarde \"" + act.value + "\") hernoemen naar '" + act.remapTarget + "' op " + loc + ".");
+                if (APPLY_CHANGES) {
+                    var didSetRemap = false;
+                    var addNewFailed = false;
+                    try {
+                        didSetRemap = setTagValueInCollection(inst.obj.TaggedValues, act.remapTarget, act.value);
+                    } catch (eSetRemap) {
+                        logAction(actionLog, "  FOUT bij setTagValueInCollection voor '" + act.remapTarget + "' op " + loc + ": " + eSetRemap.description);
+                    }
+                    if (!didSetRemap) {
+                        try {
+                            var newTvRemap = inst.obj.TaggedValues.AddNew(act.remapTarget, "");
+                            newTvRemap.Value = act.value;
+                            newTvRemap.Update();
+                            inst.obj.TaggedValues.Refresh();
+                        } catch (eAddRemap) {
+                            logAction(actionLog, "  FOUT bij toevoegen van '" + act.remapTarget + "' op " + loc + ": " + eAddRemap.description);
+                            addNewFailed = true;
+                        }
+                    }
+                    if (!addNewFailed) {
+                        var deleteOk = false;
+                        try {
+                            deleteOk = deleteTagFromCollection(inst.obj.TaggedValues, act.tagName);
+                        } catch (eDelRemap) {
+                            logAction(actionLog, "  FOUT bij verwijderen van '" + act.tagName + "' op " + loc + ": " + eDelRemap.description);
+                        }
+                        try {
+                            inst.obj.Update();
+                        } catch (eUpdRemap) {
+                            logAction(actionLog, "  FOUT bij Update() op " + loc + ": " + eUpdRemap.description);
+                        }
+
+                        // VERIFICATIE: vers uitlezen wat er nu daadwerkelijk op
+                        // het object staat, in plaats van te vertrouwen op de
+                        // hierboven gelogde (optimistische) intentie.
+                        try {
+                            var freshTagsCheck = collectTags(inst.obj.TaggedValues);
+                            var freshNewVal = freshTagsCheck[act.remapTarget];
+                            var newValOk = (freshNewVal !== undefined && freshNewVal !== null && trimStr(String(freshNewVal)) === trimStr(String(act.value)));
+                            var oldStillPresent = hasOwn(freshTagsCheck, act.tagName);
+                            if (newValOk && !oldStillPresent) {
+                                logAction(actionLog, "  Geverifieerd: '" + act.remapTarget + "' = \"" + freshNewVal + "\", oude tag '" + act.tagName + "' is weg. OK.");
+                            } else {
+                                logAction(actionLog, "  WAARSCHUWING - niet bevestigd na verificatie: '" + act.remapTarget + "' bevat nu \"" + freshNewVal + "\" (verwacht \"" + act.value + "\"), oude tag '" + act.tagName + "' " + (oldStillPresent ? "staat er nog" : "is weg") + ". Zoek dit element handmatig op ter controle: " + loc);
+                            }
+                        } catch (eVerifyRemap) {
+                            logAction(actionLog, "  Kon niet verifiëren na hernoemen op " + loc + ": " + eVerifyRemap.description);
+                        }
+                    }
+                }
+            } else if (act.status === "renamed" && act.remapSource) {
+                // Dit is de "ontvangende" kant - al afgehandeld bij de oude
+                // tag hierboven, geen aparte actie nodig.
+            } else if (act.status === "remap-conflict") {
+                logAction(actionLog, "SKIP - handmatig vereist: " + loc + ", tag '" + act.tagName + "' kan niet automatisch hernoemd worden (doeltag heeft al een waarde).");
+            } else if (act.status === "custom-action") {
+                if (EXECUTE_CUSTOM_TAG_ACTIONS) {
+                    logAction(actionLog, prefix + "Aparte actie uitvoeren voor tag '" + act.tagName + "' (waarde \"" + act.value + "\") op " + loc + ".");
+                    if (APPLY_CHANGES) {
+                        try {
+                            act.customActionFn(act.value, inst.obj, actionLog, loc);
+                            if (REMOVE_OBSOLETE_TAGS) {
+                                deleteTagFromCollection(inst.obj.TaggedValues, act.tagName);
+                            }
+                            inst.obj.Update();
+                        } catch (eCustom) {
+                            logAction(actionLog, "FOUT bij uitvoeren van aparte actie voor '" + act.tagName + "' op " + loc + ": " + eCustom.description);
+                        }
+                    }
+                } else {
+                    logAction(actionLog, "MARKERING (niet uitgevoerd, EXECUTE_CUSTOM_TAG_ACTIONS=false): tag '" + act.tagName + "' (waarde \"" + act.value + "\") heeft een geconfigureerde aparte actie op " + loc + " - blijft ongewijzigd staan.");
+                }
+            } else if (act.status === "tag-added") {
+                logAction(actionLog, prefix + "Toevoegen (leeg): '" + act.tagName + "' op " + loc + " (ontbrak, bestaat wel in " + TARGET_LABEL + ").");
+                if (APPLY_CHANGES) {
+                    try {
+                        var newTvAdd = inst.obj.TaggedValues.AddNew(act.tagName, "");
+                        newTvAdd.Value = "";
+                        newTvAdd.Update();
+                        inst.obj.TaggedValues.Refresh();
+                    } catch (eAddTag) {
+                        logAction(actionLog, "FOUT bij toevoegen van '" + act.tagName + "' op " + loc + ": " + eAddTag.description);
+                    }
+                }
+            }
+            // status "excluded": bewust geen actie - blijft ongewijzigd staan.
+            // status "kept" en "changed" (alleen definitie-afwijking, waarde nog geldig): geen actie nodig.
+        }
+
+        // Voor STEREOTYPE_REMAP-gevallen: tags die niet bij het (toekomstige)
+        // doelstereotype horen ook alvast signaleren/opruimen.
+        if (targetStereotypeName !== inst.stereotype) {
+            for (var tagName1 in inst.taggedValues) {
+                if (!hasOwn(inst.taggedValues, tagName1)) { continue; }
+                var val1 = inst.taggedValues[tagName1];
+                if (val1 === undefined || val1 === null || trimStr(String(val1)) === "") { continue; }
+                if (!hasOwn(targetTags, tagName1)) {
+                    logAction(actionLog, prefix + "Tagged value '" + tagName1 + "' (waarde \"" + val1 + "\") vervalt bij toekomstige ommap naar '" + targetStereotypeName + "'.");
+                    if (APPLY_CHANGES && REMOVE_OBSOLETE_TAGS) {
+                        deleteTagFromCollection(inst.obj.TaggedValues, tagName1);
+                        inst.obj.Update();
+                    }
+                }
+            }
+        }
+    }
+
+    logAction(actionLog, "=== Einde migratie-acties ===");
+    return actionLog;
+}
+
+
+// =====================================================================
+// Status-overzicht (alleen-lezen): hoeveel elementen zijn technology-
+// gekoppeld aan VNGR_SIM_Grouping_NL versus VNGR_MIM_1.2_Grouping_NL. Puur
+// informatief, wijzigt niets - nuttig om voortgang te volgen richting het
+// moment waarop VNGR_SIM_Grouping_NL nul gebruikers meer heeft en de
+// stereotype-koppeling in een keer definitief kan worden opgelost.
+// =====================================================================
+function reportTechnologyLinkStatus(targetProfile, actionLog) {
+    logAction(actionLog, "=== Statusoverzicht technology-koppeling (alleen-lezen) ===");
+
+    var freshInstances = [];
+    if (ROOT_PACKAGE_GUID !== "") {
+        var rootPkg = Repository.GetPackageByGuid(ROOT_PACKAGE_GUID);
+        if (rootPkg) { walkPackage(rootPkg, safeName(rootPkg), freshInstances); }
+    } else {
+        var modelCount = Repository.Models.Count;
+        for (var i = 0; i < modelCount; i++) {
+            var rootModel = Repository.Models.GetAt(i);
+            if (rootModel) { walkPackage(rootModel, safeName(rootModel), freshInstances); }
+        }
+    }
+
+    var counts = { target: 0, source: 0, other: 0, unknown: 0 };
+    for (var j = 0; j < freshInstances.length; j++) {
+        var inst = freshInstances[j];
+        if (!hasOwn(targetProfile, inst.stereotype)) { continue; }
+
+        var xrefType = (inst.kind === "Element") ? "element property"
+                     : (inst.kind === "Attribute") ? "attribute property"
+                     : "connector property";
+        var fqName = getStereotypeFQName(inst.guid, xrefType);
+        var expectedTarget = TARGET_TECHNOLOGY_QUALIFIER_FOR_VERIFICATION + "::" + inst.stereotype;
+        var expectedSource = SOURCE_TECHNOLOGY_QUALIFIER_NAME + "::" + inst.stereotype;
+
+        if (fqName === null) { counts.unknown++; }
+        else if (fqName === expectedTarget) { counts.target++; }
+        else if (fqName === expectedSource) { counts.source++; }
+        else { counts.other++; }
+    }
+
+    logAction(actionLog, "Van de elementen met een gedeeld stereotype: " + counts.target + " al gekoppeld aan " + TARGET_LABEL +
+        ", " + counts.source + " nog aan " + SOURCE_LABEL + ", " + counts.other + " overig, " + counts.unknown + " niet te verifiëren.");
+    logAction(actionLog, "Zodra 'nog aan " + SOURCE_LABEL + "' op 0 staat (en alle STEREOTYPE_REMAP-gevallen zijn afgehandeld), kan de eindopschoning van de technology-koppeling worden gepland.");
+}
+// =====================================================================
+// Kleine hulpfuncties
+// =====================================================================
+// Geeft een korte, leesbare "vingerafdruk" van een tagnaam terug (lengte
+// + tekencodes van eventuele niet-standaard tekens), om onzichtbare
+// verschillen (spaties, non-breaking space, een ander streepje/leesteken)
+// op te sporen wanneer een tagnaam onverwacht als "onbekend" verschijnt
+// terwijl hij er in de profieldefinitie identiek uitziet.
+function describeTagNameForDebug(name) {
+    var s = String(name);
+    var out = "lengte=" + s.length;
+    var oddChars = [];
+    var doubleSpacePositions = [];
+    for (var i = 0; i < s.length; i++) {
+        var code = s.charCodeAt(i);
+        // Alles buiten de gebruikelijke ASCII-tekstrange (spatie t/m ~) apart benoemen
+        if (code < 32 || code > 126) {
+            oddChars.push("positie " + i + "='" + s.charAt(i) + "' (U+" + ("0000" + code.toString(16).toUpperCase()).slice(-4) + ")");
+        }
+        if (code === 32 && s.charCodeAt(i + 1) === 32) {
+            doubleSpacePositions.push(i);
+        }
+    }
+    if (s.charAt(0) === " " || s.charAt(s.length - 1) === " ") {
+        out += ", let op: begint of eindigt met een spatie";
+    }
+    if (doubleSpacePositions.length > 0) {
+        out += ", dubbele spatie op positie(s) " + doubleSpacePositions.join(", ");
+    }
+    if (oddChars.length > 0) {
+        out += ", afwijkende tekens: " + oddChars.join("; ");
+    }
+    if (doubleSpacePositions.length === 0 && oddChars.length === 0) {
+        out += ", geen afwijkende tekens/dubbele spaties gevonden (mogelijk hoofdlettergevoeligheid of een ander verschil)";
+    }
+    // Spaties zichtbaar maken door ze te vervangen door "·", zodat een
+    // dubbele of onverwachte spatie ook met het blote oog te zien is.
+    out += ", tekst met zichtbare spaties: [" + s.replace(/ /g, "\u00B7") + "]";
+    return out;
+}
+
+// Spaties normaliseren: meerdere opeenvolgende witruimte-tekens worden 1
+// spatie, en vooraan/achteraan wordt getrimd. Gebruikt om een tagnaam die
+// alleen door een spatiefout afwijkt van de officiële profieldefinitie
+// alsnog te herkennen (zie de "spatie-variant"-check hierboven).
+function normalizeWhitespace(s) {
+    return String(s).replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
+}
+
+function trimStr(s) {
+    return String(s).replace(/^\s+|\s+$/g, "");
+}
+
+function hasOwn(obj, key) {
+    return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+function unionSortedKeys(objA, objB) {
+    var set = {};
+    var k;
+    for (k in objA) { if (hasOwn(objA, k)) { set[k] = true; } }
+    for (k in objB) { if (hasOwn(objB, k)) { set[k] = true; } }
+    var arr = [];
+    for (k in set) { if (hasOwn(set, k)) { arr.push(k); } }
+    arr.sort();
+    return arr;
+}
+
+// Best-effort parser voor het 'values'-attribuut van een enumeratie-tag
+// (komma-gescheiden lijst van toegestane keuzes). LET OP: minstens een
+// enum in dit profiel bevat een optie met een komma erin (bv.
+// "Ja, zie regels" bij "Indicatie materiele historie"), waardoor een
+// simpele komma-split die ene optie verkeerd in tweeen knipt. Voor de
+// meeste tags werkt dit prima; voor tags met zo'n ingebedde komma kan de
+// validiteitscontrole hieronder onterecht een melding geven of missen -
+// het rapport vermeldt dit voorbehoud daarom expliciet.
+function parseEnumValues(str) {
+    if (!str) { return []; }
+    var parts = str.split(",");
+    var out = [];
+    for (var i = 0; i < parts.length; i++) {
+        var v = trimStr(parts[i]);
+        if (v !== "") { out.push(v); }
+    }
+    return out;
+}
+
+function arrayContains(arr, value) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] === value) { return true; }
+    }
+    return false;
+}
+
+function escapeHtml(s) {
+    if (s === undefined || s === null) { return ""; }
+    s = String(s);
+    s = s.replace(/&/g, "&amp;");
+    s = s.replace(/</g, "&lt;");
+    s = s.replace(/>/g, "&gt;");
+    s = s.replace(/"/g, "&quot;");
+    return s;
+}
+
+function writeTextFileUtf8(path, content) {
+    // Zorg dat de doelmap bestaat
+    var fso = new ActiveXObject("Scripting.FileSystemObject");
+    var folder = fso.GetParentFolderName(path);
+    if (folder !== "" && !fso.FolderExists(folder)) {
+        fso.CreateFolder(folder);
+    }
+
+    // UTF-8 wegschrijven via ADODB.Stream (FileSystemObject.TextStream is niet Unicode-veilig)
+    var stream = new ActiveXObject("ADODB.Stream");
+    stream.Type = 2; // tekst
+    stream.Charset = "utf-8";
+    stream.Open();
+    stream.WriteText(content);
+
+    // Bestaand bestand mag overschreven worden
+    stream.SaveToFile(path, 2); // 2 = adSaveCreateOverWrite
+    stream.Close();
+}
+
+
+// =====================================================================
+// HTML-rapport opbouwen
+// =====================================================================
+
+var STATUS_LABEL = {
+    "added": "Nieuw in " + null, // wordt hieronder overschreven zodra TARGET_LABEL bekend is
+    "removed": "Vervalt",
+    "changed": "Gewijzigd - controleren",
+    "unchanged": "Ongewijzigd",
+    "kept": "Behouden",
+    "unknown": "Onbekend - vervalt",
+    "invalid-value": "Waarde ongeldig in " + null, // wordt hieronder overschreven
+    "mandatory-missing": "Verplicht veld niet ingevuld",
+    "renamed": "Hernoemd (TAG_REMAP)",
+    "remap-conflict": "Hernoeming - conflict",
+    "custom-action": "Aangepast (aparte actie)",
+    "tag-added": "Toegevoegd (ontbrak op dit element)",
+    "excluded": "Uitgezonderd (blijft staan)",
+    "no-equivalent": "Geen equivalent",
+    "shared": "Gedeeld",
+    "target-only": "Nieuw beschikbaar"
+};
+
+var STATUS_CLASS = {
+    "added": "s-added",
+    "removed": "s-removed",
+    "changed": "s-changed",
+    "unchanged": "s-unchanged",
+    "kept": "s-kept",
+    "unknown": "s-removed",
+    "invalid-value": "s-removed",
+    "mandatory-missing": "s-mandatory",
+    "renamed": "s-added",
+    "remap-conflict": "s-mandatory",
+    "custom-action": "s-removed",
+    "tag-added": "s-added",
+    "excluded": "s-kept",
+    "no-equivalent": "s-removed",
+    "shared": "s-unchanged",
+    "target-only": "s-added"
+};
+
+
+function buildReport(sourceProfile, targetProfile, instances, actionLog) {
+    STATUS_LABEL["added"] = "Nieuw in " + TARGET_LABEL;
+    STATUS_LABEL["invalid-value"] = "Waarde ongeldig in " + TARGET_LABEL;
+
+    // Groepeer instances per stereotype-naam
+    var instancesByStereotype = {};
+    var i;
+    for (i = 0; i < instances.length; i++) {
+        var st = instances[i].stereotype;
+        if (!instancesByStereotype[st]) { instancesByStereotype[st] = []; }
+        instancesByStereotype[st].push(instances[i]);
+    }
+
+    // Index: ownerGuid -> attribuut-instances (voor snel opzoeken van children)
+    var childrenByOwner = {};
+    for (i = 0; i < instances.length; i++) {
+        var inst = instances[i];
+        if (inst.kind === "Attribute") {
+            if (!childrenByOwner[inst.ownerGuid]) { childrenByOwner[inst.ownerGuid] = []; }
+            childrenByOwner[inst.ownerGuid].push(inst);
+        }
+    }
+
+    // Houd bij welke stereotype-namen door de 6 groepen zijn "geclaimd"
+    var claimedNames = {};
+    for (i = 0; i < GROUPS.length; i++) {
+        claimedNames[GROUPS[i].parent] = true;
+        for (var c = 0; c < GROUPS[i].children.length; c++) { claimedNames[GROUPS[i].children[c]] = true; }
+    }
+
+    // Totalen voor het overzicht bovenaan
+    var totals = { kept: 0, changed: 0, removed: 0, unknown: 0 };
+    var elementTotals = { total: 0, withActions: 0 };
+
+    var sectionsHtml = [];
+
+    // ---- de zes hoofdgroepen ----
+    for (i = 0; i < GROUPS.length; i++) {
+        var group = GROUPS[i];
+        var parentInstances = instancesByStereotype[group.parent] || [];
+        var groupBlocks = [];
+
+        // Profielniveau tag-diff (1x, ter referentie) voor parent en children
+        var parentTagDiff = diffStereotypeTags(group.parent, sourceProfile, targetProfile);
+        var parentMigStatus = stereotypeMigrationStatus(group.parent, sourceProfile, targetProfile);
+
+        groupBlocks.push(renderProfileDiffCard(group.parent, parentMigStatus, parentTagDiff));
+
+        for (var c2 = 0; c2 < group.children.length; c2++) {
+            var childName = group.children[c2];
+            var childTagDiff = diffStereotypeTags(childName, sourceProfile, targetProfile);
+            var childMigStatus = stereotypeMigrationStatus(childName, sourceProfile, targetProfile);
+            groupBlocks.push(renderProfileDiffCard(childName, childMigStatus, childTagDiff));
+        }
+
+        // Instanties uit het model
+        if (parentInstances.length === 0) {
+            groupBlocks.push('<p class="muted">Geen elementen met stereotype "' + escapeHtml(group.parent) + '" gevonden in het doorzochte deel van het model.</p>');
+        } else {
+            for (var p = 0; p < parentInstances.length; p++) {
+                var parentInst = parentInstances[p];
+                var parentActions = buildInstanceActions(parentInst, parentTagDiff, targetProfile[group.parent].tags);
+                elementTotals.total++;
+                if (parentActions.length > 0) { elementTotals.withActions++; }
+                for (var pa = 0; pa < parentActions.length; pa++) { totals[parentActions[pa].status] = (totals[parentActions[pa].status] || 0) + 1; }
+
+                var childInstBlocks = [];
+                var relatedChildren = childrenByOwner[parentInst.guid] || [];
+                for (var rc = 0; rc < relatedChildren.length; rc++) {
+                    var childInst = relatedChildren[rc];
+                    var isRequestedChild = false;
+                    for (var cc = 0; cc < group.children.length; cc++) {
+                        if (group.children[cc] === childInst.stereotype) { isRequestedChild = true; break; }
+                    }
+                    if (!isRequestedChild) { continue; }
+
+                    var childTagDiffForInst = diffStereotypeTags(childInst.stereotype, sourceProfile, targetProfile);
+                    var childActions = buildInstanceActions(childInst, childTagDiffForInst, targetProfile[childInst.stereotype].tags);
+                    elementTotals.total++;
+                    if (childActions.length > 0) { elementTotals.withActions++; }
+                    for (var ca = 0; ca < childActions.length; ca++) { totals[childActions[ca].status] = (totals[childActions[ca].status] || 0) + 1; }
+
+                    childInstBlocks.push(renderInstanceCard(childInst, childActions, 5));
+                }
+
+                groupBlocks.push(renderInstanceCard(parentInst, parentActions, 4, childInstBlocks));
+            }
+        }
+
+        var anchor = anchorId(group.parent);
+        sectionsHtml.push(
+            '<section class="group" id="grp-' + anchor + '">' +
+            '<h2 class="group-heading">' + escapeHtml(group.parent) + ' <span class="muted small">met ' + escapeHtml(group.children.join(" / ")) + '</span></h2>' +
+            groupBlocks.join("") +
+            "</section>"
+        );
+    }
+
+    // ---- overige stereotypes: zonder equivalent (kritiek) en gedeeld ----
+    var noEquivBlocks = [];
+    var sharedBlocks = [];
+    var handledNoEquiv = {};
+    var handledShared = {};
+
+    for (var stName in instancesByStereotype) {
+        if (!hasOwn(instancesByStereotype, stName)) { continue; }
+        if (claimedNames[stName]) { continue; } // al behandeld in een van de 6 groepen
+
+        var migStatus = stereotypeMigrationStatus(stName, sourceProfile, targetProfile);
+        var stInstances = instancesByStereotype[stName];
+
+        if (migStatus === "no-equivalent" && !handledNoEquiv[stName]) {
+            handledNoEquiv[stName] = true;
+            var neInstanceActionPairs = [];
+            for (var n1 = 0; n1 < stInstances.length; n1++) {
+                var neInst = stInstances[n1];
+                var neActions = buildAllRemovedActions(neInst);
+                elementTotals.total++;
+                if (neActions.length > 0) { elementTotals.withActions++; }
+                totals["removed"] = (totals["removed"] || 0) + neActions.length;
+                neInstanceActionPairs.push({ instance: neInst, actions: neActions });
+            }
+            noEquivBlocks.push(renderNoEquivalentCard(stName, neInstanceActionPairs));
+        } else if (migStatus === "shared" && !handledShared[stName]) {
+            handledShared[stName] = true;
+            var shTagDiff = diffStereotypeTags(stName, sourceProfile, targetProfile);
+            var shBlocks = [renderProfileDiffCard(stName, migStatus, shTagDiff)];
+            for (var n2 = 0; n2 < stInstances.length; n2++) {
+                var shInst = stInstances[n2];
+                var shActions = buildInstanceActions(shInst, shTagDiff, targetProfile[stName].tags);
+                elementTotals.total++;
+                if (shActions.length > 0) { elementTotals.withActions++; }
+                for (var sa = 0; sa < shActions.length; sa++) { totals[shActions[sa].status] = (totals[shActions[sa].status] || 0) + 1; }
+                shBlocks.push(renderInstanceCard(shInst, shActions, 4));
+            }
+            sharedBlocks.push(
+                '<div class="stereotype-block s-unchanged" id="' + anchorId(stName) + '">' +
+                '<h3 class="stereotype-heading">' + escapeHtml(stName) + ' <span class="badge s-unchanged">Gedeeld</span></h3>' +
+                shBlocks.join("") +
+                "</div>"
+            );
+        }
+    }
+
+    if (noEquivBlocks.length > 0) {
+        sectionsHtml.push(
+            '<section class="group critical" id="grp-no-equivalent">' +
+            '<h2 class="group-heading">&#9888; Stereotypes zonder equivalent in ' + escapeHtml(TARGET_LABEL) + '</h2>' +
+            '<p class="muted">Deze stereotypes komen voor in het model (op basis van ' + escapeHtml(SOURCE_LABEL) + '), maar bestaan niet in ' + escapeHtml(TARGET_LABEL) + '. Elementen met deze stereotypes moeten handmatig worden omgezet naar een ander (wel bestaand) stereotype, of uit het gemigreerde model worden verwijderd.</p>' +
+            noEquivBlocks.join("") +
+            "</section>"
+        );
+    }
+
+    if (sharedBlocks.length > 0) {
+        sectionsHtml.push(
+            '<section class="group" id="grp-overige-gedeeld">' +
+            '<h2 class="group-heading">Overige gedeelde stereotypes</h2>' +
+            '<p class="muted">Stereotypes die in beide profielen bestaan, maar niet tot een van de zes hoofdgroepen behoren.</p>' +
+            sharedBlocks.join("") +
+            "</section>"
+        );
+    }
+
+    return renderHtmlDocument(sectionsHtml, totals, elementTotals, instances.length, actionLog);
+}
+
+function anchorId(name) {
+    return "st-" + String(name).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+function renderProfileDiffCard(stereoName, migStatus, tagDiffRows) {
+    if (migStatus === "no-equivalent") {
+        return (
+            '<div class="stereotype-block s-removed">' +
+            '<h4 class="stereotype-heading">' + escapeHtml(stereoName) + ' <span class="badge s-removed">Geen equivalent in ' + escapeHtml(TARGET_LABEL) + '</span></h4>' +
+            "</div>"
+        );
+    }
+    if (migStatus === "target-only") {
+        return (
+            '<div class="stereotype-block s-added">' +
+            '<h4 class="stereotype-heading">' + escapeHtml(stereoName) + ' <span class="badge s-added">Alleen in ' + escapeHtml(TARGET_LABEL) + ', niet in model</span></h4>' +
+            "</div>"
+        );
+    }
+
+    var counts = { added: 0, removed: 0, changed: 0, unchanged: 0 };
+    var i;
+    for (i = 0; i < tagDiffRows.length; i++) { counts[tagDiffRows[i].status]++; }
+    var countStr = [];
+    if (counts.removed) { countStr.push(counts.removed + " vervalt"); }
+    if (counts.changed) { countStr.push(counts.changed + " gewijzigd"); }
+    if (counts.added) { countStr.push(counts.added + " nieuw in " + TARGET_LABEL); }
+    if (counts.unchanged) { countStr.push(counts.unchanged + " ongewijzigd"); }
+
+    var rowsHtml = [];
+    for (i = 0; i < tagDiffRows.length; i++) {
+        var r = tagDiffRows[i];
+        var cls = STATUS_CLASS[r.status];
+        var isMandatory = r.tgt && r.tgt.mandatory;
+        rowsHtml.push(
+            '<tr class="' + cls + '">' +
+            '<td class="tagname">' + escapeHtml(r.name) + (isMandatory ? ' <span class="badge s-mandatory">Verplicht</span>' : "") + "</td>" +
+            '<td><span class="badge ' + cls + '">' + STATUS_LABEL[r.status] + "</span></td>" +
+            '<td class="muted">' + escapeHtml(r.changedFields.join(", ")) + "</td>" +
+            "</tr>"
+        );
+    }
+
+    return (
+        '<div class="stereotype-block s-refcard">' +
+        '<h4 class="stereotype-heading">' + escapeHtml(stereoName) +
+        ' <span class="muted small">(profieldefinitie: ' + escapeHtml(countStr.join(" &middot; ")) + ')</span></h4>' +
+        '<details><summary class="muted small">Toon volledige tagged-value-definitievergelijking</summary>' +
+        '<table class="tagtable"><thead><tr><th>Tagged value</th><th>Status</th><th>Afwijkende velden</th></tr></thead>' +
+        "<tbody>" + rowsHtml.join("") + "</tbody></table>" +
+        "</details>" +
+        "</div>"
+    );
+}
+
+function renderInstanceCard(instance, actions, headingLevel, childBlocksHtmlArray) {
+    var h = "h" + headingLevel;
+
+    // De kaart zelf krijgt GEEN kleur op basis van de ergst voorkomende status
+    // van zijn tagged values - dat zou ten onrechte de indruk wekken dat het
+    // hele element/attribuut ongeldig is, terwijl het vaak maar om 1 tag gaat.
+    // Kleur wordt uitsluitend per tabelrij (per tag) toegepast, hieronder.
+    var attentionCount = 0;
+    for (var i = 0; i < actions.length; i++) {
+        var s = actions[i].status;
+        if (s !== "kept" && s !== "unchanged") { attentionCount++; }
+    }
+    var cls = "s-unchanged"; // neutraal, altijd
+    var badgeText;
+    if (actions.length === 0) {
+        badgeText = "Geen ingevulde tagged values";
+    } else if (attentionCount === 0) {
+        badgeText = "Alles in orde (" + actions.length + ")";
+    } else {
+        badgeText = attentionCount + " van " + actions.length + " tagged value(s) heeft aandacht nodig";
+    }
+
+    var actionsHtml;
+    if (actions.length === 0) {
+        actionsHtml = '<p class="muted small">Geen ingevulde tagged values op dit element.</p>';
+    } else {
+        var rows = [];
+        for (var j = 0; j < actions.length; j++) {
+            var a = actions[j];
+            var aCls = STATUS_CLASS[a.status];
+            rows.push(
+                '<tr class="' + aCls + '">' +
+                '<td class="tagname">' + escapeHtml(a.tagName) + "</td>" +
+                '<td><span class="badge ' + aCls + '">' + STATUS_LABEL[a.status] + "</span></td>" +
+                "<td>" + escapeHtml(a.value) + "</td>" +
+                '<td class="muted small">' + escapeHtml(a.note) + "</td>" +
+                "</tr>"
+            );
+        }
+        actionsHtml =
+            '<table class="tagtable"><thead><tr><th>Tagged value</th><th>Actie</th><th>Huidige waarde</th><th>Toelichting</th></tr></thead>' +
+            "<tbody>" + rows.join("") + "</tbody></table>";
+    }
+
+    var childHtml = (childBlocksHtmlArray && childBlocksHtmlArray.length > 0) ? childBlocksHtmlArray.join("") : "";
+
+    return (
+        '<div class="instance-block ' + cls + '">' +
+        "<" + h + ' class="instance-heading">' + escapeHtml(instance.name) +
+        ' <span class="badge ' + cls + '">' + badgeText + "</span>" +
+        "</" + h + ">" +
+        '<p class="muted small">' + escapeHtml(instance.stereotype) + " &middot; " + escapeHtml(instance.kind) +
+        " &middot; " + escapeHtml(instance.path) + " &middot; GUID " + escapeHtml(instance.guid) + "</p>" +
+        actionsHtml +
+        childHtml +
+        "</div>"
+    );
+}
+
+function renderNoEquivalentCard(stereoName, instanceActionPairs) {
+    var blocks = [];
+    for (var i = 0; i < instanceActionPairs.length; i++) {
+        blocks.push(renderInstanceCard(instanceActionPairs[i].instance, instanceActionPairs[i].actions, 4));
+    }
+    return (
+        '<div class="stereotype-block s-removed" id="' + anchorId(stereoName) + '">' +
+        '<h3 class="stereotype-heading">' + escapeHtml(stereoName) +
+        ' <span class="badge s-removed">Geen equivalent</span> ' +
+        '<span class="muted small">(' + instanceActionPairs.length + " voorkomen(s) in het model)</span></h3>" +
+        '<p class="muted small">Dit stereotype bestaat niet in ' + escapeHtml(TARGET_LABEL) + '. Het element/attribuut zelf moet worden omgezet naar een ander (wel bestaand) stereotype; alle onderstaande tagged values vervallen daarmee automatisch mee.</p>' +
+        blocks.join("") +
+        "</div>"
+    );
+}
+
+function renderHtmlDocument(sectionsHtml, totals, elementTotals, totalInstancesFound, actionLog) {
+    var generated = new Date().toString();
+
+    var css =
+        ":root{--bg:#ffffff;--fg:#1a1a1a;--muted:#6b7280;--border:#e5e7eb;--card-bg:#fafafa;--header-bg:#1f3a5f;--header-fg:#ffffff;" +
+        "--added-bg:#e6f4ea;--added-fg:#1e7a34;--added-border:#a7d7b5;" +
+        "--removed-bg:#fdecea;--removed-fg:#b3261e;--removed-border:#f3b3ae;" +
+        "--changed-bg:#fff4e0;--changed-fg:#a15c00;--changed-border:#f5cf87;" +
+        "--unchanged-bg:#f4f4f5;--unchanged-fg:#6b7280;--unchanged-border:#e5e7eb;" +
+        "--mandatory-bg:#f1e6fa;--mandatory-fg:#6b21a8;--mandatory-border:#d6b8ef;}" +
+        "@media (prefers-color-scheme: dark){:root:not([data-theme='light']){--bg:#121417;--fg:#e8e8e8;--muted:#9aa0a6;--border:#2c2f33;--card-bg:#1b1e22;--header-bg:#16324f;--header-fg:#ffffff;" +
+        "--added-bg:#163a24;--added-fg:#7fe6a0;--added-border:#245c39;" +
+        "--removed-bg:#3d1f1d;--removed-fg:#ff9d95;--removed-border:#6b2f2a;" +
+        "--changed-bg:#40320f;--changed-fg:#ffcf70;--changed-border:#6b5518;" +
+        "--unchanged-bg:#202225;--unchanged-fg:#9aa0a6;--unchanged-border:#2c2f33;" +
+        "--mandatory-bg:#3a2350;--mandatory-fg:#d9b3ff;--mandatory-border:#5c3a7a;}}" +
+        "*{box-sizing:border-box;}" +
+        "body{background:var(--bg);color:var(--fg);margin:0;padding:0;font-family:Segoe UI,Arial,sans-serif;line-height:1.45;}" +
+        "header.page{background:var(--header-bg);color:var(--header-fg);padding:24px 32px;}" +
+        "header.page h1{margin:0 0 6px 0;font-size:1.5rem;}" +
+        "header.page .sub{opacity:.85;font-size:.9rem;}" +
+        ".container{max-width:1200px;margin:0 auto;padding:24px 32px 64px;}" +
+        ".legend{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 28px;}" +
+        ".legend .item{display:flex;align-items:center;gap:6px;font-size:.85rem;}" +
+        ".swatch{width:14px;height:14px;border-radius:3px;display:inline-block;border:1px solid var(--border);}" +
+        ".toc{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:14px 20px;margin-bottom:28px;}" +
+        ".toc h2{font-size:1rem;margin:0 0 8px;}" +
+        ".toc ul{margin:0;padding-left:20px;columns:2;}" +
+        ".summary-cards{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;}" +
+        ".summary-card{flex:1 1 140px;border:1px solid var(--border);border-radius:8px;padding:14px 16px;background:var(--card-bg);}" +
+        ".summary-card .n{font-size:1.6rem;font-weight:700;}" +
+        ".summary-card .l{font-size:.8rem;color:var(--muted);}" +
+        "section.group{margin-bottom:40px;border-top:2px solid var(--border);padding-top:18px;}" +
+        "section.group.critical{border-top-color:var(--removed-border);}" +
+        ".group-heading{font-size:1.25rem;margin:0 0 10px;}" +
+        ".stereotype-block{border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:0 0 14px 0;background:var(--card-bg);}" +
+        ".stereotype-heading{margin:0 0 4px;font-size:1rem;}" +
+        ".instance-block{border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:0 0 12px 20px;background:var(--bg);}" +
+        ".instance-heading{margin:0 0 4px;font-size:.95rem;}" +
+        ".badge{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.02em;}" +
+        ".s-added,.badge.s-added{background:var(--added-bg);color:var(--added-fg);}" +
+        ".s-removed,.badge.s-removed{background:var(--removed-bg);color:var(--removed-fg);}" +
+        ".s-changed,.badge.s-changed{background:var(--changed-bg);color:var(--changed-fg);}" +
+        ".s-unchanged,.badge.s-unchanged,.s-kept,.badge.s-kept{background:var(--unchanged-bg);color:var(--unchanged-fg);}" +
+        ".s-unknown,.badge.s-unknown{background:var(--changed-bg);color:var(--changed-fg);}" +
+        ".s-mandatory,.badge.s-mandatory{background:var(--mandatory-bg);color:var(--mandatory-fg);}" +
+        ".stereotype-block.s-added{border-color:var(--added-border);}" +
+        ".stereotype-block.s-removed{border-color:var(--removed-border);}" +
+        ".instance-block.s-changed{border-color:var(--changed-border);}" +
+        ".instance-block.s-removed{border-color:var(--removed-border);}" +
+        ".instance-block.s-mandatory{border-color:var(--mandatory-border);}" +
+        ".muted{color:var(--muted);}" +
+        ".small{font-size:.82rem;}" +
+        ".tagtable{width:100%;border-collapse:collapse;margin-top:6px;font-size:.8rem;}" +
+        ".tagtable th,.tagtable td{border:1px solid var(--border);padding:5px 7px;text-align:left;vertical-align:top;}" +
+        ".tagtable td.tagname{font-weight:600;white-space:nowrap;}" +
+        "tr.s-added td{background:var(--added-bg);}" +
+        "tr.s-removed td{background:var(--removed-bg);}" +
+        "tr.s-changed td{background:var(--changed-bg);}" +
+        "tr.s-unknown td{background:var(--changed-bg);}" +
+        "tr.s-mandatory td{background:var(--mandatory-bg);}" +
+        "tr.s-unchanged td,tr.s-kept td{background:transparent;}" +
+        "details summary{cursor:pointer;}" +
+        "footer{color:var(--muted);font-size:.78rem;padding:20px 32px;}" +
+        ".logbox{border:1px solid var(--border);border-radius:8px;background:var(--card-bg);padding:10px 14px;margin-bottom:20px;max-height:420px;overflow-y:auto;font-family:Consolas,monospace;font-size:.78rem;}" +
+        ".log-line{padding:2px 0;border-bottom:1px dashed var(--border);}" +
+        ".log-line.s-removed{color:var(--removed-fg);}" +
+        ".log-line.s-changed{color:var(--changed-fg);}" +
+        ".log-line.s-unknown{color:var(--changed-fg);}";
+
+    var legend =
+        '<div class="legend">' +
+        '<div class="item"><span class="swatch" style="background:var(--removed-bg);border-color:var(--removed-border)"></span>Vervalt / geen equivalent / onbekend (in geen van beide profielen)</div>' +
+        '<div class="item"><span class="swatch" style="background:var(--changed-bg);border-color:var(--changed-border)"></span>Gewijzigd - controleren</div>' +
+        '<div class="item"><span class="swatch" style="background:var(--added-bg);border-color:var(--added-border)"></span>Nieuw in ' + escapeHtml(TARGET_LABEL) + '</div>' +
+        '<div class="item"><span class="swatch" style="background:var(--unchanged-bg);border-color:var(--unchanged-border)"></span>Behouden / ongewijzigd</div>' +
+        '<div class="item"><span class="swatch" style="background:var(--mandatory-bg);border-color:var(--mandatory-border)"></span>Verplicht veld niet ingevuld</div>' +
+        '<div class="item"><span class="swatch" style="background:var(--added-bg);border-color:var(--added-border)"></span>Hernoemd naar andere tag (TAG_REMAP)</div>' +
+        '<div class="item"><span class="swatch" style="background:var(--removed-bg);border-color:var(--removed-border)"></span>Aangepast via aparte actie (CUSTOM_TAG_ACTIONS)</div>' +
+        '<div class="item"><span class="swatch" style="background:var(--added-bg);border-color:var(--added-border)"></span>Toegevoegd (ontbrak op het element)</div>' +
+        '<div class="item"><span class="swatch" style="background:var(--unchanged-bg);border-color:var(--unchanged-border)"></span>Uitgezonderd van verwijdering (TAG_EXCLUDE_FROM_REMOVAL)</div>' +
+        "</div>";
+
+    var summary =
+        '<div class="summary-cards">' +
+        '<div class="summary-card"><div class="n">' + totalInstancesFound + '</div><div class="l">Elementen/attributen met stereotype gevonden</div></div>' +
+        '<div class="summary-card"><div class="n">' + elementTotals.withActions + '</div><div class="l">Daarvan met migratie-aandachtspunt</div></div>' +
+        '<div class="summary-card"><div class="n">' + (totals.kept || 0) + '</div><div class="l">Tagged values behouden</div></div>' +
+        '<div class="summary-card"><div class="n">' + (totals.changed || 0) + '</div><div class="l">Tagged values gewijzigd - controleren</div></div>' +
+        '<div class="summary-card"><div class="n">' + ((totals.removed || 0) + (totals.unknown || 0)) + '</div><div class="l">Tagged values / stereotypes vervallen</div></div>' +
+        '<div class="summary-card"><div class="n">' + (totals["invalid-value"] || 0) + '</div><div class="l">Enumeratiewaarden ongeldig in ' + escapeHtml(TARGET_LABEL) + '</div></div>' +
+        '<div class="summary-card"><div class="n">' + (totals["mandatory-missing"] || 0) + '</div><div class="l">Verplichte velden niet ingevuld</div></div>' +
+        '<div class="summary-card"><div class="n">' + (totals["renamed"] || 0) + '</div><div class="l">Tagged values hernoemd (TAG_REMAP)</div></div>' +
+        '<div class="summary-card"><div class="n">' + (totals["remap-conflict"] || 0) + '</div><div class="l">Hernoeming-conflicten</div></div>' +
+        '<div class="summary-card"><div class="n">' + (totals["custom-action"] || 0) + '</div><div class="l">Aangepast via aparte actie</div></div>' +
+        '<div class="summary-card"><div class="n">' + (totals["tag-added"] || 0) + '</div><div class="l">Tagged values toegevoegd (ontbraken)</div></div>' +
+        '<div class="summary-card"><div class="n">' + (totals["excluded"] || 0) + '</div><div class="l">Uitgezonderd van verwijdering</div></div>' +
+        "</div>";
+
+    var actionLogHtml = "";
+    if (actionLog && actionLog.length > 0) {
+        var logRows = [];
+        for (var li = 0; li < actionLog.length; li++) {
+            var logLine = actionLog[li];
+            var rowCls = "";
+            if (logLine.indexOf("[UITGEVOERD]") === 0) { rowCls = "s-removed"; }
+            else if (logLine.indexOf("[DRY-RUN") === 0) { rowCls = "s-changed"; }
+            else if (logLine.indexOf("SKIP") === 0) { rowCls = "s-unknown"; }
+            else if (logLine.indexOf("FOUT") === 0) { rowCls = "s-removed"; }
+            logRows.push('<div class="log-line ' + rowCls + '">' + escapeHtml(logLine) + "</div>");
+        }
+        actionLogHtml =
+            '<section class="group" id="grp-actielog">' +
+            '<h2 class="group-heading">' + (APPLY_CHANGES ? "Uitgevoerde wijzigingen" : "Voorgestelde wijzigingen (dry-run - niets is geschreven)") + '</h2>' +
+            '<div class="logbox">' + logRows.join("") + "</div>" +
+            "</section>";
+    }
+
+    var introText = APPLY_CHANGES
+        ? "Dit rapport toont de situatie ZOALS AANGETROFFEN bij aanvang van deze run. Tagged-value-wijzigingen (opschonen/herstellen) zijn hieronder (sectie \"Uitgevoerde wijzigingen\") daadwerkelijk doorgevoerd. Stereotypes zijn NIET gewijzigd (bewust uitgesteld tot de eindopschoning) - zie het statusoverzicht onderaan het logboek."
+        : "DRY-RUN: dit rapport heeft het model niet gewijzigd. Het toont welke tagged values behouden blijven, welke zouden vervallen en welke gecontroleerd moeten worden. Stereotypes worden door dit script niet gewijzigd.";
+
+    return (
+        "<!DOCTYPE html><html lang=\"nl\"><head><meta charset=\"UTF-8\">" +
+        "<title>Migratie-inventarisatie " + escapeHtml(SOURCE_LABEL) + " naar " + escapeHtml(TARGET_LABEL) + "</title>" +
+        "<style>" + css + "</style></head><body>" +
+        '<header class="page"><h1>Migratie-inventarisatie: ' + escapeHtml(SOURCE_LABEL) + " &rarr; " + escapeHtml(TARGET_LABEL) + "</h1>" +
+        '<div class="sub">' + escapeHtml(introText) + "<br>" +
+        "Voor enumeratie-tags wordt bovendien gecontroleerd of de huidige waarde nog letterlijk in de toegestane lijst van " + escapeHtml(TARGET_LABEL) + " voorkomt (best-effort komma-gebaseerde lijstvergelijking; bij een enkele tag met een komma binnen een optiewaarde kan dit onbetrouwbaar zijn - controleer die handmatig).<br>" +
+        "Daarnaast wordt gewaarschuwd als een verplicht veld van " + escapeHtml(TARGET_LABEL) + " niet is ingevuld. Het profiel-XML-formaat kent geen apart 'verplicht'-attribuut; dit wordt afgeleid uit het woord \"verplicht\" in de omschrijving van de tag, wat beperkt betrouwbaar is - controleer bij twijfel de profieldocumentatie zelf.<br>" +
+        "Gegenereerd op " + escapeHtml(generated) + "</div></header>" +
+        '<div class="container">' +
+        legend + summary +
+        actionLogHtml +
+        sectionsHtml.join("") +
+        "</div>" +
+        "<footer>Gegenereerd door Migratie_inventarisatie_VNGR_SIM_naar_VNGRMIM12.js binnen Enterprise Architect.</footer>" +
+        "</body></html>"
+    );
+}
+
+
+// =====================================================================
+// Start
+// =====================================================================
+main();
